@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moon.studentplatform.mapper.UserMapper">
+    <resultMap id="userMap" type="com.moon.studentplatform.dto.User">
+        <id property="id" column="uid"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="slat" column="slat"/>
+        <result property="isLocked" column="islocked"/>
+        <collection property="roleSet" ofType="com.moon.studentplatform.dto.Role">
+            <id property="id" column="rid"/>
+            <result property="name" column="rname"/>
+            <collection property="permissionSet" ofType="com.moon.studentplatform.dto.Permission">
+                <id property="id" column="pid"/>
+                <result property="name" column="name"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="findByUsername" parameterType="String" resultMap="userMap">
+        select u.id   uid,
+               u.username,
+               u.password,
+               u.salt,
+               u.islocked,
+               r.id   rid,
+               r.name rname,
+               p.id   pid,
+               p.name pname
+        from sys_users u
+                 inner join sys_users_roles ur on ur.user_id = u.id
+                 inner join sys_roles r on r.id = ur.role_id
+                 inner join sys_roles_permissions pr on pr.role_id = r.id
+                 inner join sys_permissions p on pr.permission_id = p.id
+        where u.username = #{username}
+    </select>
+    <select id="getAllUser" resultMap="userMap">
+        select u.id   uid,
+               u.username,
+               u.password,
+               u.salt,
+               u.islocked,
+               r.id   rid,
+               r.name rname,
+               p.id   pid,
+               p.name pname
+        from sys_users u
+                 inner join sys_users_roles ur on ur.user_id = u.id
+                 inner join sys_roles r on r.id = ur.role_id
+                 inner join sys_roles_permissions pr on pr.role_id = r.id
+                 inner join sys_permissions p on pr.permission_id = p.id
+    </select>
+</mapper>
