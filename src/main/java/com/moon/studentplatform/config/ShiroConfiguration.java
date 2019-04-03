@@ -41,6 +41,7 @@ public class ShiroConfiguration {
         // anon表示不拦截
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/loginUser", "anon");
+        filterChainDefinitionMap.put("/static/**", "anon");
         // 指定admin接口只允许admin角色的用户访问
         filterChainDefinitionMap.put("/admin", "roles[admin]");
         // 用户在登录后可以访问所有的接口
