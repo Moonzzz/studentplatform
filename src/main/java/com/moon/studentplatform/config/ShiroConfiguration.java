@@ -39,9 +39,13 @@ public class ShiroConfiguration {
         // 拦截index接口，authc表示需要认证才能访问
         filterChainDefinitionMap.put("/index", "authc");
         // anon表示不拦截
-        filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/login/**", "anon");
         filterChainDefinitionMap.put("/loginUser", "anon");
-        filterChainDefinitionMap.put("/static/**", "anon");
+        filterChainDefinitionMap.put("/css/**", "anon");
+        filterChainDefinitionMap.put("/js/**", "anon");
+        filterChainDefinitionMap.put("/image/**", "anon");
+        filterChainDefinitionMap.put("/pages/**", "anon");
+
         // 指定admin接口只允许admin角色的用户访问
         filterChainDefinitionMap.put("/admin", "roles[admin]");
         // 用户在登录后可以访问所有的接口

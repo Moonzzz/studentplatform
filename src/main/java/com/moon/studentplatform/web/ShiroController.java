@@ -19,7 +19,7 @@ public class ShiroController {
 
     @RequestMapping("/login")
     public String login() {
-        return "/login";
+        return "login/login";
     }
 
     @RequestMapping("/index")
@@ -34,7 +34,7 @@ public class ShiroController {
             subject.logout();
         }
 
-        return "/login";
+        return "/login/login";
     }
 
     @RequestMapping("/admin")
