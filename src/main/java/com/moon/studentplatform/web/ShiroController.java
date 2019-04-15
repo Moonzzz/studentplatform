@@ -4,11 +4,13 @@ import com.moon.studentplatform.dto.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.util.WebUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -18,8 +20,9 @@ import javax.servlet.http.HttpSession;
 public class ShiroController {
 
     @RequestMapping("/login")
-    public String login() {
-        return "login/login";
+    public String login(HttpServletRequest request) {
+        System.out.println(request.getHeader("Referer"));
+        return "/login.html";
     }
 
     @RequestMapping("/index")
@@ -34,7 +37,7 @@ public class ShiroController {
             subject.logout();
         }
 
-        return "/login/login";
+        return "redirect:/pages/user/login.html";
     }
 
     @RequestMapping("/admin")
@@ -51,7 +54,8 @@ public class ShiroController {
     @RequestMapping("/loginUser")
     public String loginUser(@RequestParam("username") String username,
                             @RequestParam("password") String password,
-                            HttpSession session) {
+                            HttpSession session,
+                            HttpServletRequest request) {
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         Subject subject = SecurityUtils.getSubject();
 
@@ -59,11 +63,11 @@ public class ShiroController {
             subject.login(token);
             User user = (User) subject.getPrincipal();
             session.setAttribute("user", user);
-
-            return "/index";
+            //返回之前的请求的url
+            return WebUtils.getSavedRequest(request).getRequestURI();
         } catch (Exception e) {
             System.err.println("验证不通过: {}" + e.getMessage());
-            return "/login";
+            return "redirect:/pages/user/login.html";
         }
     }
 }
