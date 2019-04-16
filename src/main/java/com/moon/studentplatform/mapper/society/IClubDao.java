@@ -2,7 +2,7 @@ package com.moon.studentplatform.mapper.society;
 
 import com.moon.studentplatform.dto.society.Club;
 import com.moon.studentplatform.dto.society.ClubActivity;
-import com.moon.studentplatform.dto.society.ClubMember;
+import com.moon.studentplatform.dto.society.ClubUser;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -52,7 +52,7 @@ public interface IClubDao {
 
     @Insert("INSERT into `club_user`(user_id,club_id,reason,experience,joindate,pass)\n" +
             "VALUES(#{user_id},#{club_id},#{reason},#{experience},#{joindate},#{pass})")
-    boolean joinClub(ClubMember member);
+    boolean joinClub(ClubUser member);
 
     @Select("select club_activity.id as id,club_activity.clubId as clubId,title,image,author\n" +
             ",date,text,club_activity.description as description from club,club_activity \n" +

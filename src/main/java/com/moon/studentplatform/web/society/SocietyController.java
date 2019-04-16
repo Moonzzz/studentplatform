@@ -3,7 +3,7 @@ package com.moon.studentplatform.web.society;
 import com.moon.studentplatform.dto.User;
 import com.moon.studentplatform.dto.society.Club;
 import com.moon.studentplatform.dto.society.ClubActivity;
-import com.moon.studentplatform.dto.society.ClubMember;
+import com.moon.studentplatform.dto.society.ClubUser;
 import com.moon.studentplatform.service.society.IClubService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +36,7 @@ public class SocietyController {
     List<Club> clubs = null;
     List<ClubActivity> clubActivities = null;
     Club cDetail = null;
-    ClubMember member = null;
+    ClubUser member = null;
 
     @RequestMapping("/allSocietys")
     public String allSocietys(ModelMap map) {
@@ -138,7 +138,7 @@ public class SocietyController {
         String experience = objs.get("experience");
         String joindate = objs.get("joindate");
 
-        member = new ClubMember(user_Id, club_Id, reason, experience, joindate, "no");
+        member = new ClubUser(user_Id, club_Id, reason, experience, joindate, "no");
         boolean flag = clubService.joinClub(member);
 
         resp.setCharacterEncoding("utf-8");

@@ -3,7 +3,7 @@ package com.moon.studentplatform.service.society;
 import com.moon.studentplatform.dao.society.IFileDao;
 import com.moon.studentplatform.dto.society.Club;
 import com.moon.studentplatform.dto.society.ClubActivity;
-import com.moon.studentplatform.dto.society.ClubMember;
+import com.moon.studentplatform.dto.society.ClubUser;
 import com.moon.studentplatform.mapper.society.IClubDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,7 +54,7 @@ public class ClubServiceImpl implements IClubService {
     }
 
     @Override
-    public boolean joinClub(ClubMember member) {
+    public boolean joinClub(ClubUser member) {
         return clubDao.joinClub(member);
     }
 

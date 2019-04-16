@@ -3,7 +3,9 @@ package com.moon.studentplatform.web.admin;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.moon.studentplatform.dto.society.Club;
+import com.moon.studentplatform.dto.society.ClubUser;
 import com.moon.studentplatform.service.society.IClubService;
+import com.moon.studentplatform.service.society.IClubUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,7 +29,11 @@ public class AdminController {
     @Autowired
     IClubService clubService;
 
+    @Autowired
+    IClubUserService clubUserService;
+
     Club club = null;
+    List<ClubUser> clubUsers;
 
     @RequestMapping("/toAdminPage")
     public String toAddClubPage(ModelMap map) {
@@ -43,6 +49,12 @@ public class AdminController {
                 break;
             case "college":
                 toPage = "adminpage/college";
+                break;
+            case "organizeuser":
+                toPage = "adminpage/organizeuser";
+                break;
+            case "collegeuser":
+                toPage = "adminpage/collegeuser";
                 break;
         }
         return toPage;
@@ -97,12 +109,37 @@ public class AdminController {
         return getString(clubs, count);
     }
 
+
+    @RequestMapping("/allClubUser")
+    @ResponseBody
+    public String allCollegeUser(@RequestParam Map<String, String> objs) {
+        String pageStr = objs.get("page");
+        String limitStr = objs.get("limit");
+        String typeStr = objs.get("type");
+
+        System.out.println("page   " + pageStr);
+        System.out.println("limit   " + limitStr);
+        System.out.println("type    " + typeStr);
+
+        int page = Integer.parseInt(pageStr);
+        int limit = Integer.parseInt(limitStr);
+        int type = Integer.parseInt(typeStr);
+        clubUsers = clubUserService.showAllClubUsers((page - 1) * limit, limit, type);
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd")
+                .create();
+        String result = gson.toJson(clubUsers);
+        int count = clubUserService.getClubUserCount(type);
+        result = "{\"code\":0,\"msg\":\"\",\"count\":" + count + ",\"data\":" + result + "}";
+        return result;
+    }
+
     /**
      * create by: Mr Tang
      * description:<p>这个方法体的作用是将JSON数据包装成layui规定的数据形式返回给前台作数据填充
      * <p>create time: 2019/4/15 21:30
+     *
      * @return
-     * 
      */
     private String getString(List<Club> clubs, int count) {
         Gson gson = new GsonBuilder()

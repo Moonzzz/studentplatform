@@ -34,7 +34,7 @@
             , laydate = layui.laydate;
         table.render({
             elem: '#film'
-            , url: '/clubList?type=2'
+            , url: '/allClubUser?type=2'
             , cellMinWidth: 80
             , toolbar: '#toolbarDemo'
             , cols: [ [
@@ -42,30 +42,45 @@
                     type: 'checkbox',
                     name: 'chk'
                 },{
-                    field: 'name',
+                    field: 'username',
                     //width : 150,
-                    title: '社团名称',
+                    title: '成员姓名',
                     align: 'center',
                     sort: true
                 }, {
-                    field: 'firstman',
+                    field: 'clubname',
                     // width : 250,
                     align: 'center',
-                    title: '创始人'
+                    title: '社团名称'
                 }, {
-                    field: 'description',
-                    title: '简介',
+                    field: 'joindate',
+                    title: '加入时间',
                     align: 'center'
                     // width: 200
                 }, {
+                    field: 'reason',
+                    title: '加入理由',
+                    align: 'center'
+                    // width: 200
+                }, {
+                    field: 'experience',
+                    title: '个人经历',
+                    align: 'center'
+                    // width: 200
+                }, {
+                    field: 'pass',
+                    title: '是否批准',
+                    align: 'center'
+                    // width: 200
+                },{
                     fixed: 'right',
                     title: '操作',
                     toolbar: '#barDemo',
                     width: 200
                 }] ]
             , page: true
-            , limits: [4, 8, 16, 32]  //每页条数的选择项，默认：[10,20,30,40,50,60,70,80,90]。
-            , limit: 4
+            , limits: [5, 10, 20, 40]  //每页条数的选择项，默认：[10,20,30,40,50,60,70,80,90]。
+            , limit: 5
             , done: function () {
                 $(".layui-table-cell").css({
                     "height": "auto"
