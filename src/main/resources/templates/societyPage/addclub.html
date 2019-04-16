@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>全部信息</title>
+</head>
+<script type="text/javascript" th:src="@{/js/xadmin.js}" charset="utf-8"></script>
+<link rel="stylesheet" th:href="@{/css/xadmin.css}">
+<link rel="stylesheet" th:href="@{/lib/layui/css/layui.css}">
+<script type="text/javascript" th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<body>
+<div>
+    <form class="layui-form" action="/addClub" method="post" id="uploadForm"
+          enctype="multipart/form-data" onsubmit="check()">
+        <div class="row" style="margin: 40px;">
+            <div class="layui-col-md4  input-group" style="float:left;width: 320px">
+                <span class=" input-group-addon"><i class="layui-icon">&#xe67c;</i>上传图片:</span><input type="file" name="picFile" class="layui-input"
+                                                                   required>
+                <span class=" input-group-addon">社团名称：</span><input type="text" name="title" class="layui-input"
+                                                                    required>
+                <span class=" input-group-addon">申请人姓名：</span><input type="text" name="firstman" class="layui-input"
+                                                                     required>
+                <span class=" input-group-addon">班级：</span><input type="text" name="classname" class="layui-input"
+                                                                  required>
+                <span class=" input-group-addon">学号：</span><input type="text" name="stunum" class="layui-input"
+                                                                  required>
+                <span class=" input-group-addon">时间：</span><input type="date" name="datepublished" class="layui-input"
+                                                                  required>
+                <span class=" input-group-addon">联系电话：</span><input type="text" id="phonum" name="phonum"
+                                                                    class="layui-input"
+                                                                    required lay-verify="phone">
+                <span class=" input-group-addon"></span><a style="font-size: 20px; text-decoration: underline"
+                                                           href="/society_files/a.docx" download="社团申请附件">社团申请附件.下载</a>
+
+                <button style="float: right;margin-top: 10px" type="submit" class="layui-btn"
+                        id="createClub">创建
+                </button>
+            </div>
+            <div style="float: right;height: 400px;width: 240px">
+                <h5>社团简介:</h5>
+                </br>
+                <textarea required style="font-size: 20px" cols="22" rows="12" title="description">
+                   </textarea>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+
+</script>
+</body>
+</html>

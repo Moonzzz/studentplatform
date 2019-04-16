@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>全部信息</title>
+</head>
+<!-- CSS
+================================================== -->
+<!-- Normalize default styles -->
+<link rel="stylesheet" th:href="@{/mcss/normalize.css}">
+<!-- Skeleton grid system -->
+<link rel="stylesheet" th:href="@{/mcss/skeleton.css}">
+<!-- Base Template Styles-->
+<link rel="stylesheet" th:href="@{/mcss/base.css}">
+<!-- Template Styles-->
+<link rel="stylesheet" th:href="@{/mcss/style.css}">
+<!-- Superfish -->
+<link rel="stylesheet" th:href="@{/mcss/superfish.css}">
+<!-- Prettyphoto -->
+<link rel="stylesheet" th:href="@{/mcss/prettyPhoto.css}">
+<!-- FontAwesome -->
+<link rel="stylesheet" th:href="@{/mcss/font-awesome.min.css}">
+<!-- REVOLUTION BANNER CSS SETTINGS -->
+<link rel="stylesheet" th:href="@{/mcss/settings.css}">
+<!-- Flexslider -->
+<link rel="stylesheet" th:href="@{/mcss/flexslider.css}">
+<!-- Layout and Media queries-->
+<link rel="stylesheet" th:href="@{/mcss/media-queries.css}">
+<!--[if lt IE 9]>
+<link rel="stylesheet" th:href="@{/mcss/ie/ie8.css}">
+<![endif]-->
+<link rel="stylesheet" th:href="@{/lib/layui/css/layui.css}">
+
+<link rel="stylesheet" th:href="@{/css/clubpage.css}">
+<script type="text/javascript" th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/clubpage.js}" charset="utf-8"></script>
+<body>
+<div style="margin-left: 215px" class="library-main__list">
+    <div style="width:920px;margin-top: 20px" class="layui-collapse">
+        <h2 onclick="feded()" class="layui-colla-title"><i class="layui-icon layui-icon-help"/>大学里的“四大组织”是什么你知道吗？</h2>
+        <div id="detail" style="display: none" class="layui-colla-item">
+            <div class="layui-colla-content layui-show">
+                一、学生会</br>
+                学生会无疑是学生组织里的头把手，也是大家最熟悉的。现在外界对学生会褒贬不一，但不得不承认学生会就是个小社会，在里面你可以见证很多人情世故，据说混得出头的都是人精，在里面确实锻炼人，往上直接和学校对接，往下就是面对学生，想要做好中间管理者，确实考验人。如果志愿做一个领导者，进入学生会是个不错的选择。</br>
+                二、社团联合会</br>
+                简称社联，如果说学生会是直接管人和学生行政事务的，社联就是管社团的。大学里社团很多，而在中间协调各大社团活动的相关事宜、以及作为老师和社团之间的桥梁，这些都是社联的工作。相比较于学生会的“官腔”，社联更接地气，氛围也会比较轻松活跃。</br>
+                三、校委会</br>
+                校委会是隶属于学校的委员会，由团委书记直接领导，负责学生党团方面的事物，例如入党申请、党课安排、收党费团费等等;也会承办一些大型活动，如演讲比赛、文化节等等。能进入这个团体的学生一般都品学兼优，不是党员就是预备党员，最差都得是优秀团员。</br>
+                四、广播站</br>
+                广播站自古以来都是很受学生欢迎的组织，一般会有三个部门：播音部、编辑部和新媒体部，从出稿到播音、再到线上运营，可以说深入到在校学生的方方面面，在网络如此发达的今天，广播站的功能也越来越强大。</br>
+            </div>
+        </div>
+    </div>
+    <ul>
+        <li th:each="item:${clubs}" class="library-main__item">
+            <!-- <a onclick="detail()" href="javascript:" title="#" target="_blank"
+                class="picture">-->
+            <a th:href="@{'/toClubDetailPage'+'?id='+${item.id}}" target="_blank"
+               class="picture">
+                <img th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/'+${item.icon}}" alt="#"
+                     title="#">
+            </a>
+            <div class="info" style="background-color: white;box-shadow: 5px 2px 6px slategray;">
+                <ul style="font-size: 16px">
+                    <li>
+                        名称：
+                        <td th:text="${item.name}"></td>
+                    </li>
+                    <li>
+                        会长：
+                        <td th:text="${item.firstman}"></td>
+                    </li>
+                    <li>
+                        电话：
+                        <td th:text="${item.phonum}"></td>
+                    </li>
+                    <li>
+                        创立时间：
+                        <td th:text="${item.date_published}"></td>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+<script>
+    function detail() {
+        $("#mainFrame").hide();
+        //$("#innerView").empty();
+        $("#innerView").show();
+        /*嵌套网页到DIV中，让后台填充数据到页面上再进行嵌套*/
+        $("#innerView").load("/toClubDetailPage");
+    }
+</script>
+</body>
+</html>

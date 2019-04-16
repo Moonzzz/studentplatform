@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>社团组织</title>
+</head>
+<link rel="stylesheet" th:href="@{css/clubpage.css}">
+<link rel="stylesheet" th:href="@{/lib/layui/css/layui.css}">
+<script type="text/javascript" th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/xadmin.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/clubpage.js}" charset="utf-8"></script>
+
+<body>
+<div style="margin-left: 215px" class="library-main__list">
+    <div style="width:920px;margin-top: 20px" class="layui-collapse">
+        <h2 onclick="feded()" class="layui-colla-title"><i class="layui-icon layui-icon-help"/>什么是社团？</h2>
+        <div id="detail" style="display: none" class="layui-colla-item">
+            <div class="layui-colla-content layui-show">社团（英文名：mass organizations）是具有某些共同特征、爱好的人相聚而成的互益组织。中国的社团一般具有非盈利和民间化两种基本组织特征。社团与政府组织、非正式组织或自然群体有着明显的区别。
+                大学社团是学生自愿组织的群众性团体，在校党委、团委的领导下，在学生会的指导下，组织开展健康、积极有益的课外文化、科技体育、艺术等活动，它组织开展我们同学们的各项活动，丰富了同学们的业余文化生活，培养学生的综合素质。它既不同于第一课堂的专业学习，又与自身的全面发展有着密切的联系。通过社团活动， 能拓展我们的视野，培养创新精神和实验能力，为我们实现自己的人生理想、从容的面对社会生活打下了坚实的基础。</div>
+        </div>
+    </div>
+    <ul>
+        <li th:each="item:${clubs}" class="library-main__item">
+            <a th:href="@{'/toClubDetailPage'+'?id='+${item.id}}" target="_blank"
+               class="picture">
+                <img th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/'+${item.icon}}" alt="#"
+                     title="#">
+            </a>
+            <div class="info" style="background-color: white;box-shadow: 5px 2px 6px slategray;">
+                <ul style="font-size: 16px">
+                    <li>
+                        名称：
+                        <td th:text="${item.name}"></td>
+                    </li>
+                    <li>
+                        会长：
+                        <td th:text="${item.firstman}"></td>
+                    </li>
+                    <li>
+                        电话：
+                        <td th:text="${item.phonum}"></td>
+                    </li>
+                    <li>
+                        创立时间：
+                        <td th:text="${item.date_published}"></td>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

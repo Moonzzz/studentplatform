@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>学生组织</title>
+</head>
+<link rel="stylesheet" th:href="@{css/clubpage.css}">
+<link rel="stylesheet" th:href="@{/lib/layui/css/layui.css}">
+<script type="text/javascript" th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/xadmin.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/clubpage.js}" charset="utf-8"></script>
+
+<body>
+<div style="margin-left: 215px"  class="library-main__list">
+    <div style="width:920px;margin-top: 20px" class="layui-collapse">
+        <h2  onclick="feded()" class="layui-colla-title"><i class="layui-icon layui-icon-help"/>什么是学生组织？</h2>
+        <div id="detail" style="display: none"  class="layui-colla-item">
+            <div class="layui-colla-content layui-show">学生会一般指中华全国学生联合会（简称全国学联）在各院校的分支机构。它的基本任务是：遵循和贯彻党的教育方针，促进同学德、智、体全面发展，团结和引导同学成为热爱祖国、适应有中国特色社会主义现代化建设事业要求的合格人才；发挥作为党和学校联系同学的桥梁和纽带作用，在维护国家和全国人民整体利益的同时，表达和维护同学的具体利益；倡导和组织自我服务、自我管理、自我教育，自我监督，开展健康有益、丰富多彩的课外活动和社会服务，努力为同学服务。</div>
+        </div>
+    </div>
+    <ul>
+        <li th:each="item:${clubs}" class="library-main__item">
+            <a th:href="@{'/toClubDetailPage'+'?id='+${item.id}}" target="_blank"
+               class="picture">
+                <img th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/'+${item.icon}}" alt="#"
+                     title="#">
+            </a>
+            <div class="info" style="background-color: white;box-shadow: 5px 2px 6px slategray;">
+                <ul style="font-size: 16px">
+                    <li>
+                        名称：
+                        <td th:text="${item.name}"></td>
+                    </li>
+                    <li>
+                        会长：
+                        <td th:text="${item.firstman}"></td>
+                    </li>
+                    <li>
+                        电话：
+                        <td th:text="${item.phonum}"></td>
+                    </li>
+                    <li>
+                        创立时间：
+                        <td th:text="${item.date_published}"></td>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

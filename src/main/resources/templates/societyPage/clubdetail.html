@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>社团主页</title>
+    <meta title="description" content="">
+    <meta title="author" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <!-- Mobile Specific Metas
+    ================================================== -->
+    <meta title="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+    <!-- CSS
+    ================================================== -->
+    <!-- Normalize default styles -->
+    <link rel="stylesheet" th:href="@{/mcss/normalize.css}">
+    <!-- Skeleton grid system -->
+    <link rel="stylesheet" th:href="@{/mcss/skeleton.css}">
+    <!-- Base Template Styles-->
+    <link rel="stylesheet" th:href="@{/mcss/base.css}">
+    <!-- Template Styles-->
+    <link rel="stylesheet" th:href="@{/mcss/style.css}">
+    <!-- Superfish -->
+    <link rel="stylesheet" th:href="@{/mcss/superfish.css}">
+    <!-- Prettyphoto -->
+    <link rel="stylesheet" th:href="@{/mcss/prettyPhoto.css}">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" th:href="@{/mcss/font-awesome.min.css}">
+    <!-- REVOLUTION BANNER CSS SETTINGS -->
+    <link rel="stylesheet" th:href="@{/mcss/settings.css}">
+    <!-- Flexslider -->
+    <link rel="stylesheet" th:href="@{/mcss/flexslider.css}">
+    <!-- Layout and Media queries-->
+    <link rel="stylesheet" th:href="@{/mcss/media-queries.css}">
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" th:href="@{/mcss/ie/ie8.css}">
+    <![endif]-->
+    <link rel="stylesheet" th:href="@{/lib/layui/css/layui.css}">
+
+    <link rel="stylesheet" th:href="@{/css/clubpage.css}">
+    <!--[if lt IE 9]>
+<!--
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+-->
+
+
+</head>
+<body>
+
+<!-- BEGIN WRAPPER -->
+<div id="wrapper">
+
+    <div class="wrapp-holder">
+        <div class="wrap-frame">
+            <!-- BEGIN HEADER -->
+            <header id="header" class="header">
+
+                <!-- Top Header -->
+                <div class="header-top">
+                    <div class="container clearfix">
+                        <div class="grid_12">
+                            <!-- Top Menu -->
+                            <ul class="header-top-menu unstyled">
+                                <li><a href="#">Pricing</a></li>
+                                <li><a href="#">Sitemap</a></li>
+                                <li><a href="#">FAQs</a></li>
+                                <li><a href="http://www.cssmoban.com">More themes</a></li>
+                            </ul>
+                            <!-- /Top Menu -->
+
+                            <!-- Social Links -->
+                            <ul class="social-links unstyled">
+                                <li class="ico-twitter"><a href="#">Twitter</a></li>
+                                <li class="ico-facebook"><a href="#">Facebook</a></li>
+                                <li class="ico-googleplus"><a href="#">Google+</a></li>
+                                <li class="ico-dribbble"><a href="#">Dribbble</a></li>
+                                <li class="ico-vimeo"><a href="#">Vimeo</a></li>
+                                <li class="ico-rss"><a href="#">RSS</a></li>
+                            </ul>
+                            <!-- /Social Links -->
+                        </div>
+                    </div>
+                </div>
+                <!-- /Top Header -->
+
+                <!-- Main Header -->
+                <div class="header-main">
+                    <div class="container clearfix">
+                        <div class="grid_12 hr-bottom">
+
+                            <!-- BEGIN LOGO -->
+                            <div id="logo">
+                                <!-- Image based Logo -->
+                                <a style="font-size: 30px" href="/index">
+                                    大学生信息服务平台&nbsp;<i style="font-size: 30px;"
+                                                      class="layui-icon layui-icon-find-fill"></i>
+                                </a>
+
+                            </div>
+                            <!-- END LOGO -->
+
+
+                            <!-- BEGIN NAVIGATION -->
+                            <nav class="primary">
+                                <ul class="sf-menu">
+                                    <li class="current-menu-item">
+                                        <a href="javascript:;" onclick="mainFrame()">主页
+                                            <span><i>|</i>go index</span></a>
+                                        <ul>
+                                            <li class="current-menu-item"><a href="old_index.html">Revolution Slider</a>
+                                            </li>
+                                            <li><a href="index-flex-fade.html">Flexslider Fade</a></li>
+                                            <li><a href="index-flex-slide.html">Flexslider Slide</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">信息通知 <span><i>|</i> Why Choose Us</span></a>
+                                        <!-- Sub Navigation -->
+                                        <ul>
+                                            <li><a href="about.html">About Us</a></li>
+                                            <li><a href="columns.html">Columns</a></li>
+                                            <li><a href="services.html">Services</a></li>
+                                            <li><a href="pricing-tables.html">Pricing Tables</a></li>
+                                            <li><a href="elements.html">Page Elements</a></li>
+                                            <li><a href="#">Second Level Item</a>
+                                                <ul>
+                                                    <li><a href="#">Third Level Item</a></li>
+                                                    <li><a href="#">And another one</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <!-- /Sub Navigation -->
+                                    </li>
+                                    <li>
+                                        <a href="#">社团组织<span><i>|</i> Our Works</span></a>
+                                        <!-- Sub Navigation -->
+                                        <ul>
+                                            <li><a href="javascript:;" onclick="allSociety()">全部</a></li>
+                                            <li><a href="javascript:;" onclick="allStuOrganize()">学生组织</a></li>
+                                            <li><a href="javascript:;" onclick="allColleges()">社团</a></li>
+                                            <li><a href="javascript:;"
+                                                   onclick="x_admin_show('创建社团','/toAddClubPage',670,590)">创建社团</a></li>
+                                        </ul>
+                                        <!-- /Sub Navigation -->
+                                    </li>
+                                    <li>
+                                        <a href="#">失物招领 <span><i>|</i> Our Updates</span></a>
+                                        <!-- Sub Navigation -->
+                                        <ul>
+                                            <li><a href="post.html">Single Post</a></li>
+                                        </ul>
+                                        <!-- /Sub Navigation -->
+                                    </li>
+                                    <li>
+                                        <a href="#">生活服务 <span><i>|</i> Get in Touch</span></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <!-- END NAVIGATION -->
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /Main Header -->
+
+            </header>
+            <!-- END HEADER -->
+
+
+            <div id="mainFrame">
+
+                <!-- BEGIN SLIDER -->
+                <div id="slider" class="slider loading">
+                    <div class="container clearfix">
+                        <div class="grid_12">
+
+                            <div class="bannercontainer">
+                                <div class="banner">
+                                    <!--轮播图片开始处-->
+                                    <ul>
+                                        <!-- THE FIRST SLIDE -->
+                                        <li th:each="item:${clubActs}" data-transition="fade" data-slotamount="10"
+                                            data-masterspeed="300"
+                                            data-slideindex="back">
+                                            <!-- THE MAIN IMAGE IN THE SLIDE -->
+                                            <img th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/activity_imgs/'+${item.image}}">
+                                            <!-- THE CAPTIONS OF THE FIRST SLIDE -->
+                                            <div class="tp-caption sfl original"
+                                                 data-x="100"
+                                                 data-y="146"
+                                                 data-speed="300"
+                                                 data-start="600"
+                                                 data-captionhidden="on"
+                                                 data-endeasing="easeOutExpo"
+                                                 data-easing="easeOutExpo">
+                                               Activity!
+                                            </div>
+                                            <div class="tp-caption sfr original_high"
+                                                 data-x="142"
+                                                 data-y="178"
+                                                 data-speed="300"
+                                                 data-start="800"
+                                                 data-captionhidden="on"
+                                                 data-endeasing="easeOutExpo"
+                                                 data-easing="easeOutExpo">
+                                                <a th:title="${item.title}" target="_blank" th:href="@{'/toActDetailPage?id='+${item.id}}"> <td th:text="${item.title}"></td></a>
+                                            </div>
+                                        </li>
+                                        <!--轮播图片结束-->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--下界-->
+                <!--社团文章开始-->
+                <div id="content-wrapper" class="content-wrapper">
+                    <div class="container">
+                        <div class="clearfix">
+                            <!-- BEGIN CONTENT -->
+                            <section id="content" class="grid_8">
+                                <h2>活 动 通 知</h2>
+                                </br>
+                                <div class="latest-posts-holder">
+                                    <!--社团通知循环开始-->
+                                    <article th:each="item:${clubActs}" class="post clearfix">
+                                        <figure class="featured-thumb">
+                                            <a th:title="${item.title}" target="_blank" th:href="@{'/toActDetailPage?id='+${item.id}}"><img style="height: 155px"
+                                                             th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/activity_imgs/'+${item.image}}"
+                                                             alt=""></a>
+                                        </figure>
+                                        <div class="post-body">
+                                            <header class="post-header">
+                                                <h3><a  target="_blank" th:href="@{'/toActDetailPage?id='+${item.id}}">
+                                                    <td th:text="${item.title}"></td>
+                                                </a></h3>
+                                                <p class="post-meta">
+                                                    <span class="post-meta-cats"><i
+                                                            class="layui-icon layui-icon-friends"></i><td
+                                                            th:text="${item.author}"></td></span>
+                                                    <span class="post-meta-author"><i
+                                                            class="layui-icon layui-icon-log"></i><td
+                                                            th:text="${item.date}"></td></span>
+                                                </p>
+                                            </header>
+                                            <div class="post-excerpt">
+                                                <p class="over_skip">
+                                                <td th:text="${item.description}"></td>
+                                                </p>
+                                                <a target="_blank" th:href="@{'/toActDetailPage?id='+${item.id}}" class="btn">查 看 详 情</a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                    <!--社团通知循环结束-->
+                                </div>
+                                <style>
+                                    .over_skip {
+                                        display: -webkit-box;
+                                        -webkit-box-orient: vertical;
+                                        -webkit-line-clamp: 3;
+                                        overflow: hidden;
+                                    }
+                                </style>
+
+                                <!-- Navigation -->
+                                <nav class="post-nav">
+                                    <div class="older fleft">
+                                        <a href="#">&larr; <span>more information</span></a>
+                                    </div>
+                                    <div class="newer fright">
+                                        <a href="#"><span>Newer Entries</span> &rarr;</a>
+                                    </div>
+                                </nav>
+                                <!-- /Navigation -->
+                            </section>
+                            <!-- END CONTENT -->
+
+                            <!-- BEGIN SIDEBAR -->
+                            <aside id="sidebar" class="sidebar grid_4">
+                                <!-- Popular Posts Widget -->
+                                <div class="popular-posts widget widget__sidebar">
+                                    <h1 class="widget-title">More</h1>
+                                    </br>
+                                    <div class="widget-content">
+                                        <ul style="margin-left: 30px" class="posts-list unstyled clearfix">
+                                            <li>
+                                                <!--<figure class="featured-thumb">
+                                                    <a href="#"><img src="images/samples/img70x70.jpg" alt="" width="70"
+                                                                     height="70"></a>
+                                                </figure>-->
+                                                <h1><a th:inline="text" href="javascript:;"
+                                                       onclick="openModak()">组 织 简 介</a></h1>
+                                                <!--<p class="post-meta">Nov 3rd 2012 by <a href="#">Dan Fisher</a></p>-->
+                                            </li>
+                                            <li>
+                                                <h1><a href="javascript:;"
+                                                    onclick="x_admin_show('加 入 我 们','/toJoinClubPage',670,590)">加 入 我 们</a></h1>
+                                            </li>
+                                            <li>
+                                                <h1><a href="#">相 关 人 员</a></h1>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- /Popular Posts Widget -->
+                                <style>
+                                    a:hover {
+                                        text-decoration: none;
+                                        color: orange;
+                                    }
+                                </style>
+
+                                <!-- Ad Spots Widget -->
+                                <div class="ad-spots widget widget__sidebar">
+                                    <h3 class="widget-title">Ad Spots</h3>
+                                    <div class="widget-content">
+                                        <ul class="ad-holder unstyled clearfix">
+                                            <li><a href="#"><img
+                                                    src="http://image.baidu.com/search/detail?ct=503316480&z=undefined&tn=baiduimagedetail&ipn=d&word=%E5%9B%BE%E7%89%87&step_word=&ie=utf-8&in=&cl=2&lm=-1&st=undefined&hd=undefined&latest=undefined&copyright=undefined&cs=2146046871,2611785107&os=2076398230,846219654&simid=3378840767,151064100&pn=4&rn=1&di=63250&ln=1858&fr=&fmq=1554799767050_R&fm=&ic=undefined&s=undefined&se=&sme=&tab=0&width=undefined&height=undefined&face=undefined&is=0,0&istype=0&ist=&jit=&bdtype=0&spn=0&pi=0&gsm=0&objurl=http%3A%2F%2Fpic75.nipic.com%2Ffile%2F20150821%2F9448607_145742365000_2.jpg&rpstart=0&rpnum=0&adpicid=0&force=undefined"
+                                                    alt="" width="125" height="125"></a></li>
+                                            <li><a href="#"><img src="images/samples/banner125x125.jpg" alt=""
+                                                                 width="125" height="125"></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- /Ad Spots Widget -->
+                            </aside>
+                            <!-- END SIDEBAR -->
+                        </div>
+                    </div>
+                </div>
+                <!--社团文章结束-->
+            </div>
+
+            <!--内嵌网页容器-->
+            <div id="innerView">
+
+            </div>
+            <!--模仿bootstrap的模态框-->
+            <div id="motaikunag" style="display: none;">
+                <p>
+                <td th:text="${cDetail.description}"></td>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END WRAPPER -->
+
+
+<!-- Javascript Files
+================================================== -->
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- initialize jQuery Library -->
+<script type="text/javascript" th:src="@{/mjs/jquery.min.js}" charset="utf-8"></script>
+
+<script>window.jQuery || document.write('<script src="mjs/jquery-1.9.1.min.js"><\/script>')</script>
+
+<script type="text/javascript" th:src="@{/mjs/jquery-migrate-1.1.1.min.js}" charset="utf-8"></script>
+<!-- Modernizr -->
+<script type="text/javascript" th:src="@{/mjs/modernizr.custom.17475.js}" charset="utf-8"></script>
+<!-- easing plugin -->
+<script type="text/javascript" th:src="@{/mjs/jquery.easing.min.js}" charset="utf-8"></script>
+<!-- Prettyphoto -->
+<script type="text/javascript" th:src="@{/mjs/jquery.prettyPhoto.js}" charset="utf-8"></script>
+<!-- Superfish -->
+<script type="text/javascript" th:src="@{/mjs/jquery.mobilemenu.js}" charset="utf-8"></script>
+<!-- superfish -->
+<script type="text/javascript" th:src="@{/mjs/jquery.superfish-1.5.0.js}" charset="utf-8"></script>
+<!-- Twitter -->
+<script type="text/javascript" th:src="@{/mjs/jquery.twitter.js}" charset="utf-8"></script>
+<!-- Flickr -->
+<script type="text/javascript" th:src="@{/mjs/jflickrfeed.js}" charset="utf-8"></script>
+<!-- ElastiSlide Carousel -->
+<script type="text/javascript" th:src="@{/mjs/jquery.elastislide.js}" charset="utf-8"></script>
+
+<!-- jQuery REVOLUTION Slider  -->
+<script type="text/javascript" th:src="@{/mjs/jquery.themepunch.plugins.min.js}" charset="utf-8"></script>
+
+
+<script type="text/javascript" th:src="@{/mjs/jquery.themepunch.revolution.min.js}" charset="utf-8"></script>
+
+<!-- Isotope -->
+<script type="text/javascript" th:src="@{/mjs/jquery.isotope.min.js}" charset="utf-8"></script>
+
+<script type="text/javascript" th:src="@{/mjs/jquery.imagesloaded.min.js}" charset="utf-8"></script>
+
+<!-- Flexslider -->
+<script type="text/javascript" th:src="@{/mjs/jquery.flexslider.js}" charset="utf-8"></script>
+
+
+<!-- Custom -->
+<script type="text/javascript" th:src="@{/mjs/custom.js}" charset="utf-8"></script>
+
+<script type="text/javascript" th:src="@{/js/clubpage.js}" charset="utf-8"></script>
+
+<script type="text/javascript" th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+
+<script type="text/javascript" th:src="@{/js/xadmin.js}" charset="utf-8"></script>
+
+<script>
+
+    function openModak(){
+        $("[name='testname']").val("xxxxxxxxxxxxxxx");//向模态框中赋值
+        layui.use(['layer'],function () {
+            var layer = layui.layer,$=layui.$;
+            layer.open({
+                type:1,//类型
+                area:['520px','590px'],//定义宽和高
+                title:'查看详细信息',//题目
+                shadeClose:false,//点击遮罩层关闭
+                content: $('#motaikunag')//打开的内容
+            });
+        })
+    }
+</script>
+
+</body>
+</html>
