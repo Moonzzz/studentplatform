@@ -4,7 +4,7 @@
 <mapper namespace="com.moon.studentplatform.mapper.UserMapper">
     <resultMap id="userMap" type="com.moon.studentplatform.dto.User">
         <id property="id" column="uid"/>
-        <result property="login_name" column="username"/>
+        <result property="username" column="login_name"/>
         <result property="password" column="password"/>
         <result property="salt" column="salt"/>
         <result property="isLocked" column="islocked"/>
