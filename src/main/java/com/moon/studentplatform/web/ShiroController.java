@@ -4,6 +4,7 @@ import com.moon.studentplatform.dto.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,7 +65,8 @@ public class ShiroController {
             User user = (User) subject.getPrincipal();
             session.setAttribute("user", user);
             //返回之前的请求的url
-            return WebUtils.getSavedRequest(request).getRequestURI();
+            SavedRequest savedRequest = WebUtils.getSavedRequest(request);
+            return savedRequest == null ? "/index" : savedRequest.getRequestURI();
         } catch (Exception e) {
             System.err.println("验证不通过: " + e.getMessage());
             return "redirect:/pages/user/login.html";
