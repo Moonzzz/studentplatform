@@ -22,6 +22,9 @@ public class User {
 
     private Integer isLocked;
 
+    public Long getId() {
+        return id;
+    }
     /**
      * 密码盐.
      *重新对盐重新进行了定义，用户名+salt，这样就更加不容易被破解
