@@ -45,6 +45,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");
         filterChainDefinitionMap.put("/image/**", "anon");
+
         filterChainDefinitionMap.put("/pages/**", "anon");
 
         // 指定admin接口只允许admin角色的用户访问
