@@ -18,7 +18,7 @@ import java.util.List;
 @Mapper
 public interface IClubDao {
 
-    @Select("select * from club")
+    @Select("SELECT * from club")
     List<Club> showAllClubs();
 
     @Delete("delete from club where id=#{id}")
@@ -32,9 +32,8 @@ public interface IClubDao {
     @Select("select * from club where count=1")
     List<Club> showAllStuOrganizes();
 
-    @Select("select * from club where count=#{count}  LIMIT #{offset},#{limit}")
+    @Select("select * from club where count=#{count} LIMIT #{offset},#{limit}")
     List<Club> getLimitClubs(@Param("offset") int offset, @Param("limit") int limit, @Param("count") int count);
-
 
     @Select("select count(*) from club where count=#{count}")
     int getClubCount(@Param("count") int count);
@@ -42,7 +41,7 @@ public interface IClubDao {
     @Select("select * from club where count <> 1")
     List<Club> showAllColleges();
 
-    @Select("select * from club where id=#{id}")
+    @Select("SELECT * from club where id=#{id}")
     Club showClubDetailById(@Param("id") int id);
 
     @Insert("INSERT into `club`(name,description,firstman,date_published,icon,phonum)\n" +
