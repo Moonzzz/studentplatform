@@ -30,7 +30,7 @@ html, body {height:100%;}
 
 body {
 	position: relative;
-	background: #f3f1ee url(../images/pattern.gif) 50% 0;
+	background: #f3f1ee url(/images/pattern.gif) 50% 0;
 	font: 12px/18px Arial, Helvetica, sans-serif;
 	color: #5c5c5c;
 	-webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
@@ -929,7 +929,7 @@ input::-moz-focus-inner {
 }
 
 .elastislide-wrapper.elastislide-loading {
-	background-image: url(../images/loader.gif);
+	background-image: url(/images/loader.gif);
 	background-repeat: no-repeat;
 	background-position: center center;
 }
@@ -1027,7 +1027,7 @@ input::-moz-focus-inner {
 	margin-top: -4px;
 	width: 4px;
 	height: 7px;
-	background: url(../images/carousel-nav.gif) 0 0 no-repeat;
+	background: url(/images/carousel-nav.gif) 0 0 no-repeat;
 }
 
 .elastislide-wrapper nav span:hover {
@@ -1190,7 +1190,7 @@ input[type="password"]::-webkit-input-placeholder{
 }
 .hr-dashed {
 	height: 2px;
-	background: url(../images/hr-dashed.gif) 0 0 repeat-x;
+	background: url(/images/hr-dashed.gif) 0 0 repeat-x;
 }
 .grid_1 .hr,
 .grid_2 .hr,

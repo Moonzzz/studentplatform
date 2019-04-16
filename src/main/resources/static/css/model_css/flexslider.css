@@ -49,10 +49,10 @@ html[xmlns] .slides {display: block;}
 .flexslider {
 	position: relative;
 	height: 360px;
-	background: #f9fbfa url(../images/loader.gif) 50% 50% no-repeat;
+	background: #f9fbfa url(/images/loader.gif) 50% 50% no-repeat;
 }
 .loading .flexslider {
-	background: #f9fbfa url(../images/loader.gif) 50% 50% no-repeat;
+	background: #f9fbfa url(/images/loader.gif) 50% 50% no-repeat;
 }
 .flex-viewport {
 	max-height: 2000px;
@@ -78,7 +78,7 @@ html[xmlns] .slides {display: block;}
 	margin: -22px 0 0; 
 	display: block; 
 	background-color: #353535;
-	background-image: url(../images/bg_direction_nav.png);
+	background-image: url(/images/bg_direction_nav.png);
 	background-repeat: no-repeat;
 	background-position: 0 0;
 	position: absolute; 
