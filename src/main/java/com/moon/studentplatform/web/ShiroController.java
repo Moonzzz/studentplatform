@@ -21,8 +21,7 @@ import javax.servlet.http.HttpSession;
 public class ShiroController {
 
     @RequestMapping("/login")
-    public String login(HttpServletRequest request) {
-        System.out.println(request.getHeader("Referer"));
+    public String login() {
         return "/login.html";
     }
 
@@ -66,7 +65,7 @@ public class ShiroController {
             session.setAttribute("user", user);
             //返回之前的请求的url
             SavedRequest savedRequest = WebUtils.getSavedRequest(request);
-            return savedRequest == null ? "/index" : savedRequest.getRequestURI();
+            return savedRequest == null ? "/index" : "redirect:"+savedRequest.getRequestURI();
         } catch (Exception e) {
             System.err.println("验证不通过: " + e.getMessage());
             return "redirect:/pages/user/login.html";
