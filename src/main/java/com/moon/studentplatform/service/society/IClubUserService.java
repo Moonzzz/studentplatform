@@ -13,4 +13,7 @@ import java.util.List;
 public interface IClubUserService {
     List<ClubUser> showAllClubUsers(int offset, int limit, int type);
     int getClubUserCount(int type);
+    boolean setIsPass(String id,String pass);
+    int deleteClubUserById(String id);
+
 }

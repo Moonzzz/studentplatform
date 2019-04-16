@@ -27,4 +27,14 @@ public class ClubUserServiceImpl implements IClubUserService {
     public int getClubUserCount(int type) {
         return clubUserDao.getClubUserCount(type);
     }
+
+    @Override
+    public boolean setIsPass(String id, String pass) {
+        return clubUserDao.setIsPass(id, pass);
+    }
+
+    @Override
+    public int deleteClubUserById(String id) {
+        return clubUserDao.deleteClubUserById(id);
+    }
 }

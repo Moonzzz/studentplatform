@@ -191,7 +191,7 @@
                 layer.confirm("真的删除这些数据吗？", function (index) {
                     if (ids.length != 0) {
                         $.ajax({
-                            url: "/deleteClubs",
+                            url: "/deleteClubs?type=beth",
                             type: "POST",
                             traditional: true,//传数组一定要加的
                             data: {

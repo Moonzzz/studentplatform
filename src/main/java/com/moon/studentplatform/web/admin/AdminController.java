@@ -78,7 +78,7 @@ public class AdminController {
 
     @RequestMapping("/deleteClubs")
     @ResponseBody
-    public String clubList(HttpServletRequest request) {
+    public String deleteClubs(HttpServletRequest request) {
         int count = 1;
         String type = request.getParameter("type");
         if (type.equals("beth")) {
@@ -91,6 +91,25 @@ public class AdminController {
         } else if (type.equals("one")) {
             String id = request.getParameter("id");
             if (clubService.deleteClubById(id) == 0) count = 0;
+        }
+        return count > 0 ? "true" : "false";
+    }
+
+    @RequestMapping("/deleteClubUsers")
+    @ResponseBody
+    public String deleteClubUsers(HttpServletRequest request) {
+        int count = 1;
+        String type = request.getParameter("type");
+        if (type.equals("beth")) {
+            String[] id = request.getParameterValues("id");
+            for (int i = 0; i < id.length; i++) {
+                System.out.println(id[i]);
+                int flag = clubUserService.deleteClubUserById(id[i]);
+                if (flag == 0) count = 0;
+            }
+        } else if (type.equals("one")) {
+            String id = request.getParameter("id");
+            if ( clubUserService.deleteClubUserById(id) == 0) count = 0;
         }
         return count > 0 ? "true" : "false";
     }
@@ -109,6 +128,16 @@ public class AdminController {
         return getString(clubs, count);
     }
 
+    @RequestMapping(value = "/setPass", method = RequestMethod.POST)
+    @ResponseBody
+    public String stePass(@RequestParam Map<String, String> objs) {
+        String id = objs.get("id");
+        String pass = objs.get("pass");
+        boolean flag = clubUserService.setIsPass(id, pass);
+        return flag == true ? "true" : "false";
+    }
+
+
 
     @RequestMapping("/allClubUser")
     @ResponseBody
@@ -116,10 +145,6 @@ public class AdminController {
         String pageStr = objs.get("page");
         String limitStr = objs.get("limit");
         String typeStr = objs.get("type");
-
-        System.out.println("page   " + pageStr);
-        System.out.println("limit   " + limitStr);
-        System.out.println("type    " + typeStr);
 
         int page = Integer.parseInt(pageStr);
         int limit = Integer.parseInt(limitStr);
@@ -133,6 +158,7 @@ public class AdminController {
         result = "{\"code\":0,\"msg\":\"\",\"count\":" + count + ",\"data\":" + result + "}";
         return result;
     }
+
 
     /**
      * create by: Mr Tang
