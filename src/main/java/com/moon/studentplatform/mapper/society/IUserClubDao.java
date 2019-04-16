@@ -28,6 +28,7 @@ public interface IUserClubDao {
             "club\n" +
             "INNER JOIN club_user ON club_user.club_id = club.id AND '' = ''\n" +
             "INNER JOIN `user` ON club_user.user_id = `user`.id\n" +
+            "WHERE club.count=2\n"+
             "ORDER BY\n" +
             "club_user.pass ASC")
     List<Club> showAllClubUsers();
