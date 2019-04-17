@@ -19,8 +19,21 @@ public interface IClubUserService {
 
     boolean setIsPass(String id, String pass);
 
+    boolean setArticleIsPass(String id, String pass);
+
     int deleteClubUserById(String id);
 
+    int deleteArticleById(String id);
+
     boolean editArticle(MultipartFile picFile, ClubActivity activity);
+
+    int isUserPass(int clubId, int userId);
+
+    int isUserApply(int clubId, int userId);
+
+    List<ClubActivity> getLimitArticles(int offset, int limit);
+
+    int getArticlesCount();
+
 
 }

@@ -55,7 +55,7 @@ public interface IClubDao {
 
     @Select("select club_activity.id as id,club_activity.clubId as clubId,title,image,author\n" +
             ",date,text,club_activity.description as description from club,club_activity \n" +
-            "where club_activity.clubId=#{clubId} and club.id=club_activity.clubId")
+            "where club_activity.clubId=#{clubId} and club.id=club_activity.clubId and club_activity.pass='true'")
     List<ClubActivity> showClubActsByCId(@Param("clubId") int clubId);
 
     @Select("select * from club_activity where id=#{id}")

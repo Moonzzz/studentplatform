@@ -173,7 +173,7 @@
                 <!-- /Main Header -->
             </header>
             <!-- END HEADER -->
-            <div>
+            <div id="mainFrame">
                 <h1 style="margin-left: 560px;color: black">
                     <td th:text="${activity.title}"></td>
                 </h1>
@@ -205,11 +205,14 @@
                     </div>
                 </div>
             </div>
+            <!--内嵌网页容器-->
+            <div id="innerView">
+
+            </div>
         </div>
     </div>
 </div>
 <!-- END WRAPPER -->
-
 
 <!-- Javascript Files
 ================================================== -->
@@ -255,7 +258,6 @@
 
 <!-- Custom -->
 <script type="text/javascript" th:src="@{/mjs/custom.js}" charset="utf-8"></script>
-
 
 <script type="text/javascript" th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
 

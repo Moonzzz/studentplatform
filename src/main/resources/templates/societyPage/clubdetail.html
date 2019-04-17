@@ -198,7 +198,7 @@
                                                  data-captionhidden="on"
                                                  data-endeasing="easeOutExpo"
                                                  data-easing="easeOutExpo">
-                                               Activity!
+                                                Activity!
                                             </div>
                                             <div class="tp-caption sfr original_high"
                                                  data-x="142"
@@ -208,7 +208,10 @@
                                                  data-captionhidden="on"
                                                  data-endeasing="easeOutExpo"
                                                  data-easing="easeOutExpo">
-                                                <a th:title="${item.title}" target="_blank" th:href="@{'/toActDetailPage?id='+${item.id}}"> <td th:text="${item.title}"></td></a>
+                                                <a th:title="${item.title}" target="_blank"
+                                                   th:href="@{'/toActDetailPage?id='+${item.id}}">
+                                                    <td th:text="${item.title}"></td>
+                                                </a>
                                             </div>
                                         </li>
                                         <!--轮播图片结束-->
@@ -231,13 +234,14 @@
                                     <!--社团通知循环开始-->
                                     <article th:each="item:${clubActs}" class="post clearfix">
                                         <figure class="featured-thumb">
-                                            <a th:title="${item.title}" target="_blank" th:href="@{'/toActDetailPage?id='+${item.id}}"><img style="height: 155px"
-                                                             th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/activity_imgs/'+${item.image}}"
-                                                             alt=""></a>
+                                            <a th:title="${item.title}" target="_blank"
+                                               th:href="@{'/toActDetailPage?type=foreGround&id='+${item.id}}"><img style="height: 155px"
+                                                                                                   th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/activity_imgs/'+${item.image}}"
+                                                                                                   alt=""></a>
                                         </figure>
                                         <div class="post-body">
                                             <header class="post-header">
-                                                <h3><a  target="_blank" th:href="@{'/toActDetailPage?id='+${item.id}}">
+                                                <h3><a target="_blank" th:href="@{'/toActDetailPage?id='+${item.id}}">
                                                     <td th:text="${item.title}"></td>
                                                 </a></h3>
                                                 <p class="post-meta">
@@ -253,7 +257,8 @@
                                                 <p class="over_skip">
                                                 <td th:text="${item.description}"></td>
                                                 </p>
-                                                <a target="_blank" th:href="@{'/toActDetailPage?id='+${item.id}}" class="btn">查 看 详 情</a>
+                                                <a target="_blank" th:href="@{'/toActDetailPage?type=foreGround&id='+${item.id}}"
+                                                   class="btn">查 看 详 情</a>
                                             </div>
                                         </div>
                                     </article>
@@ -300,10 +305,11 @@
                                             </li>
                                             <li>
                                                 <h1><a href="javascript:;"
-                                                    onclick="x_admin_show('加 入 我 们','/toJoinClubPage',670,590)">加 入 我 们</a></h1>
+                                                       onclick="joinClub()">加 入 我 们</a></h1>
                                             </li>
                                             <li>
-                                                <h1><a target="_blank" th:href=@{'/toEditArticlePage?clubId='+${cDetail.id}}>发 表 文 章</a></h1>
+                                                <h1><a target="_blank" href="javascript:;" onclick="EditArticle()">发 表 文
+                                                    章</a></h1>
                                             </li>
                                         </ul>
                                     </div>
@@ -407,15 +413,63 @@
 
 <script>
 
-    function openModak(){
+    function joinClub() {
+        $.ajax({
+            url: "/isUserPass",
+            type: "GET",
+            traditional: true,//传数组一定要加的
+            async: true,
+            data: {type: 'isPassJoin'},
+            dataType: "json",
+            success: function (data) {
+                //layer.msg("可以申请", {icon: 6});
+                if (data == '3') {
+                    layer.msg("对不起，您已经是该组织成员，不能提交申请！", {icon: 5});
+                }
+                else if (data == '1') {
+                    x_admin_show('加 入 我 们', '/toJoinClubPage', 670, 590);
+                } else if (data = '2') {
+                    layer.msg("对不起，您已经提交加入申请，不能重复提交！", {icon: 5});
+                }
+            },
+            error: function (data) {
+                layer.msg("对不起,请先登录！", {icon: 5});
+            }
+        });
+    }
+
+    function EditArticle() {
+        /*href="/toEditArticlePage"*/
+        $.ajax({
+            url: "/isUserPass",
+            type: "GET",
+            traditional: true,//传数组一定要加的
+            async: true,
+            data: {type: 'isPassEdit'},
+            dataType: "json",
+            success: function (data) {
+                //layer.msg("可以发表文章", {icon: 6});
+                if (data == false) {
+                    layer.msg("对不起，您目前还不是该组织成员，无法发表文章", {icon: 5});
+                } else {
+                    window.location.href = "/toEditArticlePage";
+                }
+            },
+            error: function (data) {
+                layer.msg("对不起,请先登录！", {icon: 5});
+            }
+        });
+    }
+
+    function openModak() {
         $("[name='testname']").val("xxxxxxxxxxxxxxx");//向模态框中赋值
-        layui.use(['layer'],function () {
-            var layer = layui.layer,$=layui.$;
+        layui.use(['layer'], function () {
+            var layer = layui.layer, $ = layui.$;
             layer.open({
-                type:1,//类型
-                area:['520px','590px'],//定义宽和高
-                title:'查看详细信息',//题目
-                shadeClose:false,//点击遮罩层关闭
+                type: 1,//类型
+                area: ['520px', '590px'],//定义宽和高
+                title: '查看详细信息',//题目
+                shadeClose: false,//点击遮罩层关闭
                 content: $('#motaikunag')//打开的内容
             });
         })

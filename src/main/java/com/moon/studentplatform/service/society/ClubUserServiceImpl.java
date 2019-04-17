@@ -41,8 +41,18 @@ public class ClubUserServiceImpl implements IClubUserService {
     }
 
     @Override
+    public boolean setArticleIsPass(String id, String pass) {
+        return clubUserDao.setArticleIsPass(id, pass);
+    }
+
+    @Override
     public int deleteClubUserById(String id) {
         return clubUserDao.deleteClubUserById(id);
+    }
+
+    @Override
+    public int deleteArticleById(String id) {
+        return clubUserDao.deleteArticleById(id);
     }
 
     @Override
@@ -61,5 +71,26 @@ public class ClubUserServiceImpl implements IClubUserService {
             if (flag) return true;
         }
         return false;
+    }
+
+    @Override
+    public int isUserPass(int clubId, int userId) {
+        int count = clubUserDao.isUserPass(clubId, userId);
+        return count;
+    }
+
+    @Override
+    public int isUserApply(int clubId, int userId) {
+        return clubUserDao.isUserApply(clubId, userId);
+    }
+
+    @Override
+    public List<ClubActivity> getLimitArticles(int offset, int limit) {
+        return clubUserDao.getLimitArticles(offset, limit);
+    }
+
+    @Override
+    public int getArticlesCount() {
+        return clubUserDao.getArticlesCount();
     }
 }

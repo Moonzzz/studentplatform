@@ -20,10 +20,10 @@
         <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
         <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
         <button class="layui-btn layui-btn-sm" lay-event="bulkdelete">批量删除</button>
-        <button class="layui-btn layui-btn-sm" lay-event="addFilm">新增</button>
     </div>
 </script>
 <script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="show">查看文章</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script type="text/html" id="checkboxTpl">
@@ -37,7 +37,7 @@
             , laydate = layui.laydate;
         table.render({
             elem: '#film'
-            , url: '/allClubUser?type=1'
+            , url: '/allArticle'
             , cellMinWidth: 80
             , toolbar: '#toolbarDemo'
             , cols: [ [
@@ -45,32 +45,27 @@
                     type: 'checkbox',
                     name: 'chk'
                 },{
-                    field: 'username',
+                    field: 'title',
                     //width : 150,
-                    title: '成员姓名',
+                    title: '文章标题',
                     align: 'center',
                     sort: true
                 }, {
-                    field: 'clubname',
+                    field: 'author',
                     // width : 250,
                     align: 'center',
-                    title: '社团名称'
+                    title: '作者'
                 }, {
-                    field: 'joindate',
-                    title: '加入时间',
+                    field: 'date',
+                    title: '时间',
                     align: 'center'
                     // width: 200
                 }, {
-                    field: 'reason',
-                    title: '加入理由',
+                    field: 'description',
+                    title: '描述',
                     align: 'center'
                     // width: 200
-                }, {
-                    field: 'experience',
-                    title: '个人经历',
-                    align: 'center'
-                    // width: 200
-                }, {
+                },{
                     field: 'pass',
                     title: '是否批准',
                     align: 'center',
@@ -104,13 +99,17 @@
                 data: {
                     "id": id,
                     "pass": pass,
-                    "type":'userPass'
+                    "type":'articlePass'
                 },
                 success: function (data) {
-                    layer.msg("操作成功", {icon: 6});
+                    if(data==false){
+                        layer.msg("操作失败！", {icon: 7});
+                    }else{
+                        layer.msg("操作成功！", {icon: 6});
+                    }
                 },
                 error: function (data) {
-                    layer.tips("操作失败");
+                    layer.msg("操作是失败！", {icon: 7});
                 }
             });
         });
@@ -124,7 +123,7 @@
             if (obj.event === 'del') {
                 layer.confirm('真的删除行么', function (index) {
                     $.ajax({
-                        url: "/deleteClubUsers?type=one",
+                        url: "/deleteArticles?type=one",
                         type: "POST",
                         data: {"id": data.id},
                         dataType: "json",
@@ -138,6 +137,11 @@
                         }
                     });
                 });
+            }else if (obj.event === 'show') {
+                var data = obj.data;
+                var activityId=data.id;
+                var linkStr='/toActDetailPage?type=backStage&id='+activityId;
+                x_admin_show('文章详情',linkStr,970,490)
             }
         });
         //头工具栏事件
@@ -174,7 +178,7 @@
                 layer.confirm("真的删除这些数据吗？", function (index) {
                     if (ids.length != 0) {
                         $.ajax({
-                            url: "/deleteClubUsers?type=beth",
+                            url: "/deleteArticles?type=beth",
                             type: "POST",
                             traditional: true,//传数组一定要加的
                             data: {

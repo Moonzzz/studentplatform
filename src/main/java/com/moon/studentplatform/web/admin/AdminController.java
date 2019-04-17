@@ -2,6 +2,7 @@ package com.moon.studentplatform.web.admin;
 
 import com.google.gson.Gson;
 import com.moon.studentplatform.dto.society.Club;
+import com.moon.studentplatform.dto.society.ClubActivity;
 import com.moon.studentplatform.dto.society.ClubUser;
 import com.moon.studentplatform.service.society.IClubService;
 import com.moon.studentplatform.service.society.IClubUserService;
@@ -32,7 +33,9 @@ public class AdminController {
     IClubUserService clubUserService;
 
     Club club = null;
-    List<ClubUser> clubUsers;
+    List<ClubUser> clubUsers = null;
+    List<ClubActivity> clubActivities = null;
+
 
     @RequestMapping("/toAdminPage")
     public String toAddClubPage(ModelMap map) {
@@ -55,6 +58,8 @@ public class AdminController {
             case "collegeuser":
                 toPage = "adminpage/collegeuser";
                 break;
+            case "article":
+                toPage = "adminpage/article";
         }
         return toPage;
     }
@@ -113,6 +118,24 @@ public class AdminController {
         return count > 0 ? "true" : "false";
     }
 
+    @RequestMapping("/deleteArticles")
+    @ResponseBody
+    public String deleteArticles(HttpServletRequest request) {
+        int count = 1;
+        String type = request.getParameter("type");
+        if (type.equals("beth")) {
+            String[] id = request.getParameterValues("id");
+            for (int i = 0; i < id.length; i++) {
+                System.out.println(id[i]);
+                int flag = clubUserService.deleteArticleById(id[i]);
+                if (flag == 0) count = 0;
+            }
+        } else if (type.equals("one")) {
+            String id = request.getParameter("id");
+            if (clubUserService.deleteArticleById(id) == 0) count = 0;
+        }
+        return count > 0 ? "true" : "false";
+    }
     @RequestMapping("/clubList")
     @ResponseBody
     public String clubList(@RequestParam Map<String, String> objs) {
@@ -131,10 +154,33 @@ public class AdminController {
     @RequestMapping(value = "/setPass", method = RequestMethod.POST)
     @ResponseBody
     public String stePass(@RequestParam Map<String, String> objs) {
+        boolean flag = false;
         String id = objs.get("id");
         String pass = objs.get("pass");
-        boolean flag = clubUserService.setIsPass(id, pass);
+        String type = objs.get("type");
+        if (type.equals("userPass")) {
+            flag = clubUserService.setIsPass(id, pass);
+        } else if (type.equals("articlePass")) {
+            System.out.println("clubId:  "+id);
+            System.out.println("pass:"+pass);
+            flag = clubUserService.setArticleIsPass(id, pass);
+        }
         return flag == true ? "true" : "false";
+    }
+
+    @RequestMapping("/allArticle")
+    @ResponseBody
+    public String allArticle(@RequestParam Map<String, String> objs) {
+        String pageStr = objs.get("page");
+        String limitStr = objs.get("limit");
+        int page = Integer.parseInt(pageStr);
+        int limit = Integer.parseInt(limitStr);
+        clubActivities = clubUserService.getLimitArticles((page - 1) * limit, limit);
+        int count = clubUserService.getArticlesCount();
+        Gson gson = new Gson();
+        String result = gson.toJson(clubActivities);
+        result = "{\"code\":0,\"msg\":\"\",\"count\":" + count + ",\"data\":" + result + "}";
+        return result;
     }
 
 
@@ -164,7 +210,7 @@ public class AdminController {
      * @return
      */
     private String getString(List<Club> clubs, int count) {
-       // Gson gson = new GsonBuilder().create();
+        // Gson gson = new GsonBuilder().create();
         Gson gson = new Gson();
         String result = gson.toJson(clubs);
         result = "{\"code\":0,\"msg\":\"\",\"count\":" + count + ",\"data\":" + result + "}";
