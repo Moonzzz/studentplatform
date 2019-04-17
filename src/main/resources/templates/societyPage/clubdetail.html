@@ -6,13 +6,13 @@
     ================================================== -->
     <meta charset="utf-8">
     <title>社团主页</title>
-    <meta title="description" content="">
-    <meta title="author" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
     <!-- Mobile Specific Metas
     ================================================== -->
-    <meta title="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
     <!-- CSS
@@ -303,7 +303,7 @@
                                                     onclick="x_admin_show('加 入 我 们','/toJoinClubPage',670,590)">加 入 我 们</a></h1>
                                             </li>
                                             <li>
-                                                <h1><a href="#">相 关 人 员</a></h1>
+                                                <h1><a target="_blank" th:href=@{'/toEditArticlePage?clubId='+${cDetail.id}}>发 表 文 章</a></h1>
                                             </li>
                                         </ul>
                                     </div>

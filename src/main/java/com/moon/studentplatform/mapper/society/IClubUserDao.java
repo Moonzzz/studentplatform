@@ -1,5 +1,6 @@
 package com.moon.studentplatform.mapper.society;
 
+import com.moon.studentplatform.dto.society.ClubActivity;
 import com.moon.studentplatform.dto.society.ClubUser;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -48,4 +49,11 @@ public interface IClubUserDao {
 
     @Delete("delete from club_user where id=#{id}")
     int deleteClubUserById(@Param("id") String id);
+
+
+    @Insert("INSERT into `club_activity`\n" +
+            "(userId,clubId,title,image,author,date,text,description,pass)\n" +
+            "VALUES(#{userId},#{clubId},#{title},#{image},#{author}\n" +
+            ",#{date},#{text},#{description},#{pass})")
+    boolean editArticle(ClubActivity activity);
 }

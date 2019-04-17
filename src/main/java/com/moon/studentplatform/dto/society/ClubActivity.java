@@ -8,6 +8,7 @@ package com.moon.studentplatform.dto.society;
  */
 public class ClubActivity {
     private int id;
+    private int userId;
     private int clubId;
     private String title;
     private String image;
@@ -19,6 +20,17 @@ public class ClubActivity {
 
     public ClubActivity() {
 
+    }
+
+    public ClubActivity(int userId, int clubId, String title, String author, String date, String text, String description, String pass) {
+        this.userId = userId;
+        this.clubId = clubId;
+        this.title = title;
+        this.author = author;
+        this.date = date;
+        this.text = text;
+        this.description = description;
+        this.pass = pass;
     }
 
     public int getId() {
@@ -89,6 +101,7 @@ public class ClubActivity {
     public String toString() {
         return "ClubActivity{" +
                 "id=" + id +
+                ", userId=" + userId +
                 ", clubId=" + clubId +
                 ", title='" + title + '\'' +
                 ", image='" + image + '\'' +

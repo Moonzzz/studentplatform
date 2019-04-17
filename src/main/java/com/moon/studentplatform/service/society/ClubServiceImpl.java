@@ -32,7 +32,7 @@ public class ClubServiceImpl implements IClubService {
         long pSize = picFile.getSize();
         int randomNum = fileDao.getSecondTimestamp(new Date());
         String pSuffix = fileDao.getSuffix(picFile.getOriginalFilename());
-        String pRealPath = "D:/AIDEAworkspace/studentplatform-master/src/main/resources/static/society_files/" + randomNum + pSuffix;
+        String pRealPath = "D:/AIDEAworkspace/studentplatform/src/main/resources/static/society_files/" + randomNum + pSuffix;
         String icon = randomNum + pSuffix;
         System.out.println("icon:  " + icon);
         club.setIcon(icon);
@@ -97,4 +97,6 @@ public class ClubServiceImpl implements IClubService {
     public ClubActivity showClubActDetailById(int id) {
         return clubDao.showClubActDetailById(id);
     }
+
+
 }

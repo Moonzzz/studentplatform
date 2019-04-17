@@ -60,4 +60,5 @@ public interface IClubDao {
 
     @Select("select * from club_activity where id=#{id}")
     ClubActivity showClubActDetailById(@Param("id") int id);
+
 }

@@ -1,6 +1,8 @@
 package com.moon.studentplatform.service.society;
 
+import com.moon.studentplatform.dto.society.ClubActivity;
 import com.moon.studentplatform.dto.society.ClubUser;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -12,8 +14,13 @@ import java.util.List;
  */
 public interface IClubUserService {
     List<ClubUser> showAllClubUsers(int offset, int limit, int type);
+
     int getClubUserCount(int type);
-    boolean setIsPass(String id,String pass);
+
+    boolean setIsPass(String id, String pass);
+
     int deleteClubUserById(String id);
+
+    boolean editArticle(MultipartFile picFile, ClubActivity activity);
 
 }
