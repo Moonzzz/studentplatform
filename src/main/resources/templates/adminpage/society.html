@@ -113,7 +113,7 @@
                     var description = $('#description').val();
                     var date = $('#date').val();
                     var firstman = $("#firstman").val();
-                    var phonum=$("#phonum").val();
+                    var phonum = $("#phonum").val();
                     var pass = $("#pass").val();
                     layer.confirm('真的要修改么', function (index) {
                         $.ajax({
@@ -126,7 +126,7 @@
                                 "description": description,
                                 "date": date,
                                 "firstman": firstman,
-                                "phonum":phonum,
+                                "phonum": phonum,
                                 "pass": pass
                             },
                             success: function (data) {
@@ -142,13 +142,18 @@
                     return false;
                 });
             }
-
             function EidtUv(data, obj) {
                 $("#name").val(data.name);
                 $("#description").val(data.description);
-                $("#date").val(data.date_published);
+                $("#date").val(data.datepublished);
                 $("#firstman").val(data.firstman);
                 $("#phonum").val(data.phonum);
+                var isPass = data.pass;
+                if(isPass=='yes'){
+                    $("#pass").find("option[value='yes']").attr("selected",true);//默认选中
+                }else{
+                    $("#pass").find("option[value='no']").attr("selected",true);//默认选中
+                }
                 layer.open({
                     title: '修改组织信息',
                     type: 1,
@@ -208,7 +213,7 @@
                             }
                         });
                     } else {
-                        layer.msg("请选择要删除的数据", {icon: 5},1000);
+                        layer.msg("请选择要删除的数据", {icon: 5}, 1000);
                     }
                 });
             }
@@ -261,8 +266,8 @@
         <label class="layui-form-label">是否批准</label>
         <div class="layui-input-inline">
             <select name="selector" lay-filter="genre" id="pass">
-                <option name="pass" value="yes">是</option>
-                <option name="pass" value="no">否</option>
+                <option value="yes">是</option>
+                <option value="no">否</option>
             </select>
         </div>
     </div>

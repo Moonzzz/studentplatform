@@ -10,33 +10,24 @@ public class Club {
     private int id;
     private String name;
     private String description;//社团描述
-    private String date_published;
+    private String datepublished;
     private String firstman;
     private int count;//组织类型
     private String icon;
     private String phonum;
-    private String reason;
     private String pass;
 
     public Club() {
     }
 
-    public Club(int id, String name, String description, String date_published, String firstman, String phonum, String pass) {
+    public Club(int id, String name, String description, String datepublished, String firstman, String phonum, String pass) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.date_published = date_published;
+        this.datepublished = datepublished;
         this.firstman = firstman;
         this.phonum = phonum;
         this.pass = pass;
-    }
-
-    public Club(String name, String date_published, String firstman, String phonum, String description) {
-        this.name = name;
-        this.date_published = date_published;
-        this.firstman = firstman;
-        this.phonum = phonum;
-        this.description = description;
     }
 
     public int getId() {
@@ -63,12 +54,12 @@ public class Club {
         this.description = description;
     }
 
-    public String getDate_published() {
-        return date_published;
+    public String getDatepublished() {
+        return datepublished;
     }
 
-    public void setDate_published(String date_published) {
-        this.date_published = date_published;
+    public void setDatepublished(String datepublished) {
+        this.datepublished = datepublished;
     }
 
     public String getFirstman() {
@@ -103,26 +94,34 @@ public class Club {
         this.phonum = phonum;
     }
 
-    public String getReason() {
-        return reason;
+    public String getPass() {
+        return pass;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    public Club(String name, String datepublished, String firstman, String phonum, String description) {
+        this.name = name;
+        this.datepublished = datepublished;
+        this.firstman = firstman;
+        this.phonum = phonum;
+        this.description = description;
     }
 
     @Override
     public String toString() {
         return "Club{" +
                 "id=" + id +
-                ", title='" + name + '\'' +
+                ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", date_published='" + date_published + '\'' +
+                ", datepublished='" + datepublished + '\'' +
                 ", firstman='" + firstman + '\'' +
                 ", count=" + count +
                 ", icon='" + icon + '\'' +
                 ", phonum='" + phonum + '\'' +
-                ", reason='" + reason + '\'' +
+                ", pass='" + pass + '\'' +
                 '}';
     }
 }

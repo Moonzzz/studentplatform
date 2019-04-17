@@ -1,9 +1,7 @@
 package com.moon.studentplatform.mapper.society;
 
-import com.moon.studentplatform.dto.society.Club;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import com.moon.studentplatform.dto.society.ClubUser;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -29,8 +27,25 @@ public interface IClubUserDao {
             "club\n" +
             "INNER JOIN club_user ON club_user.club_id = club.id AND '' = ''\n" +
             "INNER JOIN `user` ON club_user.user_id = `user`.id\n" +
-            "WHERE club.count=#{type}\n"+
+            "WHERE club.count=#{count}\n" +
             "ORDER BY\n" +
-            "club_user.pass ASC")
-    List<Club> showAllClubUsers(@Param("type") int type);
+            "club_user.pass ASC\n" +
+            "LIMIT #{offset},#{limit}")
+    List<ClubUser> showAllClubUsers(@Param("offset") int offset, @Param("limit") int limit, @Param("count") int count);
+
+    @Select("SELECT\n" +
+            "count(*)\n" +
+            "FROM\n" +
+            "club\n" +
+            "INNER JOIN club_user ON club_user.club_id = club.id\n" +
+            "INNER JOIN `user` ON club_user.user_id = `user`.id\n" +
+            "where club.count=#{type}")
+    int getClubUserCount(@Param("type") int type);
+
+    @Update("update club_user set pass=#{pass}\n" +
+            " where id=#{id}")
+    boolean setIsPass(@Param("id") String id, @Param("pass") String pass);
+
+    @Delete("delete from club_user where id=#{id}")
+    int deleteClubUserById(@Param("id") String id);
 }
