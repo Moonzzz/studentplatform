@@ -89,7 +89,6 @@ public class SocietyController {
         request.getSession().setAttribute("clubId", clubId);
         clubActivities = clubService.showClubActsByCId(clubId);
         cDetail = clubService.showClubDetailById(clubId);
-        System.out.println(cDetail.toString());
         map.addAttribute("cDetail", cDetail);
         if (clubActivities.size() > 0) {
             map.addAttribute("clubActs", clubActivities);
@@ -161,5 +160,4 @@ public class SocietyController {
             out.close();
         }
     }
-
 }

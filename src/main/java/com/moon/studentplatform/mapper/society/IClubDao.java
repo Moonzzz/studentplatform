@@ -24,7 +24,7 @@ public interface IClubDao {
     @Delete("delete from club where id=#{id}")
     int deleteClubById(@Param("id") String id);
 
-    @Update("update club set name=#{name},description=#{description},date_published=#{date_published},\n" +
+    @Update("update club set name=#{name},description=#{description},datepublished=#{datepublished},\n" +
             "firstman=#{firstman},phonum=#{phonum},pass=#{pass}\n" +
             " where id=#{id}")
     boolean modifyClub(Club club);
@@ -44,8 +44,8 @@ public interface IClubDao {
     @Select("SELECT * from club where id=#{id}")
     Club showClubDetailById(@Param("id") int id);
 
-    @Insert("INSERT into `club`(name,description,firstman,date_published,icon,phonum)\n" +
-            "VALUES(#{name},#{description},#{firstman},#{date_published},#{icon},#{phonum})")
+    @Insert("INSERT into `club`(name,description,firstman,datepublished,icon,phonum)\n" +
+            "VALUES(#{name},#{description},#{firstman},#{datepublished},#{icon},#{phonum})")
     boolean addClub(Club club);
 
 
