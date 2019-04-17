@@ -1,5 +1,6 @@
 package com.moon.studentplatform.web.society;
 
+import com.moon.studentplatform.dao.society.SenstiveWordsFiter;
 import com.moon.studentplatform.dto.User;
 import com.moon.studentplatform.dto.society.ClubActivity;
 import com.moon.studentplatform.service.society.IClubUserService;
@@ -27,6 +28,8 @@ import java.util.Map;
 public class ClubUserController {
     @Autowired
     IClubUserService clubUserService;
+    @Autowired
+    SenstiveWordsFiter wordsFiter;
 
     @RequestMapping("/toEditArticlePage")
     public String toEditArticlePage() {
@@ -66,7 +69,8 @@ public class ClubUserController {
         String date = objs.get("date");
         String text = objs.get("text");
         String author = user.getUsername();
-        ClubActivity activity = new ClubActivity(userId, clubId, title, author, date, text, description, "false");
+        String newtext = wordsFiter.fiteSenstiveWords(text);//敏感词过滤
+        ClubActivity activity = new ClubActivity(userId, clubId, title, author, date, newtext, description, "false");
         boolean flag = clubUserService.editArticle(picFile, activity);
         //System.out.println("当前clubID:" + clubId);
         //boolean flag = true;

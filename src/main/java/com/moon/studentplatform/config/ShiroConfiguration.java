@@ -38,7 +38,7 @@ public class ShiroConfiguration {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
        /* filterChainDefinitionMap.put("/static/**", "anon");
         // 拦截index接口，authc表示需要认证才能访问
-        filterChainDefinitionMap.put("/index", "authc");
+        filterChainDefinitionMap.put("/index", "anon");
         // anon表示不拦截
         filterChainDefinitionMap.put("/login/**", "anon");
         filterChainDefinitionMap.put("/loginUser", "anon");
