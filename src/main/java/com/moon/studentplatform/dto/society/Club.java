@@ -30,14 +30,6 @@ public class Club {
         this.pass = pass;
     }
 
-    public Club(String name, String datepublished, String firstman, String phonum, String description) {
-        this.name = name;
-        this.datepublished = datepublished;
-        this.firstman = firstman;
-        this.phonum = phonum;
-        this.description = description;
-    }
-
     public int getId() {
         return id;
     }
@@ -62,11 +54,11 @@ public class Club {
         this.description = description;
     }
 
-    public String getdatepublished() {
+    public String getDatepublished() {
         return datepublished;
     }
 
-    public void setdatepublished(String datepublished) {
+    public void setDatepublished(String datepublished) {
         this.datepublished = datepublished;
     }
 
@@ -100,6 +92,22 @@ public class Club {
 
     public void setPhonum(String phonum) {
         this.phonum = phonum;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    public Club(String name, String datepublished, String firstman, String phonum, String description) {
+        this.name = name;
+        this.datepublished = datepublished;
+        this.firstman = firstman;
+        this.phonum = phonum;
+        this.description = description;
     }
 
     @Override

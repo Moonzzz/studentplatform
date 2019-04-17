@@ -41,6 +41,7 @@ public class SocietyController {
     @RequestMapping("/allSocietys")
     public String allSocietys(ModelMap map) {
         clubs = clubService.showAllClubs();
+        System.out.println(clubs.toString());
         if (clubs.size() > 0) {
             map.addAttribute("clubs", clubs);
         }
