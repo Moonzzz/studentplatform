@@ -74,8 +74,7 @@ public class AdminController {
         String date = objs.get("date");
         String firstman = objs.get("firstman");
         String phonum = objs.get("phonum");
-        String pass = objs.get("pass");
-        club = new Club(id, name, description, date, firstman, phonum, pass);
+        club = new Club(id, name, description, date, firstman, phonum);
         boolean flag = clubService.modifyClub(club);
         return flag ? "true" : "false";
     }
@@ -136,6 +135,7 @@ public class AdminController {
         }
         return count > 0 ? "true" : "false";
     }
+
     @RequestMapping("/clubList")
     @ResponseBody
     public String clubList(@RequestParam Map<String, String> objs) {
@@ -161,9 +161,11 @@ public class AdminController {
         if (type.equals("userPass")) {
             flag = clubUserService.setIsPass(id, pass);
         } else if (type.equals("articlePass")) {
-            System.out.println("clubId:  "+id);
-            System.out.println("pass:"+pass);
             flag = clubUserService.setArticleIsPass(id, pass);
+        } else if (type.equals("clubPass")) {
+            System.out.println("ClubID: " + id);
+            System.out.println("pass" + pass);
+            flag = clubService.setIsClubPass(id, pass);
         }
         return flag == true ? "true" : "false";
     }

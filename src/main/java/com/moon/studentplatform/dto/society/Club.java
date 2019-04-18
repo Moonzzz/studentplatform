@@ -20,14 +20,13 @@ public class Club {
     public Club() {
     }
 
-    public Club(int id, String name, String description, String datepublished, String firstman, String phonum, String pass) {
+    public Club(int id, String name, String description, String datepublished, String firstman, String phonum) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.datepublished = datepublished;
         this.firstman = firstman;
         this.phonum = phonum;
-        this.pass = pass;
     }
 
     public int getId() {

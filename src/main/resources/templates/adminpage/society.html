@@ -27,6 +27,11 @@
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
+
+<script type="text/html" id="checkboxTpl">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="lock" value="{{d.id}}" title="批准" lay-filter="lockDemo" {{ d.pass == 'true' ? 'checked' : ''}}>
+</script>
 <script>
     layui.use(['table', 'form', 'laydate'], function () {
         var table = layui.table
@@ -64,6 +69,12 @@
                     align: 'center'
                     // width: 200
                 }, {
+                    field: 'pass',
+                    title: '是否批准',
+                    align: 'center',
+                    templet: '#checkboxTpl',
+                    unresize: true
+                },{
                     fixed: 'right',
                     title: '操作',
                     toolbar: '#barDemo',
@@ -78,6 +89,34 @@
                 });
             }
         });
+
+        //监听批准操作
+        form.on('checkbox(lockDemo)', function(obj){
+            //layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+            var id=this.value;
+            var pass=obj.elem.checked;
+            $.ajax({
+                url: "/setPass",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "id": id,
+                    "pass": pass,
+                    "type":'clubPass'
+                },
+                success: function (data) {
+                    if(data==false){
+                        layer.msg("操作失败！", {icon: 7});
+                    }else{
+                        layer.msg("操作成功！", {icon: 6});
+                    }
+                },
+                error: function (data) {
+                    layer.msg("操作是失败！", {icon: 7});
+                }
+            });
+        });
+
 
         //日期框
         laydate.render({
@@ -114,7 +153,6 @@
                     var date = $('#date').val();
                     var firstman = $("#firstman").val();
                     var phonum = $("#phonum").val();
-                    var pass = $("#pass").val();
                     layer.confirm('真的要修改么', function (index) {
                         $.ajax({
                             url: "/modifyClub",
@@ -126,13 +164,17 @@
                                 "description": description,
                                 "date": date,
                                 "firstman": firstman,
-                                "phonum": phonum,
-                                "pass": pass
+                                "phonum": phonum
                             },
                             success: function (data) {
-                                layer.close(index);
-                                layer.msg("修改成功", {icon: 6});
-                                window.location.reload();
+                                if(data==false){
+                                    layer.msg("修改失败", {icon: 5});
+                                }else{
+                                    layer.close(index);
+                                    layer.confirm('修改成功', function (index) {
+                                        window.location.reload();
+                                    })
+                                }
                             },
                             error: function (data) {
                                 layer.msg("修改失败", {icon: 5});
@@ -260,15 +302,6 @@
         <div class="layui-input-inline">
             <input type="layui-input" name="phonum" id="phonum" lay-verify="phone|" placeholder="请输入联系电话"
                    lay-verType="tips" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">是否批准</label>
-        <div class="layui-input-inline">
-            <select name="selector" lay-filter="genre" id="pass">
-                <option value="yes">是</option>
-                <option value="no">否</option>
-            </select>
         </div>
     </div>
     <div class="layui-form-item">

@@ -98,5 +98,8 @@ public class ClubServiceImpl implements IClubService {
         return clubDao.showClubActDetailById(id);
     }
 
-
+    @Override
+    public boolean setIsClubPass(String id, String pass) {
+        return clubDao.setIsClubPass(id, pass);
+    }
 }

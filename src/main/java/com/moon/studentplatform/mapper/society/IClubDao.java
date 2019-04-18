@@ -18,18 +18,18 @@ import java.util.List;
 @Mapper
 public interface IClubDao {
 
-    @Select("SELECT * from club")
+    @Select("SELECT * from club where pass ='true'")
     List<Club> showAllClubs();
 
     @Delete("delete from club where id=#{id}")
     int deleteClubById(@Param("id") String id);
 
     @Update("update club set name=#{name},description=#{description},datepublished=#{datepublished},\n" +
-            "firstman=#{firstman},phonum=#{phonum},pass=#{pass}\n" +
+            "firstman=#{firstman},phonum=#{phonum}\n" +
             " where id=#{id}")
     boolean modifyClub(Club club);
 
-    @Select("select * from club where count=1")
+    @Select("SELECT * from club where count=1 and pass='true'")
     List<Club> showAllStuOrganizes();
 
     @Select("select * from club where count=#{count} LIMIT #{offset},#{limit}")
@@ -38,7 +38,7 @@ public interface IClubDao {
     @Select("select count(*) from club where count=#{count}")
     int getClubCount(@Param("count") int count);
 
-    @Select("select * from club where count <> 1")
+    @Select("select * from club where count <> 1 and pass='true'")
     List<Club> showAllColleges();
 
     @Select("SELECT * from club where id=#{id}")
@@ -60,5 +60,9 @@ public interface IClubDao {
 
     @Select("select * from club_activity where id=#{id}")
     ClubActivity showClubActDetailById(@Param("id") int id);
+
+    @Update("update club set pass=#{pass}\n" +
+            " where id=#{id}")
+    boolean setIsClubPass(@Param("id") String id, @Param("pass") String pass);
 
 }

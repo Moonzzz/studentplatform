@@ -38,6 +38,7 @@ public interface IClubService {
 
     ClubActivity showClubActDetailById(int id);
 
+    boolean setIsClubPass(String id, String pass);
 
 
 }
