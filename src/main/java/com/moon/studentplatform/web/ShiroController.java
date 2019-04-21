@@ -22,7 +22,7 @@ public class ShiroController {
 
     @RequestMapping("/login")
     public String login() {
-        return "/login.html";
+        return "redirect:/pages/user/login.html";
     }
 
     @RequestMapping("/index")
