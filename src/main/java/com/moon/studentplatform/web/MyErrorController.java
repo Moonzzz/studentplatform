@@ -8,10 +8,13 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ *
+ * springboot 2 404页面处理
  * @author Moon
  */
 @Controller
 public class MyErrorController implements ErrorController {
+
     @RequestMapping("/error")
     public ModelAndView handleError(HttpServletRequest request) {
         Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");

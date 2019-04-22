@@ -1,9 +1,12 @@
 server:
   port: 8080
+#  虚拟文件路径映射
+web:
+  upload_path: E:/temp/
 
 spring:
   resources:
-    static-locations: classpath:/META-INF/resources/,classpath:/static,classpath:/resources/,file:E:/temp/
+    static-locations: classpath:/META-INF/resources/,classpath:/static,classpath:/resources/,file:${web.upload_path}
   datasource:
     name: mysql_test
     type: com.alibaba.druid.pool.DruidDataSource
@@ -41,5 +44,7 @@ logging:
     org.mybatis: debug
 
 mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.moon.studentplatform.domain

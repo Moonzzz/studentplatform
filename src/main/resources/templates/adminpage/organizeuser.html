@@ -24,8 +24,11 @@
     </div>
 </script>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="checkboxTpl">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="lock" value="{{d.id}}" title="批准" lay-filter="lockDemo" {{ d.pass == 'true' ? 'checked' : ''}}>
 </script>
 <script>
     layui.use(['table', 'form', 'laydate'], function () {
@@ -34,7 +37,7 @@
             , laydate = layui.laydate;
         table.render({
             elem: '#film'
-            , url: '/clubList?type=2'
+            , url: '/allClubUser?type=1'
             , cellMinWidth: 80
             , toolbar: '#toolbarDemo'
             , cols: [ [
@@ -42,30 +45,46 @@
                     type: 'checkbox',
                     name: 'chk'
                 },{
-                    field: 'name',
+                    field: 'username',
                     //width : 150,
-                    title: '社团名称',
+                    title: '成员姓名',
                     align: 'center',
                     sort: true
                 }, {
-                    field: 'firstman',
+                    field: 'clubname',
                     // width : 250,
                     align: 'center',
-                    title: '创始人'
+                    title: '社团名称'
                 }, {
-                    field: 'description',
-                    title: '简介',
+                    field: 'joindate',
+                    title: '加入时间',
                     align: 'center'
                     // width: 200
                 }, {
+                    field: 'reason',
+                    title: '加入理由',
+                    align: 'center'
+                    // width: 200
+                }, {
+                    field: 'experience',
+                    title: '个人经历',
+                    align: 'center'
+                    // width: 200
+                }, {
+                    field: 'pass',
+                    title: '是否批准',
+                    align: 'center',
+                    templet: '#checkboxTpl',
+                    unresize: true
+                },{
                     fixed: 'right',
                     title: '操作',
                     toolbar: '#barDemo',
                     width: 200
                 }] ]
             , page: true
-            , limits: [4, 8, 16, 32]  //每页条数的选择项，默认：[10,20,30,40,50,60,70,80,90]。
-            , limit: 4
+            , limits: [5, 10, 20, 40]  //每页条数的选择项，默认：[10,20,30,40,50,60,70,80,90]。
+            , limit: 5
             , done: function () {
                 $(".layui-table-cell").css({
                     "height": "auto"
@@ -73,6 +92,28 @@
             }
         });
 
+        //监听批准操作
+        form.on('checkbox(lockDemo)', function(obj){
+            //layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+            var id=this.value;
+            var pass=obj.elem.checked;
+            $.ajax({
+                url: "/setPass",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "id": id,
+                    "pass": pass,
+                    "type":'userPass'
+                },
+                success: function (data) {
+                    layer.msg("操作成功", {icon: 6});
+                },
+                error: function (data) {
+                    layer.tips("操作失败");
+                }
+            });
+        });
         //日期框
         laydate.render({
             elem: '#datePublished' //指定元素
@@ -83,7 +124,7 @@
             if (obj.event === 'del') {
                 layer.confirm('真的删除行么', function (index) {
                     $.ajax({
-                        url: "/deleteClubs?type=one",
+                        url: "/deleteClubUsers?type=one",
                         type: "POST",
                         data: {"id": data.id},
                         dataType: "json",
@@ -96,58 +137,6 @@
                             layer.msg("删除失败", {icon: 5});
                         }
                     });
-                });
-            } else if (obj.event === 'edit') {
-                //这里一般是发送修改的Ajax请求
-                EidtUv(data, obj);
-                form.on('submit(modifyFilm)', function (obj) {
-                    /*id为不可变的值*/
-                    var id = data.id;
-                    var name = $('#name').val();
-                    var description = $('#description').val();
-                    var date = $('#date').val();
-                    var firstman = $("#firstman").val();
-                    var phonum=$("#phonum").val();
-                    var pass = $("#pass").val();
-                    layer.confirm('真的修改行么', function (index) {
-                        $.ajax({
-                            url: "/modifyClub",
-                            type: "POST",
-                            dataType: "text",
-                            data: {
-                                "id": id,
-                                "name": name,
-                                "description": description,
-                                "date": date,
-                                "firstman": firstman,
-                                "phonum":phonum,
-                                "pass": pass
-                            },
-                            success: function (data) {
-                                layer.close(index);
-                                layer.msg("修改成功", {icon: 6});
-                                window.location.reload();
-                            },
-                            error: function (data) {
-                                layer.msg("修改失败", {icon: 5});
-                            }
-                        });
-                    });
-                    return false;
-                });
-            }
-
-            function EidtUv(data, obj) {
-                $("#name").val(data.name);
-                $("#description").val(data.description);
-                $("#date").val(data.date_published);
-                $("#firstman").val(data.firstman);
-                $("#phonum").val(data.phonum);
-                layer.open({
-                    title: '修改组织信息',
-                    type: 1,
-                    area: ['400px', '400px'],
-                    content: $("#form1")
                 });
             }
         });
@@ -185,7 +174,7 @@
                 layer.confirm("真的删除这些数据吗？", function (index) {
                     if (ids.length != 0) {
                         $.ajax({
-                            url: "/deleteClubs",
+                            url: "/deleteClubUsers?type=beth",
                             type: "POST",
                             traditional: true,//传数组一定要加的
                             data: {
@@ -213,58 +202,5 @@
         });
     });
 </script>
-<!--<%&#45;&#45;修改的弹框&#45;&#45;%>-->
-<form class="layui-form layui-form-pane1" id="form1" name="form1" method="post" style="display: none;"
-      lay-filter="first1">
-    <div class="layui-form-item">
-        <label class="layui-form-label">组织名称</label>
-        <div class="layui-input-inline">
-            <input type="text" name="name" id="name" lay-verify="required|" required placeholder="请输入组织名称"
-                   autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">组织介绍</label>
-        <div class="layui-input-inline">
-            <input type="layui-input" name="datePublished" id="description" lay-verify="required|"
-                   placeholder="请选择组织介绍" lay-verType="tips" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">创办时间</label>
-        <div class="layui-input-inline">
-            <input type="date" name="date" id="date" lay-verify="required|" placeholder="请选择电影上映日期"
-                   lay-verType="tips" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">创办人</label>
-        <div class="layui-input-inline">
-            <input type="layui-input" name="firstman" id="firstman" lay-verify="required|" placeholder="请输入创办人"
-                   lay-verType="tips" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">联系电话</label>
-        <div class="layui-input-inline">
-            <input type="layui-input" name="phonum" id="phonum" lay-verify="phone|" placeholder="请输入联系电话"
-                   lay-verType="tips" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">是否批准</label>
-        <div class="layui-input-inline">
-            <select name="selector" lay-filter="genre" id="pass">
-                <option name="pass" value="yes">是</option>
-                <option name="pass" value="no">否</option>
-            </select>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <div class="layui-input-block">
-            <button class="layui-btn" lay-submit lay-filter="modifyFilm">修改信息</button>
-        </div>
-    </div>
-</form>
 </body>
 </html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>平台首页</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <!-- Mobile Specific Metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+    <!-- CSS
+    ================================================== -->
+    <!-- Normalize default styles -->
+    <link rel="stylesheet" th:href="@{/mcss/normalize.css}">
+    <!-- Skeleton grid system -->
+    <link rel="stylesheet" th:href="@{/mcss/skeleton.css}">
+    <!-- Base Template Styles-->
+    <link rel="stylesheet" th:href="@{/mcss/base.css}">
+    <!-- Template Styles-->
+    <link rel="stylesheet" th:href="@{/mcss/style.css}">
+    <!-- Superfish -->
+    <link rel="stylesheet" th:href="@{/mcss/superfish.css}">
+    <!-- Prettyphoto -->
+    <link rel="stylesheet" th:href="@{/mcss/prettyPhoto.css}">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" th:href="@{/mcss/font-awesome.min.css}">
+    <!-- REVOLUTION BANNER CSS SETTINGS -->
+    <link rel="stylesheet" th:href="@{/mcss/settings.css}">
+    <!-- Flexslider -->
+    <link rel="stylesheet" th:href="@{/mcss/flexslider.css}">
+    <!-- Layout and Media queries-->
+    <link rel="stylesheet" th:href="@{/mcss/media-queries.css}">
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" th:href="@{/mcss/ie/ie8.css}">
+    <![endif]-->
+    <link rel="stylesheet" th:href="@{/lib/layui/css/layui.css}">
+
+    <link rel="stylesheet" th:href="@{/css/clubpage.css}">
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <style>
+        a:hover {
+            text-decoration: none;
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+
+<!-- BEGIN WRAPPER -->
+<div id="wrapper">
+
+    <div class="wrapp-holder">
+        <div class="wrap-frame">
+            <!-- BEGIN HEADER -->
+            <header id="header" class="header">
+
+                <!-- Top Header -->
+                <div class="header-top">
+                    <div class="container clearfix">
+                        <div class="grid_12">
+                            <!-- Top Menu -->
+                            <ul class="header-top-menu unstyled">
+                                <li><a href="#">Pricing</a></li>
+                                <li><a href="#">Sitemap</a></li>
+                                <li><a href="#">FAQs</a></li>
+                                <li><a href="http://www.cssmoban.com">More themes</a></li>
+                            </ul>
+                            <!-- /Top Menu -->
+
+                            <!-- Social Links -->
+                            <ul class="social-links unstyled">
+                                <li class="ico-twitter"><a href="#">Twitter</a></li>
+                                <li class="ico-facebook"><a href="#">Facebook</a></li>
+                                <li class="ico-googleplus"><a href="#">Google+</a></li>
+                                <li class="ico-dribbble"><a href="#">Dribbble</a></li>
+                                <li class="ico-vimeo"><a href="#">Vimeo</a></li>
+                                <li class="ico-rss"><a href="#">RSS</a></li>
+                            </ul>
+                            <!-- /Social Links -->
+                        </div>
+                    </div>
+                </div>
+                <!-- /Top Header -->
+
+                <!-- Main Header -->
+                <div class="header-main">
+                    <div class="container clearfix">
+                        <div class="grid_12 hr-bottom">
+
+                            <!-- BEGIN LOGO -->
+                            <div id="logo">
+                                <!-- Image based Logo -->
+                                <a style="font-size: 30px" href="/index">
+                                    大学生信息服务平台&nbsp;<i style="font-size: 30px;"
+                                                      class="layui-icon layui-icon-find-fill"></i>
+                                </a>
+
+                            </div>
+                            <!-- END LOGO -->
+
+
+                            <!-- BEGIN NAVIGATION -->
+                            <nav class="primary">
+                                <ul class="sf-menu">
+                                    <li class="current-menu-item">
+                                        <a href="javascript:;" onclick="mainFrame()">主页
+                                            <span><i>|</i>go index</span></a>
+                                        <ul>
+                                            <li class="current-menu-item"><a href="old_index.html">Revolution Slider</a>
+                                            </li>
+                                            <li><a href="index-flex-fade.html">Flexslider Fade</a></li>
+                                            <li><a href="index-flex-slide.html">Flexslider Slide</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">信息通知 <span><i>|</i> Why Choose Us</span></a>
+                                        <!-- Sub Navigation -->
+                                        <ul>
+                                            <li><a href="about.html">About Us</a></li>
+                                            <li><a href="columns.html">Columns</a></li>
+                                            <li><a href="services.html">Services</a></li>
+                                            <li><a href="pricing-tables.html">Pricing Tables</a></li>
+                                            <li><a href="elements.html">Page Elements</a></li>
+                                            <li><a href="#">Second Level Item</a>
+                                                <ul>
+                                                    <li><a href="#">Third Level Item</a></li>
+                                                    <li><a href="#">And another one</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <!-- /Sub Navigation -->
+                                    </li>
+                                    <li>
+                                        <a href="#">社团组织 <span><i>|</i> Our Works</span></a>
+                                        <!-- Sub Navigation -->
+                                        <ul>
+                                            <li><a href="javascript:;" onclick="allSociety()">全部</a></li>
+                                            <li><a href="javascript:;" onclick="allStuOrganize()">学生组织</a></li>
+                                            <li><a href="javascript:;" onclick="allColleges()">社团</a></li>
+                                            <li><a href="javascript:;"
+                                                   onclick="x_admin_show('创建社团','/toAddClubPage',670,590)">创建社团</a></li>
+                                        </ul>
+                                        <!-- /Sub Navigation -->
+                                    </li>
+                                    <li>
+                                        <a href="#">失物招领 <span><i>|</i> Our Updates</span></a>
+                                        <!-- Sub Navigation -->
+                                        <ul>
+                                            <li><a href="post.html">Single Post</a></li>
+                                        </ul>
+                                        <!-- /Sub Navigation -->
+                                    </li>
+                                    <li>
+                                        <a href="#">生活服务 <span><i>|</i> Get in Touch</span></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <!-- END NAVIGATION -->
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /Main Header -->
+            </header>
+            <!-- END HEADER -->
+            <div id="mainFrame">
+                <h1 style="margin-left: 560px;color: black">
+                    <td th:text="${activity.title}"></td>
+                </h1>
+                </br>
+                <div  style="margin-left: 360px" class="latest-posts-holder">
+                    <article class="post clearfix">
+                        <figure style="height: 255px;width: 600px" class="featured-thumb">
+                            <a th:title="${activity.title}"><img style="height: 255px;width: 600px"
+                                             th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/activity_imgs/'+${activity.image}}"
+                                             alt=""></a>
+                        </figure>
+                    </article>
+                </div>
+                <div id="content-wrapper" class="content-wrapper">
+                    <div class="container">
+                        <div class="clearfix">
+                            <!--正文内容开始-->
+                            <p style="font-size: 20px">
+                                <td th:text="${activity.text}"></td>
+                            </p>
+                            <!--正文内容结束-->
+                            <div style="float: right;font-size: 20px">
+                                </br>
+                                作者：<td th:text="${activity.author}" />
+                                </br>
+                                时间：<td th:text="${activity.date}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--内嵌网页容器-->
+            <div id="innerView">
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END WRAPPER -->
+
+<!-- Javascript Files
+================================================== -->
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- initialize jQuery Library -->
+<script type="text/javascript" th:src="@{/mjs/jquery.min.js}" charset="utf-8"></script>
+
+<script>window.jQuery || document.write('<script src="mjs/jquery-1.9.1.min.js"><\/script>')</script>
+
+<script type="text/javascript" th:src="@{/mjs/jquery-migrate-1.1.1.min.js}" charset="utf-8"></script>
+<!-- Modernizr -->
+<script type="text/javascript" th:src="@{/mjs/modernizr.custom.17475.js}" charset="utf-8"></script>
+<!-- easing plugin -->
+<script type="text/javascript" th:src="@{/mjs/jquery.easing.min.js}" charset="utf-8"></script>
+<!-- Prettyphoto -->
+<script type="text/javascript" th:src="@{/mjs/jquery.prettyPhoto.js}" charset="utf-8"></script>
+<!-- Superfish -->
+<script type="text/javascript" th:src="@{/mjs/jquery.mobilemenu.js}" charset="utf-8"></script>
+<!-- superfish -->
+<script type="text/javascript" th:src="@{/mjs/jquery.superfish-1.5.0.js}" charset="utf-8"></script>
+<!-- Twitter -->
+<script type="text/javascript" th:src="@{/mjs/jquery.twitter.js}" charset="utf-8"></script>
+<!-- Flickr -->
+<script type="text/javascript" th:src="@{/mjs/jflickrfeed.js}" charset="utf-8"></script>
+<!-- ElastiSlide Carousel -->
+<script type="text/javascript" th:src="@{/mjs/jquery.elastislide.js}" charset="utf-8"></script>
+
+<!-- jQuery REVOLUTION Slider  -->
+<script type="text/javascript" th:src="@{/mjs/jquery.themepunch.plugins.min.js}" charset="utf-8"></script>
+
+
+<script type="text/javascript" th:src="@{/mjs/jquery.themepunch.revolution.min.js}" charset="utf-8"></script>
+
+<!-- Isotope -->
+<script type="text/javascript" th:src="@{/mjs/jquery.isotope.min.js}" charset="utf-8"></script>
+
+<script type="text/javascript" th:src="@{/mjs/jquery.imagesloaded.min.js}" charset="utf-8"></script>
+
+<!-- Flexslider -->
+<script type="text/javascript" th:src="@{/mjs/jquery.flexslider.js}" charset="utf-8"></script>
+
+
+<!-- Custom -->
+<script type="text/javascript" th:src="@{/mjs/custom.js}" charset="utf-8"></script>
+
+<script type="text/javascript" th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+
+<script type="text/javascript" th:src="@{/js/xadmin.js}" charset="utf-8"></script>
+
+<script type="text/javascript" th:src="@{/js/clubpage.js}" charset="utf-8"></script>
+</body>
+</html>

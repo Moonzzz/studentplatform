@@ -3,7 +3,7 @@ package com.moon.studentplatform.web.society;
 import com.moon.studentplatform.dto.User;
 import com.moon.studentplatform.dto.society.Club;
 import com.moon.studentplatform.dto.society.ClubActivity;
-import com.moon.studentplatform.dto.society.ClubMember;
+import com.moon.studentplatform.dto.society.ClubUser;
 import com.moon.studentplatform.service.society.IClubService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -36,7 +36,7 @@ public class SocietyController {
     List<Club> clubs = null;
     List<ClubActivity> clubActivities = null;
     Club cDetail = null;
-    ClubMember member = null;
+    ClubUser member = null;
 
     @RequestMapping("/allSocietys")
     public String allSocietys(ModelMap map) {
@@ -77,16 +77,21 @@ public class SocietyController {
     }
 
     @RequestMapping("/toActDetailPage")
-    public String toActDetailPage(ModelMap map, @RequestParam("id") int id) {
-        System.out.println("id是---：" + id);
+    public String toActDetailPage(ModelMap map, @RequestParam("id") int id, @RequestParam("type") String type) {
+        String toPage = "";
         activity = clubService.showClubActDetailById(id);
         map.addAttribute("activity", activity);
-        return "societyPage/activitydetail";
+        if (type.equals("foreGround")) {
+            toPage = "societyPage/activitydetail";
+        } else if (type.equals("backStage")) {
+            toPage = "adminpage/articledetail";
+        }
+        return toPage;
     }
 
     @RequestMapping(value = "/toClubDetailPage", method = RequestMethod.GET, produces = "application/json")
-    public String toClubDetailPage(HttpServletRequest request, @RequestParam("id") int clubId, ModelMap map) {
-        request.getSession().setAttribute("clubId", clubId);
+    public String toClubDetailPage(HttpSession session, @RequestParam("id") int clubId, ModelMap map) {
+        session.setAttribute("clubId", clubId);
         clubActivities = clubService.showClubActsByCId(clubId);
         cDetail = clubService.showClubDetailById(clubId);
         map.addAttribute("cDetail", cDetail);
@@ -129,16 +134,16 @@ public class SocietyController {
 
     @RequestMapping(value = "/joinClub", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public void joinClub(HttpServletRequest request, HttpServletResponse resp, @RequestParam Map<String, String> objs, ModelMap map) throws IOException {
-        User user = (User) request.getSession().getAttribute("user");
+    public void joinClub(HttpSession session, HttpServletResponse resp, @RequestParam Map<String, String> objs, ModelMap map) throws IOException {
+        User user = (User) session.getAttribute("user");
         Long userId = user.getId();
         int user_Id = new Long(userId).intValue();
-        int club_Id = (int) request.getSession().getAttribute("clubId");
+        int club_Id = (int) session.getAttribute("clubId");
         String reason = objs.get("reason");
         String experience = objs.get("experience");
         String joindate = objs.get("joindate");
 
-        member = new ClubMember(user_Id, club_Id, reason, experience, joindate, "no");
+        member = new ClubUser(user_Id, club_Id, reason, experience, joindate, "no");
         boolean flag = clubService.joinClub(member);
 
         resp.setCharacterEncoding("utf-8");
@@ -160,5 +165,4 @@ public class SocietyController {
             out.close();
         }
     }
-
 }

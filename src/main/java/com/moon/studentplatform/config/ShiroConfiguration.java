@@ -36,6 +36,7 @@ public class ShiroConfiguration {
 
         // 定义请求拦截规则，key是正则表达式用于匹配访问的路径，value则用于指定使用什么拦截器进行拦截
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
+        filterChainDefinitionMap.put("/static/**", "anon");
         // 拦截index接口，authc表示需要认证才能访问
         filterChainDefinitionMap.put("/index", "authc");
         // anon表示不拦截
@@ -45,6 +46,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");
         filterChainDefinitionMap.put("/image/**", "anon");
+
         filterChainDefinitionMap.put("/pages/**", "anon");
 
         // 指定admin接口只允许admin角色的用户访问

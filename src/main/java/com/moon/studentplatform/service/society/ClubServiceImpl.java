@@ -3,7 +3,7 @@ package com.moon.studentplatform.service.society;
 import com.moon.studentplatform.dao.society.IFileDao;
 import com.moon.studentplatform.dto.society.Club;
 import com.moon.studentplatform.dto.society.ClubActivity;
-import com.moon.studentplatform.dto.society.ClubMember;
+import com.moon.studentplatform.dto.society.ClubUser;
 import com.moon.studentplatform.mapper.society.IClubDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class ClubServiceImpl implements IClubService {
         long pSize = picFile.getSize();
         int randomNum = fileDao.getSecondTimestamp(new Date());
         String pSuffix = fileDao.getSuffix(picFile.getOriginalFilename());
-        String pRealPath = "D:/AIDEAworkspace/studentplatform-master/src/main/resources/static/society_files/" + randomNum + pSuffix;
+        String pRealPath = "D:/AIDEAworkspace/studentplatform/src/main/resources/static/society_files/" + randomNum + pSuffix;
         String icon = randomNum + pSuffix;
         System.out.println("icon:  " + icon);
         club.setIcon(icon);
@@ -54,7 +54,7 @@ public class ClubServiceImpl implements IClubService {
     }
 
     @Override
-    public boolean joinClub(ClubMember member) {
+    public boolean joinClub(ClubUser member) {
         return clubDao.joinClub(member);
     }
 
@@ -96,5 +96,10 @@ public class ClubServiceImpl implements IClubService {
     @Override
     public ClubActivity showClubActDetailById(int id) {
         return clubDao.showClubActDetailById(id);
+    }
+
+    @Override
+    public boolean setIsClubPass(String id, String pass) {
+        return clubDao.setIsClubPass(id, pass);
     }
 }
