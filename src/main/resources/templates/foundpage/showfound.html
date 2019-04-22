@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!--模态框-->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function tiaozhuan() {
+            window.location.href = 'http://localhost:8080/toaddfound';
+        }
+    </script>
+</head>
+<link rel="stylesheet" th:href="@{css/foundpage.css}">
+<link rel="stylesheet" th:href="@{/lib/layui/css/layui.css}">
+<script type="text/javascript" th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/jquery.min.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/xadmin.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/foundpage.js}" charset="utf-8"></script>
+<style>
+    .library-main__list {
+        margin-left: 150px;
+    }
+
+    .library-main__item div {
+        background-color: white;
+        box-shadow: 5px 2px 6px slategray;
+        font-size: 15px;
+    }
+</style>
+<body>
+<input type="text " id="">
+<script>
+    $("#but").click(function () {
+        var name = $("#code").val();
+        $.ajax({
+            url: "/toselect",
+            type: "get",
+            contentType: "application/json",
+            data: {"name": name},
+            // data: JSON.stringify(stas),
+            // dataType: "json",
+            success: function (data, textStatus) {
+                console.log(data);
+                document.getElementById("id_for_div").innerHTML = "";
+                data = JSON.parse(data);
+                var founds = data.data;
+                var titles = {
+                    id: "id:",
+                    title: "标题:",
+                    type: "类型:",
+                    adress: "地址:",
+                    description: "描述:",
+                    number: "联系方式:",
+                    publishtime: "发布日期:"
+                };
+                // var  div=document.createElement("div").classList.add("library-main__list");
+                var ul = document.createElement("ul");
+                for (var i = 0; i < founds.length; i++) {
+                    var found = founds[i];
+                    var li = document.createElement("li");
+                    li.classList.add("library-main__item")
+                    var div1 = document.createElement("div");
+                    div1.classList.add("info");
+                    var ul1 = document.createElement("ul");
+                    for (var s in found) {
+                        var li1 = document.createElement("li");
+                        li1.innerText = titles[s];
+                        var td = document.createElement("td");
+                        td.innerText = found[s];
+                        li1.appendChild(td);
+                        ul1.appendChild(li1);
+                    }
+                    div1.appendChild(ul1);
+                    li.appendChild(div1);
+                    ul.appendChild(li);
+                }
+                document.getElementById("id_for_div").appendChild(ul);
+            }
+        });
+    });
+
+</script>
+<div class="searchTable" align="center">
+    <div class="layui-inline" style="margin-right: 100px">
+        <button class="layui-btn" data-toggle="modal" data-target="#myModal">添加招领</button>
+    </div>
+    <div class="layui-inline">
+        <input class="layui-input" name="name" id="code" placeholder="请输入关键字直接搜索" autocomplete="off">
+    </div>
+    <button class="layui-btn" data-type="reload" id="but"> 搜索</button>
+</div>
+<div class="library-main__list" id="id_for_div">
+    <ul>
+        <li th:each="item:${founds}" class="library-main__item">
+            <div class="info">
+                <ul>
+                    <li>
+                        id：
+                        <td th:text="${item.id}"></td>
+                    </li>
+                    <li>
+                        标题：
+                        <td th:text="${item.title}"></td>
+                    </li>
+                    <li>
+                        类型：
+                        <td th:text="${item.type}"></td>
+                    </li>
+                    <li>
+                        地址：
+                        <td th:text="${item.adress}"></td>
+                    </li>
+                    <li>
+                        描述：
+                        <td th:text="${item.description}"></td>
+                    </li>
+                    <li>
+                        联系方式：
+                        <td th:text="${item.number}"></td>
+                    </li>
+                    <li>
+                        发布日期：
+                        <td th:text="${item.publishtime}"></td>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 400px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h3 class="modal-title" id="myModalLabel">
+                    添加招领
+                </h3>
+            </div>
+            <div>
+                <form action="/add" method="post">
+                    <div class="control-group">
+                        <label class="control-label">标题</label>
+                        <div class="controls" style="align-content: center">
+                            <input type="text" name="title" placeholder="placeholder" style="margin: auto">
+                        </div>
+                        <label class="control-label">类型</label>
+                        <div class="controls">
+                            <input type="text" name="type" placeholder="placeholder" style="margin: auto">
+                        </div>
+                        <label class="control-label">地址</label>
+                        <div class="controls">
+                            <input type="text" name="adress" placeholder="placeholder" style="margin: auto">
+                        </div>
+                        <label class="control-label">描述</label>
+                        <div class="controls">
+                            <input type="text" name="description" placeholder="placeholder" style="margin: auto">
+                        </div>
+                        <label class="control-label">联系方式</label>
+                        <div class="controls">
+                            <input type="text" name="number" placeholder="placeholder" style="margin: auto">
+                        </div>
+                        <label class="control-label">发布日期</label>
+                        <div  style="height:30px; line-height:30px;text-align:center;">
+                            <input type="date"  name="publishtime" placeholder="placeholder" >
+                        </div>
+                        <label class="control-label">  </label>
+                        <div>
+                            <center>
+                                <input type="submit" value="提交">
+                            </center>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

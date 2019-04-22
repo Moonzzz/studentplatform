@@ -13,6 +13,9 @@ public interface LostafMapper {
     @Select("select * from found LIMIT #{offset},#{limit}")
     List<Found> querry(@Param("offset") int offset, @Param("limit") int limit);
 
+    @Select("select * from found")
+    List<Found> toquery();
+
     @Delete("delete from found where id=#{id}")
     int showdelete( int id);
 
@@ -22,7 +25,7 @@ public interface LostafMapper {
     @Insert("INSERT INTO  found(title,type,adress,description,number,publishtime) VALUES(#{title},#{type},#{adress},#{description},#{number},#{publishtime})")
     boolean toadd(Found found);
 
-    @Select("select * from found where type=#{code}")
+    @Select("select * from found where title  like CONCAT('%',#{code},'%')")
     List<Found> toselect(String code);
 
 }

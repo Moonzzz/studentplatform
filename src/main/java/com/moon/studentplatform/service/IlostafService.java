@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface IlostafService {
        List<Found> toshow(int offset, int limit);
+       List<Found>  show();
        int delete(int id);
        int count();
        boolean add(Found found);

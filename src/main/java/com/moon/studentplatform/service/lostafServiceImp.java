@@ -18,6 +18,11 @@ public class lostafServiceImp  implements  IlostafService{
     }
 
     @Override
+    public List<Found> show() {
+        return lostafMapper.toquery();
+    }
+
+    @Override
     public int delete(int id) {
         return lostafMapper.showdelete(id);
     }
