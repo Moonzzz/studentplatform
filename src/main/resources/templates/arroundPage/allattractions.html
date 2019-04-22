@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>全部信息</title>
+</head>
+<link rel="stylesheet" th:href="@{css/clubpage.css}">
+<link rel="stylesheet" th:href="@{/lib/layui/css/layui.css}">
+<script type="text/javascript" th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/clubpage.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/arroundpage.js}" charset="utf-8"></script>
+<style>
+    #description {
+        /*border: 1px solid #e3e6e8;*/
+        height:38px;
+        line-height: 38px;
+        overflow: hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+    }
+    .icoFontlist:hover
+    {
+        width: 225px;
+        font-size: 12px;
+        border: 0px solid #ddd;
+        overflow: hidden;
+        text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color:blue;
+        text-decoration:underline;
+        cursor:pointer;
+    }
+    .icoFontlist{
+        width: 225px;
+        font-size: 12px;
+        border: 0px solid #ddd;
+        color:#5f5f5f;
+        overflow: hidden;
+        text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+</style>
+<body>
+<div style="margin-left: 300px" class="library-main__list">
+    <ul>
+        <li th:each="item:${attractions}" class="library-main__item">
+            <!-- <a onclick="detail()" href="javascript:" title="#" target="_blank"
+                class="picture">-->
+            <a th:href="@{'/toClubDetailPage'+'?id='+${item.id}}" target="_blank"
+               class="picture">
+                <img th:src="@{${#httpServletRequest.getContextPath()} + 'arround_files/'+${item.photos}}" alt="#"
+                     title="#">
+            </a>
+            <div class="info" style="background-color: white;box-shadow: 5px 2px 6px slategray;">
+                <ul style="font-size: 16px">
+                    <li>
+                        名称：
+                        <td th:text="${item.name}"></td>
+                    </li>
+                    <li>
+                        地点：
+                        <td th:text="${item.position}"></td>
+                    </li>
+                    <li id = "icoFontlist">
+                        简介：
+                        <td th:text="${item.description}"></td>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+<script>
+    $(function () {
+        $("#description").on("mouseenter",function() {
+            if (this.offsetWidth < this.scrollWidth) {
+                var that = this;
+                var text = $(this).text();
+                layer.tips(text, that,{
+                    tips: 1,
+                    time: 2000
+                });
+            }
+        });
+    })
+</script>
+</body>
+</html>
