@@ -109,7 +109,7 @@
                     }
                 },
                 error: function (data) {
-                    layer.msg("操作是失败！", {icon: 7});
+                    layer.msg("操作失败！", {icon: 7});
                 }
             });
         });
@@ -140,8 +140,8 @@
             }else if (obj.event === 'show') {
                 var data = obj.data;
                 var activityId=data.id;
-                var linkStr='/toActDetailPage?type=backStage&id='+activityId;
-                x_admin_show('文章详情',linkStr,970,490)
+                var url='/toActDetailPage?type=backStage&id='+activityId;
+                x_admin_show('文章详情',url,970,490)
             }
         });
         //头工具栏事件

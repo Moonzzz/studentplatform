@@ -174,16 +174,18 @@
             </header>
             <!-- END HEADER -->
             <div id="mainFrame">
-                <h1 style="margin-left: 560px;color: black">
-                    <td th:text="${activity.title}"></td>
-                </h1>
-                </br>
-                <div  style="margin-left: 360px" class="latest-posts-holder">
+                <div style="margin-left: 360px" class="latest-posts-holder">
                     <article class="post clearfix">
+                        <div style="margin-left: 150px;float: left">
+                            <h1 style="color: black">
+                                <td th:text="${activity.title}"></td>
+                            </h1>
+                        </div>
+                        </br></br></br>
                         <figure style="height: 255px;width: 600px" class="featured-thumb">
                             <a th:title="${activity.title}"><img style="height: 255px;width: 600px"
-                                             th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/activity_imgs/'+${activity.image}}"
-                                             alt=""></a>
+                                                                 th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/activity_imgs/'+${activity.image}}"
+                                                                 alt=""></a>
                         </figure>
                     </article>
                 </div>
@@ -192,14 +194,16 @@
                         <div class="clearfix">
                             <!--正文内容开始-->
                             <p style="font-size: 20px">
-                                <td th:text="${activity.text}"></td>
+                            <td th:text="${activity.text}"></td>
                             </p>
                             <!--正文内容结束-->
                             <div style="float: right;font-size: 20px">
                                 </br>
-                                作者：<td th:text="${activity.author}" />
+                                作者：
+                                <td th:text="${activity.author}"/>
                                 </br>
-                                时间：<td th:text="${activity.date}" />
+                                时间：
+                                <td th:text="${activity.date}"/>
                             </div>
                         </div>
                     </div>
