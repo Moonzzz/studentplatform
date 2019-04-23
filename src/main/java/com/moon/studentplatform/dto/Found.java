@@ -3,6 +3,8 @@ package com.moon.studentplatform.dto;
 import java.sql.Date;
 
 public class Found {
+
+
     private int id;
     private String title;
     private String type;
