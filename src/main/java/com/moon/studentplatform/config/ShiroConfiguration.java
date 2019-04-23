@@ -54,7 +54,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/admin", "roles[admin]");
         // 用户在登录后可以访问所有的接口
         filterChainDefinitionMap.put("/**", "user");
-        bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+//        bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
         return bean;
     }

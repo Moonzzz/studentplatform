@@ -17,8 +17,8 @@ spring:
       driver-class-name: com.mysql.cj.jdbc.Driver
       #基本属性
       url: jdbc:mysql://localhost:3306/studentplatform?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
-      username: wssq
-      password: 5417
+      username: root
+      password: 1234
       #配置初始化大小/最小/最大
       initial-size: 1
       min-idle: 1
@@ -42,6 +42,7 @@ logging:
     org.thymeleaf: info
     org.springframework: info
     org.mybatis: debug
+    org.springframework.boot.autoconfigure: ERROR
 
 mybatis:
   configuration:
