@@ -1,26 +1,31 @@
-function allSociety() {
+function letInnerViewOut(url) {
     $("#mainFrame").hide();
     $("#innerView").show();
     $("#innerView").empty();
-    /*嵌套网页到DIV中，让后台填充数据到页面上再进行嵌套*/
-    $("#innerView").load("/allSocietys");
+    $("#innerView").load(url);
+
+}
+function allContests() {
+    letInnerViewOut("/officialPage?page=contests");
+}
+function allInfoDynamic() {
+    letInnerViewOut("/officialPage?page=infodynamics");
+}
+function collegeIntro() {
+    letInnerViewOut("http://localhost:8080/pages/official/collegeintro.html");
+}
+
+function allSociety() {
+    letInnerViewOut("/allSocietys");
 }
 
 function allStuOrganize() {
-    $("#mainFrame").hide();
-    //$("#innerView").empty();
-    $("#innerView").show();
-    $("#innerView").empty();
-    /*嵌套网页到DIV中，让后台填充数据到页面上再进行嵌套*/
-    $("#innerView").load("/allStuOrganize");
+    letInnerViewOut("/allStuOrganize");
 }
 
+
 function allColleges() {
-    $("#mainFrame").hide();
-    $("#innerView").show();
-    $("#innerView").empty();
-    /*嵌套网页到DIV中，让后台填充数据到页面上再进行嵌套*/
-    $("#innerView").load("/allColleges");
+    letInnerViewOut("/allColleges");
 }
 function mainFrame() {
     $("#mainFrame").show();

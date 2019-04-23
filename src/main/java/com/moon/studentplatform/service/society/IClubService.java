@@ -14,6 +14,7 @@ import java.util.List;
  * @modified By：
  */
 public interface IClubService {
+
     boolean addClub(MultipartFile picFile, Club club);
 
     int deleteClubById(String id);

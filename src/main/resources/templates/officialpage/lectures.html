@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>平台首页</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <!-- Mobile Specific Metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+    <!-- CSS
+    ================================================== -->
+    <!-- Normalize default styles -->
+    <link rel="stylesheet" th:href="@{/mcss/normalize.css}">
+    <!-- Skeleton grid system -->
+    <link rel="stylesheet" th:href="@{/mcss/skeleton.css}">
+    <!-- Base Template Styles-->
+    <link rel="stylesheet" th:href="@{/mcss/base.css}">
+    <!-- Template Styles-->
+    <link rel="stylesheet" th:href="@{/mcss/style.css}">
+    <!-- Superfish -->
+    <link rel="stylesheet" th:href="@{/mcss/superfish.css}">
+    <!-- Prettyphoto -->
+    <link rel="stylesheet" th:href="@{/mcss/prettyPhoto.css}">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" th:href="@{/mcss/font-awesome.min.css}">
+    <!-- REVOLUTION BANNER CSS SETTINGS -->
+    <link rel="stylesheet" th:href="@{/mcss/settings.css}">
+    <!-- Flexslider -->
+    <link rel="stylesheet" th:href="@{/mcss/flexslider.css}">
+    <!-- Layout and Media queries-->
+    <link rel="stylesheet" th:href="@{/mcss/media-queries.css}">
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" th:href="@{/mcss/ie/ie8.css}">
+    <![endif]-->
+    <link rel="stylesheet" th:href="@{/lib/layui/css/layui.css}">
+
+    <link rel="stylesheet" th:href="@{/css/clubpage.css}">
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+
+    <script type="text/javascript" th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/xadmin.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/js/clubpage.js}" charset="utf-8"></script>
+    <style>
+        a:hover {
+            text-decoration: none;
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+
+<!-- BEGIN WRAPPER -->
+<div id="wrapper">
+
+    <div class="wrapp-holder">
+        <div class="wrap-frame">
+            <!-- BEGIN HEADER -->
+            <header id="header" class="header">
+
+                <!-- Top Header -->
+                <div class="header-top">
+                    <div class="container clearfix">
+                        <div class="grid_12">
+                            <!-- Top Menu -->
+                            <ul class="header-top-menu unstyled">
+                                <li><a href="#">Pricing</a></li>
+                                <li><a href="#">Sitemap</a></li>
+                                <li><a href="#">FAQs</a></li>
+                                <li><a href="http://www.cssmoban.com">More themes</a></li>
+                            </ul>
+                            <!-- /Top Menu -->
+
+                            <!-- Social Links -->
+                            <ul class="social-links unstyled">
+                                <li class="ico-twitter"><a href="#">Twitter</a></li>
+                                <li class="ico-facebook"><a href="#">Facebook</a></li>
+                                <li class="ico-googleplus"><a href="#">Google+</a></li>
+                                <li class="ico-dribbble"><a href="#">Dribbble</a></li>
+                                <li class="ico-vimeo"><a href="#">Vimeo</a></li>
+                                <li class="ico-rss"><a href="#">RSS</a></li>
+                            </ul>
+                            <!-- /Social Links -->
+                        </div>
+                    </div>
+                </div>
+                <!-- /Top Header -->
+
+                <!-- Main Header -->
+                <div class="header-main">
+                    <div class="container clearfix">
+                        <div class="grid_12 hr-bottom">
+
+                            <!-- BEGIN LOGO -->
+                            <div id="logo">
+                                <!-- Image based Logo -->
+                                <a style="font-size: 30px" href="/index">
+                                    大学生信息服务平台&nbsp;<i style="font-size: 30px;"
+                                                      class="layui-icon layui-icon-find-fill"></i>
+                                </a>
+
+                            </div>
+                            <!-- END LOGO -->
+                        </div>
+                    </div>
+                </div>
+                <!-- /Main Header -->
+
+            </header>
+            <!-- END HEADER -->
+
+
+            <div id="mainFrame" style="width: 936px;margin-left: 210px">
+                <div class="top_area" style="width: 936px;height: 80px">
+                    <ul>
+                        <li style="float: left;font-size: 17px;margin-top: 6px">
+                            <select name="type" id="type" lay-verify="" style="height: 33px">
+                                <option value="-1">讲座分类选择</option>
+                            </select>
+                        </li>
+                        <li style="float:left;margin-left: 20px">
+                            <input style="color:black;border-radius:12px;margin-top: 3px;" type="text" name="filmname"
+                                   placeholder="请输入关键字" autocomplete="on" class="layui-input"
+                                   id="word">
+                        </li>
+                    </ul>
+                </div>
+                <table class="layui-hide" lay-filter="test" id="film"></table>
+                <script type="text/html" id="toolbarDemo">
+                    <div class="layui-btn-container">
+                        <button class="layui-btn layui-btn-sm" lay-event="search">按条件搜索</button>
+                    </div>
+                </script>
+                <script type="text/html" id="barDemo">
+                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="show">查看详情</a>
+                </script>
+            </div>
+            <!--内嵌网页容器-->
+            <div id="innerView">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    layui.use(['table', 'form', 'laydate'], function () {
+        var table = layui.table
+            , form = layui.form
+            , laydate = layui.laydate;
+        table.render({
+            elem: '#film'
+            , url: '/lectureList'
+            , cellMinWidth: 80
+            , toolbar: '#toolbarDemo'
+            , cols: [ [
+                {
+                    field: 'title',
+                    //width : 150,
+                    title: '讲座名称',
+                    align: 'center',
+                    sort: true
+                }, {
+                    field: 'dateStart',
+                    // width : 250,
+                    align: 'center',
+                    title: '学分认定开始时间'
+                }, {
+                    field: 'dateEnd',
+                    title: '学分认定结束时间',
+                    align: 'center'
+                    // width: 200
+                }, {
+                    fixed: 'right',
+                    title: '操作',
+                    toolbar: '#barDemo',
+                    width: 200
+                }] ]
+            , page: true
+            , limits: [10, 20, 30, 40]  //每页条数的选择项，默认：[10,20,30,40,50,60,70,80,90]。
+            , limit: 10
+            , done: function () {
+                $(".layui-table-cell").css({
+                    "height": "auto"
+                });
+            }
+        });
+        //日期框
+        laydate.render({
+            elem: '#datePublished' //指定元素
+        });
+        //监听工具条(删除，修改)
+        table.on('tool(test)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'show') {
+                var data = obj.data;
+                var activityId = data.id;
+                var url = '/toActDetailPage?type=backStage&id=' + activityId;
+                x_admin_show('文章详情', url, 970, 490)
+            }
+        });
+        //头工具栏事件
+        table.on('toolbar(test)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'search'://搜索
+                    search(obj);
+                    break;
+            };
+            function search() {
+                var words = $("#word").val();
+                var type = $("#type").val();
+                var urlstr='/searchLecture?keyword='+words+'&type='+type;
+                //所获得的 tableIns 即为当前容器的实例
+                table.render({
+                    elem: '#film'
+                    , url: urlstr
+                    , cellMinWidth: 80
+                    , toolbar: '#toolbarDemo'
+                    , cols: [ [
+                        {
+                            field: 'title',
+                            title: '讲座名称',
+                            align: 'center',
+                            sort: true
+                        }, {
+                            field: 'dateStart',
+                            align: 'center',
+                            title: '学分认定开始时间'
+                        }, {
+                            field: 'dateEnd',
+                            title: '学分认定结束时间',
+                            align: 'center'
+                        }, {
+                            fixed: 'right',
+                            title: '操作',
+                            toolbar: '#barDemo',
+                            width: 200
+                        }] ]
+                    , page: true
+                    , limits: [100, 200, 300, 400]  //每页条数的选择项，默认：[10,20,30,40,50,60,70,80,90]。
+                    , limit: 100
+                    , done: function () {
+                        $(".layui-table-cell").css({
+                            "height": "auto"
+                        });
+                    }
+                });
+            }
+        });
+    });
+
+    /*异步绑定部门种类*/
+    $(function () {
+        $.ajax({
+            url: "/allTypes",
+            type: "POST",
+            traditional: true,//传数组一定要加的
+            data: {},
+            dataType: "json",
+            success: function (data) {
+                var datas = eval(data);
+                for (var i = 0; i < datas.length; i++) {
+                    $("#type").append("<option value='"+datas[i].id+"'>"+datas[i].name+"</option>");
+                }
+            },
+            error: function (data) {
+                layer.msg("获取部门类型失败", {icon: 5});
+            }
+        });
+    });
+</script>
+</body>
+</html>
