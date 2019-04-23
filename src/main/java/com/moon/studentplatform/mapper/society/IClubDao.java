@@ -17,7 +17,6 @@ import java.util.List;
 @Repository
 @Mapper
 public interface IClubDao {
-
     @Select("SELECT * from club where pass ='true'")
     List<Club> showAllClubs();
 

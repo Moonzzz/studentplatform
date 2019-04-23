@@ -1,9 +1,12 @@
 package com.moon.studentplatform.web.admin;
 
 import com.google.gson.Gson;
+import com.moon.studentplatform.dto.arround.Attractions;
+import com.moon.studentplatform.dto.arround.Food;
 import com.moon.studentplatform.dto.society.Club;
 import com.moon.studentplatform.dto.society.ClubActivity;
 import com.moon.studentplatform.dto.society.ClubUser;
+import com.moon.studentplatform.service.arround.IArroundService;
 import com.moon.studentplatform.service.society.IClubService;
 import com.moon.studentplatform.service.society.IClubUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +34,16 @@ public class AdminController {
 
     @Autowired
     IClubUserService clubUserService;
+    @Autowired
+    IArroundService arroundService;
 
+    Attractions attraction = null;
+    Food food = null;
     Club club = null;
     List<ClubUser> clubUsers = null;
     List<ClubActivity> clubActivities = null;
-
+    List<Attractions> attractions = null;
+    List<Food> foods = null;
 
     @RequestMapping("/toAdminPage")
     public String toAddClubPage(ModelMap map) {
@@ -60,6 +68,15 @@ public class AdminController {
                 break;
             case "article":
                 toPage = "adminpage/article";
+                break;
+            case "attraction":
+                toPage = "adminpage/attraction";
+                break;
+            case "food":
+                toPage = "adminpage/food";
+                break;
+            default:
+                break;
         }
         return toPage;
     }
@@ -203,6 +220,125 @@ public class AdminController {
         return result;
     }
 
+    @RequestMapping("/showAttractions")
+    @ResponseBody
+    public String showAttractions(@RequestParam Map<String,String> objs){
+        String pageStr = objs.get("page");
+        String limitStr = objs.get("limit");
+        int page = Integer.parseInt(pageStr);
+        int limit = Integer.parseInt(limitStr);
+        attractions = arroundService.getLimitAttractions((page-1)*limit,limit);
+        Gson gson = new Gson();
+        String result = gson.toJson(attractions);
+        int count = arroundService.getAttractionCount();
+        return getJson(result,count);
+    }
+
+    @RequestMapping("/showFoods")
+    @ResponseBody
+    public String showFoods(@RequestParam Map<String,String> objs){
+        String pageStr = objs.get("page");
+        String limitStr = objs.get("limit");
+        int page = Integer.parseInt(pageStr);
+        int limit = Integer.parseInt(limitStr);
+        foods = arroundService.getLimitFoods((page-1)*limit,limit);
+        Gson gson = new Gson();
+        String result = gson.toJson(foods);
+        int count = arroundService.getFoodCount();
+        return getJson(result,count);
+    }
+
+    /**
+    *
+    * author: Mr.Shi
+    * description: 删除景点信息
+    * Date:  2019/4/22
+    **/
+    @RequestMapping("/deleteAttractions")
+    @ResponseBody
+    public String deleteAttractions(HttpServletRequest request) {
+        int count = 1;
+        int ids;
+        String type = request.getParameter("type");
+        if (type.equals("beth")) {
+            String[] id = request.getParameterValues("id");
+            for (int i = 0; i < id.length; i++) {
+                System.out.println(id[i]);
+                ids = Integer.parseInt(id[i]);
+                if (!arroundService.isAttractionDelete(ids)) count = 0;
+            }
+        } else if (type.equals("one")) {
+            String id = request.getParameter("id");
+            ids = Integer.parseInt(id);
+            if (!arroundService.isAttractionDelete(ids)) count = 0;
+        }
+        return count > 0 ? "true" : "false";
+    }
+
+    /**
+    *
+    * author: Mr.Shi
+    * description: 删除美食信息
+    * Date:  2019/4/22
+    **/
+    @RequestMapping("/deleteFoods")
+    @ResponseBody
+    public String deleteFoods(HttpServletRequest request) {
+        int count = 1;
+        int ids;
+        String type = request.getParameter("type");
+        if (type.equals("beth")) {
+            String[] id = request.getParameterValues("id");
+            for (int i = 0; i < id.length; i++) {
+                System.out.println(id[i]);
+                ids = Integer.parseInt(id[i]);
+                if (!arroundService.isFoodDelete(ids)) count = 0;
+            }
+        } else if (type.equals("one")) {
+            String id = request.getParameter("id");
+            ids = Integer.parseInt(id);
+            if (!arroundService.isFoodDelete(ids)) count = 0;
+        }
+        return count > 0 ? "true" : "false";
+    }
+
+    /**
+    *
+    * author: Mr.Shi
+    * description: 修改景点信息
+    * Date:  2019/4/22
+    **/
+    @RequestMapping("/modifyAttraction")
+    @ResponseBody
+    public String modifyAttraction(@RequestParam Map<String, String> objs) {
+        String idStr = objs.get("id");
+        int id = Integer.parseInt(idStr);
+        String name = objs.get("name");
+        String description = objs.get("description");
+        String position = objs.get("position");
+        attraction = new Attractions(id,name,position,description);
+        boolean flag = arroundService.modifyAttraction(attraction);
+        return flag ? "true" : "false";
+    }
+
+    /**
+    *
+    * author: Mr.Shi
+    * description: 修改店铺信息
+    * Date:  2019/4/22
+    **/
+    @RequestMapping("/modifyFood")
+    @ResponseBody
+    public String modifyFood(@RequestParam Map<String, String> objs) {
+        String idStr = objs.get("id");
+        int id = Integer.parseInt(idStr);
+        String name = objs.get("name");
+        String description = objs.get("description");
+        String position = objs.get("position");
+       food = new Food(id,name,position,description);
+        boolean flag = arroundService.modifyFood(food);
+        return flag ? "true" : "false";
+    }
 
     /**
      * create by: Mr Tang
@@ -218,4 +354,14 @@ public class AdminController {
         result = "{\"code\":0,\"msg\":\"\",\"count\":" + count + ",\"data\":" + result + "}";
         return result;
     }
+
+/**
+* author: Mr.Shi
+* description: 将数据转换为前台所需的json格式
+* Date:  2019/4/20
+**/
+    private String getJson(String result ,int count){
+        return "{\"code\":0,\"msg\":\"\",\"count\":" + count + ",\"data\":" + result + "}";
+    }
+
 }

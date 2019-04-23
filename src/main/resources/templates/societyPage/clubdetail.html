@@ -198,7 +198,7 @@
                                                  data-captionhidden="on"
                                                  data-endeasing="easeOutExpo"
                                                  data-easing="easeOutExpo">
-                                                Activity!
+                                                <td th:text="${cDetail.name}"></td>
                                             </div>
                                             <div class="tp-caption sfr original_high"
                                                  data-x="142"
@@ -209,7 +209,7 @@
                                                  data-endeasing="easeOutExpo"
                                                  data-easing="easeOutExpo">
                                                 <a th:title="${item.title}" target="_blank"
-                                                   th:href="@{'/toActDetailPage?id='+${item.id}}">
+                                                   th:href="@{'/toActDetailPage?type=foreGround&id='+${item.id}}">
                                                     <td th:text="${item.title}"></td>
                                                 </a>
                                             </div>
@@ -241,7 +241,7 @@
                                         </figure>
                                         <div class="post-body">
                                             <header class="post-header">
-                                                <h3><a target="_blank" th:href="@{'/toActDetailPage?id='+${item.id}}">
+                                                <h3><a target="_blank" th:href="@{'/toActDetailPage?type=foreGround&id='+${item.id}}">
                                                     <td th:text="${item.title}"></td>
                                                 </a></h3>
                                                 <p class="post-meta">

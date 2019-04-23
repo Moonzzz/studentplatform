@@ -116,7 +116,7 @@
                                     <li class="current-menu-item">
                                         <!-- onclick="mainFrame()"-->
                                         <a href="/toAdminPage">主页
-                                            <span><i>|</i>go index</span></a>
+                                            <span><i>|</i></span></a>
                                         <ul>
                                             <li class="current-menu-item"><a href="old_index.html">Revolution Slider</a>
                                             </li>
@@ -125,25 +125,19 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="#">信息通知 <span><i>|</i> Why Choose Us</span></a>
+                                        <a href="#">信息通知 <span><i>|</i></span></a>
                                         <!-- Sub Navigation -->
                                         <ul>
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="columns.html">Columns</a></li>
-                                            <li><a href="services.html">Services</a></li>
-                                            <li><a href="pricing-tables.html">Pricing Tables</a></li>
-                                            <li><a href="elements.html">Page Elements</a></li>
-                                            <li><a href="#">Second Level Item</a>
-                                                <ul>
-                                                    <li><a href="#">Third Level Item</a></li>
-                                                    <li><a href="#">And another one</a></li>
-                                                </ul>
-                                            </li>
+                                            <li><a href="javascript:" onclick="allInfoDynamic()">信息动态</a></li>
+                                            <li><a href="javascript:" onclick="collegeIntro()">学院信息</a></li>
+                                            <li><a target="_blank" href="/officialPage?page=lectures">学术与行业讲座</a></li>
+                                            <li><a href="javascript:" onclick="allContests()">学科竞赛</a></li>
+                                            <li><a href="javascript:" onclick="allCompetitions()">考试考证</a></li>
                                         </ul>
                                         <!-- /Sub Navigation -->
                                     </li>
                                     <li>
-                                        <a href="#">社团组织 <span><i>|</i> Our Works</span></a>
+                                        <a href="#">社团组织 <span><i>|</i></span></a>
                                         <!-- Sub Navigation -->
                                         <ul>
                                             <li><a href="javascript:;" onclick="allSociety()">全部</a></li>
@@ -155,7 +149,7 @@
                                         <!-- /Sub Navigation -->
                                     </li>
                                     <li>
-                                        <a href="#">失物招领 <span><i>|</i> Our Updates</span></a>
+                                        <a href="#">失物招领 <span><i>|</i></span></a>
                                         <!-- Sub Navigation -->
                                         <ul>
                                             <li><a href="javascript:;" onclick="allFound()">全部</a></li>
@@ -163,7 +157,13 @@
                                         <!-- /Sub Navigation -->
                                     </li>
                                     <li>
-                                        <a href="#">生活服务 <span><i>|</i> Get in Touch</span></a>
+                                        <a href="#">生活服务 <span><i>|</i></span></a>
+                                        <ul>
+                                            <li><a href="javascript:;" onclick="allAttractions()">景点</a></li>
+                                            <li><a href="javascript:;" onclick="allFoods()">美食</a></li>
+                                            <li><a href="javascript:;" onclick="getMap()">地图</a></li>
+                                            <li><a href="javascript:;" onclick="Test()">地图</a></li>
+                                        </ul>
                                     </li>
                                 </ul>
                             </nav>
@@ -190,10 +190,11 @@
                                     <!--轮播图片开始处-->
                                     <ul>
                                         <!-- THE FIRST SLIDE -->
-                                        <li data-transition="fade" data-slotamount="10" data-masterspeed="300"
+                                        <li th:each="item:${infos}" data-transition="fade" data-slotamount="10"
+                                            data-masterspeed="300"
                                             data-slideindex="back">
                                             <!-- THE MAIN IMAGE IN THE SLIDE -->
-                                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1554809849791&di=2d846bd98ae333025231a5eb8785212c&imgtype=0&src=http%3A%2F%2Fpic15.nipic.com%2F20110628%2F1369025_192645024000_2.jpg">
+                                            <img th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/activity_imgs/'+${item.image}}"/>
                                             <!-- THE CAPTIONS OF THE FIRST SLIDE -->
                                             <div class="tp-caption sfl original"
                                                  data-x="100"
@@ -203,7 +204,7 @@
                                                  data-captionhidden="on"
                                                  data-endeasing="easeOutExpo"
                                                  data-easing="easeOutExpo">
-                                                Create Your Own
+                                                <td th:text="${item.author}"></td>
                                             </div>
                                             <div class="tp-caption sfr original_high"
                                                  data-x="142"
@@ -213,65 +214,13 @@
                                                  data-captionhidden="on"
                                                  data-endeasing="easeOutExpo"
                                                  data-easing="easeOutExpo">
-                                                Personality!
+                                                <a th:title="${item.title}" target="_blank"
+                                                   th:href="@{'/toActDetailPage?type=foreGround&id='+${item.id}}">
+                                                    <td th:text="${item.title}"></td>
+                                                </a>
                                             </div>
                                         </li>
-
-                                        <!-- THE FIRST SLIDE -->
-                                        <li data-transition="fade" data-slotamount="10" data-masterspeed="300"
-                                            data-slideindex="back">
-                                            <!-- THE MAIN IMAGE IN THE SLIDE -->
-                                            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1554809849791&di=2d846bd98ae333025231a5eb8785212c&imgtype=0&src=http%3A%2F%2Fpic15.nipic.com%2F20110628%2F1369025_192645024000_2.jpg">
-                                            <!-- THE CAPTIONS OF THE FIRST SLIDE -->
-                                            <div class="tp-caption sfl original"
-                                                 data-x="100"
-                                                 data-y="146"
-                                                 data-speed="300"
-                                                 data-start="600"
-                                                 data-captionhidden="on"
-                                                 data-endeasing="easeOutExpo"
-                                                 data-easing="easeOutExpo">
-                                                Create Your Own
-                                            </div>
-                                            <div class="tp-caption sfr original_high"
-                                                 data-x="142"
-                                                 data-y="178"
-                                                 data-speed="300"
-                                                 data-start="800"
-                                                 data-captionhidden="on"
-                                                 data-endeasing="easeOutExpo"
-                                                 data-easing="easeOutExpo">
-                                                Personality!
-                                            </div>
-                                        </li>
-
-                                        <!-- THE FIRST SLIDE -->
-                                        <li data-transition="fade" data-slotamount="10" data-masterspeed="300"
-                                            data-slideindex="back">
-                                            <!-- THE MAIN IMAGE IN THE SLIDE -->
-                                            <img src="http://www.aiit.edu.cn/info/120702">
-                                            <!-- THE CAPTIONS OF THE FIRST SLIDE -->
-                                            <div class="tp-caption sfl original"
-                                                 data-x="100"
-                                                 data-y="146"
-                                                 data-speed="300"
-                                                 data-start="600"
-                                                 data-captionhidden="on"
-                                                 data-endeasing="easeOutExpo"
-                                                 data-easing="easeOutExpo">
-                                                Create Your Own
-                                            </div>
-                                            <div class="tp-caption sfr original_high"
-                                                 data-x="142"
-                                                 data-y="178"
-                                                 data-speed="300"
-                                                 data-start="800"
-                                                 data-captionhidden="on"
-                                                 data-endeasing="easeOutExpo"
-                                                 data-easing="easeOutExpo">
-                                                Personality!
-                                            </div>
-                                        </li>
+                                        <!--轮播图片结束-->
                                     </ul>
                                     <!--轮播图片结束-->
                                 </div>
@@ -290,105 +239,40 @@
                                 </br>
                                 <div class="latest-posts-holder">
                                     <!--社团通知循环开始-->
-                                    <article class="post clearfix">
+                                    <article th:each="item:${infos}" class="post clearfix">
                                         <figure class="featured-thumb">
-                                            <a href="#"><img style="height: 155px"
-                                                             th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/1554690415.jpg'}"
-                                                             alt=""></a>
+                                            <a th:title="${item.title}" target="_blank"
+                                               th:href="@{'/toActDetailPage?type=foreGround&id='+${item.id}}"><img
+                                                    style="height: 155px"
+                                                    th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/activity_imgs/'+${item.image}}"
+                                                    alt=""></a>
                                         </figure>
                                         <div class="post-body">
                                             <header class="post-header">
-                                                <h3><a href="#">丐帮开始新一轮的帮主选举啦！！！</a></h3>
+                                                <h3><a target="_blank"
+                                                       th:href="@{'/toActDetailPage?type=foreGround&id='+${item.id}}">
+                                                    <td th:text="${item.title}"></td>
+                                                </a></h3>
                                                 <p class="post-meta">
-                                                    <span class="post-meta-cats"><i class="icon-tag"></i><a href="#">News</a> / <a
-                                                            href="#">Design</a></span>
-                                                    <span class="post-meta-author"><a href="#"><i class="icon-user"></i>Dan Fisher</a></span>
-                                                    <span class="post-meta-comments"><a href="#"><i
-                                                            class="icon-comment"></i>16</a></span>
+                                                    <span class="post-meta-cats"><i
+                                                            class="layui-icon layui-icon-friends"></i><td
+                                                            th:text="${item.author}"></td></span>
+                                                    <span class="post-meta-author"><i
+                                                            class="layui-icon layui-icon-log"></i><td
+                                                            th:text="${item.date}"></td></span>
                                                 </p>
                                             </header>
                                             <div class="post-excerpt">
                                                 <p class="over_skip">
-                                                    早在5000多年前，山东就已经出现原始形态的实物货币。齐国自春秋中叶开始就以齐国刀币作为法定标准货币。鲁国在西周时期少量使用海贝，春秋中叶开始铸行铜贝和包金铜贝。</p>
-                                                <a href="#" class="btn">查 看 详 情</a>
+                                                <td th:text="${item.description}"></td>
+                                                </p>
+                                                <a target="_blank"
+                                                   th:href="@{'/toActDetailPage?type=foreGround&id='+${item.id}}"
+                                                   class="btn">查 看 详 情</a>
                                             </div>
                                         </div>
                                     </article>
                                     <!--社团通知循环结束-->
-                                    <article class="post clearfix">
-                                        <figure class="featured-thumb">
-                                            <a href="#"><img style="height: 155px"
-                                                             th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/1554690415.jpg'}"
-                                                             alt=""></a>
-                                        </figure>
-                                        <div class="post-body">
-                                            <header class="post-header">
-                                                <h3><a href="#">丐帮开始新一轮的帮主选举啦！！！</a></h3>
-                                                <p class="post-meta">
-                                                    <span class="post-meta-cats"><i class="icon-tag"></i><a href="#">News</a> / <a
-                                                            href="#">Design</a></span>
-                                                    <span class="post-meta-author"><a href="#"><i class="icon-user"></i>Dan Fisher</a></span>
-                                                    <span class="post-meta-comments"><a href="#"><i
-                                                            class="icon-comment"></i>16</a></span>
-                                                </p>
-                                            </header>
-                                            <div class="post-excerpt">
-                                                <p class="over_skip">
-                                                    早在5000多年前，山东就已经出现原始形态的实物货币。齐国自春秋中叶开始就以齐国刀币作为法定标准货币。鲁国在西周时期少量使用海贝，春秋中叶开始铸行铜贝和包金铜贝。</p>
-                                                <a href="#" class="btn">查 看 详 情</a>
-                                            </div>
-                                        </div>
-                                    </article>
-
-                                    <article class="post clearfix">
-                                        <figure class="featured-thumb">
-                                            <a href="#"><img style="height: 155px"
-                                                             th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/1554690415.jpg'}"
-                                                             alt=""></a>
-                                        </figure>
-                                        <div class="post-body">
-                                            <header class="post-header">
-                                                <h3><a href="#">丐帮开始新一轮的帮主选举啦！！！</a></h3>
-                                                <p class="post-meta">
-                                                    <span class="post-meta-cats"><i class="icon-tag"></i><a href="#">News</a> / <a
-                                                            href="#">Design</a></span>
-                                                    <span class="post-meta-author"><a href="#"><i class="icon-user"></i>Dan Fisher</a></span>
-                                                    <span class="post-meta-comments"><a href="#"><i
-                                                            class="icon-comment"></i>16</a></span>
-                                                </p>
-                                            </header>
-                                            <div class="post-excerpt">
-                                                <p class="over_skip">
-                                                    早在5000多年前，山东就已经出现原始形态的实物货币。齐国自春秋中叶开始就以齐国刀币作为法定标准货币。鲁国在西周时期少量使用海贝，春秋中叶开始铸行铜贝和包金铜贝。</p>
-                                                <a href="#" class="btn">查 看 详 情</a>
-                                            </div>
-                                        </div>
-                                    </article>
-
-                                    <article class="post clearfix">
-                                        <figure class="featured-thumb">
-                                            <a href="#"><img style="height: 155px"
-                                                             th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/1554690415.jpg'}"
-                                                             alt=""></a>
-                                        </figure>
-                                        <div class="post-body">
-                                            <header class="post-header">
-                                                <h3><a href="#">丐帮开始新一轮的帮主选举啦！！！</a></h3>
-                                                <p class="post-meta">
-                                                    <span class="post-meta-cats"><i class="icon-tag"></i><a href="#">News</a> / <a
-                                                            href="#">Design</a></span>
-                                                    <span class="post-meta-author"><a href="#"><i class="icon-user"></i>Dan Fisher</a></span>
-                                                    <span class="post-meta-comments"><a href="#"><i
-                                                            class="icon-comment"></i>16</a></span>
-                                                </p>
-                                            </header>
-                                            <div class="post-excerpt">
-                                                <p class="over_skip">
-                                                    早在5000多年前，山东就已经出现原始形态的实物货币。齐国自春秋中叶开始就以齐国刀币作为法定标准货币。鲁国在西周时期少量使用海贝，春秋中叶开始铸行铜贝和包金铜贝。</p>
-                                                <a href="#" class="btn">查 看 详 情</a>
-                                            </div>
-                                        </div>
-                                    </article>
                                 </div>
                                 <style>
                                     .over_skip {
@@ -417,44 +301,10 @@
                             <aside id="sidebar" class="sidebar grid_4">
                                 <!-- Popular Posts Widget -->
                                 <div class="popular-posts widget widget__sidebar">
-                                    <h3 class="widget-title">通 知 公 告</h3>
+                                    <h3 class="widget-title">讲 座 通 知</h3>
                                     <div class="widget-content">
-                                        <ul class="posts-list unstyled clearfix">
-                                            <li>
-                                                <h2 style="color: black">第十三周会议通知</h2>
-                                            </li>
-                                            <li>
-                                                <h4><a href="javascrpt:">诸葛亮三顾毛驴</a></h4>
-                                            </li>
-                                            <li>
-                                                <h4><a href="javascrpt:">诸葛亮三顾毛驴</a></h4>
-                                            </li>
-                                            <li>
-                                                <h4><a href="javascrpt:">诸葛亮三顾毛驴</a></h4>
-                                            </li>
-
-                                            <li>
-                                                <h4><a href="javascrpt:">诸葛亮三顾毛驴</a></h4>
-                                            </li>
-
-                                            <li>
-                                                <h4><a href="javascrpt:">诸葛亮三顾毛驴</a></h4>
-                                            </li>
-                                            <li>
-                                                <h4><a href="javascrpt:">诸葛亮三顾毛驴</a></h4>
-                                            </li>
-                                            <li>
-                                                <h4><a href="javascrpt:">诸葛亮三顾毛驴</a></h4>
-                                            </li>
-
-                                            <li>
-                                                <h4><a href="javascrpt:">诸葛亮三顾毛驴</a></h4>
-                                            </li>
-
-                                            <li>
-                                                <h4><a href="javascrpt:">诸葛亮三顾毛驴</a></h4>
-                                            </li>
-
+                                        <ul id="right_notice" class="posts-list unstyled clearfix">
+                                            <!--ajax加载资源-->
                                         </ul>
                                     </div>
                                 </div>
@@ -531,4 +381,29 @@
 
 <script type="text/javascript" th:src="@{/js/foundpage.js}" charset="utf-8"></script>
 </body>
+
+<script>
+    /*异步加载主页通知数据*/
+    $(function () {
+        $.ajax({
+            url: "/indexLectures",
+            type: "GET",
+            traditional: true,//传数组一定要加的
+            data: {},
+            dataType: "json",
+            success: function (data) {
+                var datas = eval(data);
+                for (var i = 0; i < datas.length; i++) {
+                    var $li = $("<li></li>");
+                    $li.append("<h4 style='color: black'>" + datas[i].title + "</h4>");
+                    $li.append("<div style='float: left'>" + "时间" + datas[i].dateStart + "</div>");
+                    $("#right_notice").append($li);
+                }
+            },
+            error: function (data) {
+                layer.msg("获取部门类型失败", {icon: 5});
+            }
+        });
+    });
+</script>
 </html>
