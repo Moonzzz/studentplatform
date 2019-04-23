@@ -12,7 +12,7 @@ public interface IAttractionsDao {
     @Select("select * from attractions")
     List<Attractions> showAttractions();
 
-    @Insert("Insert into attractions(name,position,description,photos) VALUE(#{name},#{position},#{description},#{phitos})")
+    @Insert("Insert into attractions(name,position,description,photos) VALUE(#{name},#{position},#{description},#{photos})")
     boolean addAttraction(Attractions attractions);
 
     @Delete("delete from attractions where id=#{id}")
