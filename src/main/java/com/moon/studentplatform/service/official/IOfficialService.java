@@ -19,6 +19,6 @@ public interface IOfficialService {
     List<DeptType> getAllType();
     int getSearchCount(LectureSeach seach);
     int getAllLectureCount();
-    List<ClubActivity> showAllContests();
+    List<ClubActivity> showAllContests(int type);
     List<ClubActivity> showAllInfoDynas();
 }

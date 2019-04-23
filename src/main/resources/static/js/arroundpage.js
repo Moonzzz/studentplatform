@@ -1,27 +1,23 @@
-function allAttractions() {
+/*
+function letInnerViewOut(url) {
     $("#mainFrame").hide();
     $("#innerView").show();
-    /*嵌套网页到DIV中，让后台填充数据到页面上再进行嵌套*/
-    $("#innerView").load("/allAttraction");
+    $("#innerView").empty();
+    $("#innerView").load(url);
+}
+
+function allAttractions() {
+    letInnerViewOut("/allAttraction");
 }
 
 function allFoods() {
-    $("#mainFrame").hide();
-    $("#innerView").show();
-    /*嵌套网页到DIV中，让后台填充数据到页面上再进行嵌套*/
-    $("#innerView").load("/allFood");
+    letInnerViewOut("/allFood");
 }
 
 function getMap(){
-    $("#mainFrame").hide();
-    $("#innerView").show();
-    //嵌套网页到DIV中，让后台填充数据到页面上再进行嵌套
-    $("#innerView").load("/Map");
+    letInnerViewOut("/Map");
 }
 
 function Test(){
-    $("#mainFrame").hide();
-    $("#innerView").show();
-    //嵌套网页到DIV中，让后台填充数据到页面上再进行嵌套
-    $("#innerView").load("/test");
-}
+    letInnerViewOut("/test");
+}*/

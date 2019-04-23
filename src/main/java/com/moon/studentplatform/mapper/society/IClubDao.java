@@ -31,7 +31,7 @@ public interface IClubDao {
     @Select("SELECT * from club where count=1 and pass='true'")
     List<Club> showAllStuOrganizes();
 
-    @Select("select * from club where count=#{count} LIMIT #{offset},#{limit}")
+    @Select("select * from club where count=#{count} ORDER BY pass ASC LIMIT #{offset},#{limit}")
     List<Club> getLimitClubs(@Param("offset") int offset, @Param("limit") int limit, @Param("count") int count);
 
     @Select("select count(*) from club where count=#{count}")
@@ -43,8 +43,8 @@ public interface IClubDao {
     @Select("SELECT * from club where id=#{id}")
     Club showClubDetailById(@Param("id") int id);
 
-    @Insert("INSERT into `club`(name,description,firstman,datepublished,icon,phonum)\n" +
-            "VALUES(#{name},#{description},#{firstman},#{datepublished},#{icon},#{phonum})")
+    @Insert("INSERT into `club`(count,name,description,firstman,datepublished,icon,phonum,pass)\n" +
+            "VALUES(#{count},#{name},#{description},#{firstman},#{datepublished},#{icon},#{phonum},#{pass})")
     boolean addClub(Club club);
 
 

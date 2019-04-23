@@ -3,14 +3,16 @@ function letInnerViewOut(url) {
     $("#innerView").show();
     $("#innerView").empty();
     $("#innerView").load(url);
-
 }
+
 function allContests() {
     letInnerViewOut("/officialPage?page=contests");
 }
+
 function allInfoDynamic() {
     letInnerViewOut("/officialPage?page=infodynamics");
 }
+
 function collegeIntro() {
     letInnerViewOut("http://localhost:8080/pages/official/collegeintro.html");
 }
@@ -27,6 +29,11 @@ function allStuOrganize() {
 function allColleges() {
     letInnerViewOut("/allColleges");
 }
+
+function allCompetitions() {
+    letInnerViewOut("/competitions");
+}
+
 function mainFrame() {
     $("#mainFrame").show();
     $("#innerView").hide();
@@ -35,4 +42,26 @@ function mainFrame() {
 
 function feded() {
     $("#detail").toggle(50);
+}
+
+/*ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc*/
+function allFound() {
+    letInnerViewOut("/toshowfound");
+}
+
+
+function allAttractions() {
+    letInnerViewOut("/allAttraction");
+}
+
+function allFoods() {
+    letInnerViewOut("/allFood");
+}
+
+function getMap() {
+    letInnerViewOut("/Map");
+}
+
+function Test() {
+    letInnerViewOut("/test");
 }

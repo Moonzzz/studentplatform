@@ -48,8 +48,8 @@ public class OfficialServiceImpl implements IOfficialService {
     }
 
     @Override
-    public List<ClubActivity> showAllContests() {
-        return officialDao.showAllContests();
+    public List<ClubActivity> showAllContests(int type) {
+        return officialDao.showAllContests(type);
     }
 
     @Override

@@ -101,12 +101,14 @@ public class Club {
         this.pass = pass;
     }
 
-    public Club(String name, String datepublished, String firstman, String phonum, String description) {
+    public Club(int count, String name, String datepublished, String firstman, String phonum, String description, String pass) {
+        this.count = count;
         this.name = name;
         this.datepublished = datepublished;
         this.firstman = firstman;
         this.phonum = phonum;
         this.description = description;
+        this.pass = pass;
     }
 
     @Override

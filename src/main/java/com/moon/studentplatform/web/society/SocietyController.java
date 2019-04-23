@@ -109,8 +109,11 @@ public class SocietyController {
         String datepublished = objs.get("datepublished");
         String firstman = objs.get("firstman");
         String phonum = objs.get("phonum");
+        String count = objs.get("count");
+        int intCount = Integer.parseInt(count);
         String description = objs.get("description");
-        Club club = new Club(name, datepublished, firstman, phonum, description);
+        Club club = new Club(intCount, name, datepublished, firstman, phonum, description, "false");
+        System.out.println(club.toString());
         boolean flag = clubService.addClub(picFile, club);
         resp.setCharacterEncoding("utf-8");
         resp.setContentType("text/html;charset=utf-8");
@@ -119,7 +122,7 @@ public class SocietyController {
             //return "200";
             out.flush();
             out.println("<script>" + "alert('创建社团成功，等待管理员审核~~~');");
-            out.print(" window.history.go(-2);");
+            out.print(" window.history.go(-1);");
             out.print("</script>");
             out.close();
         } else {

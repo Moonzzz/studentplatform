@@ -100,8 +100,8 @@ public interface IOfficialDao {
             "club_activity\n" +
             "INNER JOIN club ON club_activity.clubId = club.id\n" +
             "WHERE\n" +
-            "club.count = 1\n" +
+            "club.count = #{type}\n" +
             "and club_activity.pass='true'\n" +
             "ORDER BY club_activity.date DESC")
-    List<ClubActivity> showAllContests();
+    List<ClubActivity> showAllContests(@Param("type") int type);
 }

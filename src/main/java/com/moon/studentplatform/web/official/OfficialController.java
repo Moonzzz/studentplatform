@@ -45,7 +45,12 @@ public class OfficialController {
                 toPage = "officialpage/lectures";
                 break;
             case "contests":
-                dinfoDynamics = officialService.showAllContests();
+                dinfoDynamics = officialService.showAllContests(1);
+                map.addAttribute("infos", dinfoDynamics);
+                toPage = "officialpage/infodynamics";
+                break;
+            case "competitions":
+                dinfoDynamics = officialService.showAllContests(3);
                 map.addAttribute("infos", dinfoDynamics);
                 toPage = "officialpage/infodynamics";
                 break;
