@@ -12,6 +12,12 @@ public class Food {
   public Food() {
   }
 
+  public Food(String name, String position, String description) {
+    this.name = name;
+    this.position = position;
+    this.description = description;
+  }
+
   public Food(long id, String name, String position, String description) {
     this.id = id;
     this.name = name;

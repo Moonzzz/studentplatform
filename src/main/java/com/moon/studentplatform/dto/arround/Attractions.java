@@ -20,6 +20,12 @@ public class Attractions {
     this.photos = photos;
   }
 
+  public Attractions(String name, String position, String description) {
+    this.name = name;
+    this.position = position;
+    this.description = description;
+  }
+
   public Attractions(long id, String name, String position, String description) {
     this.id = id;
     this.name = name;
