@@ -65,6 +65,7 @@ public class ShiroController {
             session.setAttribute("user", user);
             //返回之前的请求的url
             SavedRequest savedRequest = WebUtils.getSavedRequest(request);
+            System.out.println(savedRequest.getRequestURI());
             return savedRequest == null ? "/index" : "redirect:"+savedRequest.getRequestURI();
         } catch (Exception e) {
             System.err.println("验证不通过: " + e.getMessage());
