@@ -3,10 +3,12 @@ package com.moon.studentplatform.web.admin;
 import com.google.gson.Gson;
 import com.moon.studentplatform.dto.arround.Attractions;
 import com.moon.studentplatform.dto.arround.Food;
+import com.moon.studentplatform.dto.official.Lecture;
 import com.moon.studentplatform.dto.society.Club;
 import com.moon.studentplatform.dto.society.ClubActivity;
 import com.moon.studentplatform.dto.society.ClubUser;
 import com.moon.studentplatform.service.arround.IArroundService;
+import com.moon.studentplatform.service.official.IOfficialService;
 import com.moon.studentplatform.service.society.IClubService;
 import com.moon.studentplatform.service.society.IClubUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,11 @@ public class AdminController {
 
     @Autowired
     IClubUserService clubUserService;
+
+
+    @Autowired
+    IOfficialService officialService;
+
     @Autowired
     IArroundService arroundService;
 
@@ -54,6 +61,9 @@ public class AdminController {
     public String goToPage(ModelMap map, @RequestParam("page") String page) {
         String toPage = "";
         switch (page) {
+            case "lecture":
+                toPage = "adminpage/lecture";
+                break;
             case "organize":
                 toPage = "adminpage/society";
                 break;
@@ -94,6 +104,41 @@ public class AdminController {
         club = new Club(id, name, description, date, firstman, phonum);
         boolean flag = clubService.modifyClub(club);
         return flag ? "true" : "false";
+    }
+
+
+    @RequestMapping(value = "/addLecture", method = RequestMethod.POST,produces = "application/json")
+    @ResponseBody
+    public String addLecture(@RequestParam Map<String, String> objs) {
+        String title = objs.get("title");
+        String typeId = objs.get("typeId");
+        String context = objs.get("context");
+        String dateStart = objs.get("dateStart");
+        String dateEnd = objs.get("dateEnd");
+        Lecture lecture = new Lecture(title, typeId, context, dateStart, dateEnd);
+        int flag = officialService.addLecture(lecture);
+        return flag >0 ? "true" : "false";
+    }
+
+
+    @RequestMapping("/deleteLectures")
+    @ResponseBody
+    public String deleteLectures(HttpServletRequest request) {
+        int count = 1;
+        String type = request.getParameter("type");
+        if (type.equals("beth")) {
+            String[] id = request.getParameterValues("id");
+            for (int i = 0; i < id.length; i++) {
+                System.out.println(id[i]);
+                int flag = officialService.deleteLectureById(id[i]);
+                if (flag == 0) count = 0;
+            }
+        } else if (type.equals("one")) {
+            String id = request.getParameter("id");
+            System.out.println("id是：" + id);
+            if (officialService.deleteLectureById(id) == 0) count = 0;
+        }
+        return count > 0 ? "true" : "false";
     }
 
     @RequestMapping("/deleteClubs")
@@ -152,6 +197,7 @@ public class AdminController {
         }
         return count > 0 ? "true" : "false";
     }
+
 
     @RequestMapping("/clubList")
     @ResponseBody
@@ -222,38 +268,37 @@ public class AdminController {
 
     @RequestMapping("/showAttractions")
     @ResponseBody
-    public String showAttractions(@RequestParam Map<String,String> objs){
+    public String showAttractions(@RequestParam Map<String, String> objs) {
         String pageStr = objs.get("page");
         String limitStr = objs.get("limit");
         int page = Integer.parseInt(pageStr);
         int limit = Integer.parseInt(limitStr);
-        attractions = arroundService.getLimitAttractions((page-1)*limit,limit);
+        attractions = arroundService.getLimitAttractions((page - 1) * limit, limit);
         Gson gson = new Gson();
         String result = gson.toJson(attractions);
         int count = arroundService.getAttractionCount();
-        return getJson(result,count);
+        return getJson(result, count);
     }
 
     @RequestMapping("/showFoods")
     @ResponseBody
-    public String showFoods(@RequestParam Map<String,String> objs){
+    public String showFoods(@RequestParam Map<String, String> objs) {
         String pageStr = objs.get("page");
         String limitStr = objs.get("limit");
         int page = Integer.parseInt(pageStr);
         int limit = Integer.parseInt(limitStr);
-        foods = arroundService.getLimitFoods((page-1)*limit,limit);
+        foods = arroundService.getLimitFoods((page - 1) * limit, limit);
         Gson gson = new Gson();
         String result = gson.toJson(foods);
         int count = arroundService.getFoodCount();
-        return getJson(result,count);
+        return getJson(result, count);
     }
 
     /**
-    *
-    * author: Mr.Shi
-    * description: 删除景点信息
-    * Date:  2019/4/22
-    **/
+     * author: Mr.Shi
+     * description: 删除景点信息
+     * Date:  2019/4/22
+     **/
     @RequestMapping("/deleteAttractions")
     @ResponseBody
     public String deleteAttractions(HttpServletRequest request) {
@@ -276,11 +321,10 @@ public class AdminController {
     }
 
     /**
-    *
-    * author: Mr.Shi
-    * description: 删除美食信息
-    * Date:  2019/4/22
-    **/
+     * author: Mr.Shi
+     * description: 删除美食信息
+     * Date:  2019/4/22
+     **/
     @RequestMapping("/deleteFoods")
     @ResponseBody
     public String deleteFoods(HttpServletRequest request) {
@@ -303,11 +347,10 @@ public class AdminController {
     }
 
     /**
-    *
-    * author: Mr.Shi
-    * description: 修改景点信息
-    * Date:  2019/4/22
-    **/
+     * author: Mr.Shi
+     * description: 修改景点信息
+     * Date:  2019/4/22
+     **/
     @RequestMapping("/modifyAttraction")
     @ResponseBody
     public String modifyAttraction(@RequestParam Map<String, String> objs) {
@@ -316,17 +359,16 @@ public class AdminController {
         String name = objs.get("name");
         String description = objs.get("description");
         String position = objs.get("position");
-        attraction = new Attractions(id,name,position,description);
+        attraction = new Attractions(id, name, position, description);
         boolean flag = arroundService.modifyAttraction(attraction);
         return flag ? "true" : "false";
     }
 
     /**
-    *
-    * author: Mr.Shi
-    * description: 修改店铺信息
-    * Date:  2019/4/22
-    **/
+     * author: Mr.Shi
+     * description: 修改店铺信息
+     * Date:  2019/4/22
+     **/
     @RequestMapping("/modifyFood")
     @ResponseBody
     public String modifyFood(@RequestParam Map<String, String> objs) {
@@ -335,7 +377,7 @@ public class AdminController {
         String name = objs.get("name");
         String description = objs.get("description");
         String position = objs.get("position");
-       food = new Food(id,name,position,description);
+        food = new Food(id, name, position, description);
         boolean flag = arroundService.modifyFood(food);
         return flag ? "true" : "false";
     }
@@ -355,12 +397,12 @@ public class AdminController {
         return result;
     }
 
-/**
-* author: Mr.Shi
-* description: 将数据转换为前台所需的json格式
-* Date:  2019/4/20
-**/
-    private String getJson(String result ,int count){
+    /**
+     * author: Mr.Shi
+     * description: 将数据转换为前台所需的json格式
+     * Date:  2019/4/20
+     **/
+    private String getJson(String result, int count) {
         return "{\"code\":0,\"msg\":\"\",\"count\":" + count + ",\"data\":" + result + "}";
     }
 

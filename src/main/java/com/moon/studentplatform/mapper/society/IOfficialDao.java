@@ -4,9 +4,7 @@ import com.moon.studentplatform.dto.official.DeptType;
 import com.moon.studentplatform.dto.official.Lecture;
 import com.moon.studentplatform.dto.official.LectureSeach;
 import com.moon.studentplatform.dto.society.ClubActivity;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,7 +18,16 @@ import java.util.List;
 @Repository
 @Mapper
 public interface IOfficialDao {
+
+    @Insert("INSERT into `lecture_type`(title,type_id,context,dateStart,dateEnd)\n" +
+            "VALUES(#{title},#{type},#{context},#{dateStart},#{dateEnd})")
+    int addLecture(Lecture lecture);
+
+    @Delete("delete from lecture_type where id=#{id}")
+    int deleteLectureById(@Param("id") String id);
+
     @Select("SELECT\n" +
+            "lecture_type.id as id,"+
             "type.`name` as type,\n" +
             "lecture_type.title,\n" +
             "lecture_type.dateStart,\n" +

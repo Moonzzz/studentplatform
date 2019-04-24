@@ -34,25 +34,22 @@ public class OfficialController {
 
     @RequestMapping("/officialPage")
     public String officialPage(ModelMap map, @RequestParam("page") String page) {
-        String toPage = "";
+        String toPage = "officialpage/infodynamics";
         switch (page) {
             case "infodynamics":
                 dinfoDynamics = officialService.showAllInfoDynas();
                 map.addAttribute("infos", dinfoDynamics);
-                toPage = "officialpage/infodynamics";
-                break;
-            case "lectures":
-                toPage = "officialpage/lectures";
                 break;
             case "contests":
                 dinfoDynamics = officialService.showAllContests(1);
                 map.addAttribute("infos", dinfoDynamics);
-                toPage = "officialpage/infodynamics";
                 break;
             case "competitions":
                 dinfoDynamics = officialService.showAllContests(3);
                 map.addAttribute("infos", dinfoDynamics);
-                toPage = "officialpage/infodynamics";
+                break;
+            case "lectures":
+                toPage = "officialpage/lectures";
                 break;
         }
         return toPage;

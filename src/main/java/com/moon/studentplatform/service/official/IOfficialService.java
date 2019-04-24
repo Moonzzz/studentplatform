@@ -14,6 +14,8 @@ import java.util.List;
  * @modified By：
  */
 public interface IOfficialService {
+    int addLecture(Lecture lecture);
+    int deleteLectureById(String id);
     List<Lecture> getLimitLectures(int offset, int limit);
     List<Lecture> shearchLectures(LectureSeach seach);
     List<DeptType> getAllType();

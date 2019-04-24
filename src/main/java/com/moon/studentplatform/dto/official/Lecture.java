@@ -10,12 +10,22 @@ public class Lecture {
     int id;
 
     String title;
+    String type;
+    String context;
     String dateStart;
     String dateEnd;
-    String context;
-    String type;
+
+
 
     public Lecture() {
+    }
+
+    public Lecture(String title, String type, String context, String dateStart, String dateEnd) {
+        this.title = title;
+        this.type = type;
+        this.context = context;
+        this.dateStart = dateStart;
+        this.dateEnd = dateEnd;
     }
 
     public int getId() {

@@ -23,6 +23,16 @@ public class OfficialServiceImpl implements IOfficialService {
     IOfficialDao officialDao;
 
     @Override
+    public int addLecture(Lecture lecture) {
+        return officialDao.addLecture(lecture);
+    }
+
+    @Override
+    public int deleteLectureById(String id) {
+        return officialDao.deleteLectureById(id);
+    }
+
+    @Override
     public List<Lecture> getLimitLectures(int offset, int limit) {
         return officialDao.getLimitLectures(offset, limit);
     }

@@ -13,6 +13,10 @@ function allInfoDynamic() {
     letInnerViewOut("/officialPage?page=infodynamics");
 }
 
+function allCompetitions() {
+    letInnerViewOut("/officialPage?page=competitions");
+}
+
 function collegeIntro() {
     letInnerViewOut("http://localhost:8080/pages/official/collegeintro.html");
 }
@@ -30,9 +34,6 @@ function allColleges() {
     letInnerViewOut("/allColleges");
 }
 
-function allCompetitions() {
-    letInnerViewOut("/competitions");
-}
 
 function mainFrame() {
     $("#mainFrame").show();
