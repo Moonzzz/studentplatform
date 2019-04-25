@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mcss/base.css" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mcss/flexslider.css" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mcss/font-awesome.min.css" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mcss/ie" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mcss/media-queries.css" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mcss/normalize.css" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mcss/prettyPhoto.css" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mcss/settings.css" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mcss/skeleton.css" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mcss/style.css" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mcss/superfish.css" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mjs/custom.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mjs/jflickrfeed.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mjs/jquery-1.9.1.min.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mjs/jquery-migrate-1.1.1.min.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mjs/jquery.easing.min.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mjs/jquery.elastislide.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mjs/jquery.flexslider.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mjs/jquery.form.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mjs/jquery.imagesloaded.min.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mjs/jquery.isotope.min.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mjs/jquery.min.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mjs/jquery.mobilemenu.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mjs/jquery.prettyPhoto.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mjs/jquery.superfish-1.5.0.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mjs/jquery.themepunch.plugins.min.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mjs/jquery.themepunch.revolution.min.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mjs/jquery.twitter.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mjs/jquery.ui.map.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/mjs/modernizr.custom.17475.js" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/society_files/a.docx" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/society_files/activity_imgs/a.jpg" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/society_files/activity_imgs/b.jpg" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/society_files/activity_imgs/c.jpg" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/society_files/activity_imgs/d.png" charset="GBK" />
+  </component>
+</project>
