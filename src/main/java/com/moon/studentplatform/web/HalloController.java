@@ -12,7 +12,7 @@ public class HalloController {
 
     @RequestMapping("/hello")
     public String index(ModelMap map) {
-        int i = 1/0;
+        int i = 1 / 0;
         map.addAttribute("host", "www.abc.com");
         return "hello";
     }

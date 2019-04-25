@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css">
+    <!-- jQuery -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="row">
+    <div class="col-md-9">
+        <input type="button" value="上一步" onclick="prevForm(event)" class="btn btn-primary">
+    </div>
+    <div class="col-md-3">
+        <input type="button" value="提交" class="btn btn-primary">
+    </div>
+</div>
+<script type="text/javascript">
+    var is_confirm = true;
+    (function () {
+        // 关闭窗口时弹出确认提示
+        $(window).bind('beforeunload', function () {
+            // 只有在标识变量is_confirm不为false时，才弹出确认提示
+            if (window.is_confirm !== false) {
+                return "您可能有数据没有保存";
+            }
+        });
+        // mouseleave mouseover事件也可以注册在body、外层容器等元素上
+        $(window).bind('mouseover mouseleave', function (event) {
+            is_confirm = event.type == 'mouseleave';
+        });
+    })();
+</script>
+</body>
+</html>

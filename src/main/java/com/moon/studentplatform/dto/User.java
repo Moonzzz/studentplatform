@@ -14,6 +14,7 @@ public class User {
 
     private String username;
 
+    private String userPhoto;
     private String password;
 
     private String salt;

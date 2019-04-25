@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间用于查找 -->
+<mapper namespace="com.moon.studentplatform.mapper.BlogMapper">
+    <select id="selectByDate" resultMap="blogMap">
+        SELECT SQL_CALC_FOUND_ROWS u.login_name,
+                                   u.user_id,
+                                   p.post_id,
+                                   p.title,
+                                   p.digest,
+                                   p.comment_num,
+                                   p.views,
+                                   p.likes,
+                                   p.images,
+                                   p.date_lastModified,
+                                   p.isLocked
+        FROM sys_users u,
+             post_user p
+        WHERE u.user_id = p.user_id
+        ORDER BY p.date_lastModified DESC
+        LIMIT #{offset},#{pageSize};
+        SELECT FOUND_ROWS() as count;
+    </select>
+    <select id="selectByTitle" resultMap="blogMap">
+        SELECT SQL_CALC_FOUND_ROWS u.login_name,
+                                   u.user_id,
+                                   p.post_id,
+                                   p.title,
+                                   p.digest,
+                                   p.comment_num,
+                                   p.views,
+                                   p.likes,
+                                   p.images,
+                                   p.date_lastModified,
+                                   p.isLocked
+        FROM sys_users u,
+             post_user p
+        WHERE u.user_id = p.user_id
+          AND p.title like #{title}
+        ORDER BY p.date_lastModified DESC
+        LIMIT #{offset},#{pageSize};
+        SELECT FOUND_ROWS() as count;
+    </select>
+    <select id="selectById" resultMap="blogDetail">
+        SELECT u.login_name,
+               u.user_id,
+               pu.post_id,
+               pu.title,
+               p.content,
+               pu.comment_num,
+               pu.views,
+               pu.likes,
+               pu.date_lastModified,
+               pu.isLocked
+        FROM sys_users u,
+             post_user pu,
+             post p
+        WHERE u.user_id = pu.user_id
+          AND p.id = pu.post_id
+          AND pu.post_id = #{id}
+    </select>
+
+
+    <insert id="insertBlog" parameterType="Blog" useGeneratedKeys="true" keyProperty="postId">
+        INSERT INTO post_user
+        VALUES (#{userId}, null, #{title}, #{dateLastModified}, 0, 0, 0, 0,
+                #{images}, #{digest});
+    </insert>
+    <insert id="insertBlogAndType" parameterType="Blog">
+        INSERT INTO post
+        VALUES (#{postId}, #{content}, #{dateLastModified});
+        INSERT INTO post_type
+        <foreach collection="categories" index="index" item="item" open="VALUES" close=";" separator=",">
+            (#{postId},#{item})
+        </foreach>
+    </insert>
+
+    <insert id="insertComment" parameterType="Comment" useGeneratedKeys="true" keyProperty="postId">
+        INSERT INTO comment
+        VALUES (null, #{userId}, #{postId}, #{content}, #{datePublished}, 0, 0);
+        UPDATE post_user
+        SET comment_num = comment_num + 1
+        WHERE post_id = #{postId};
+    </insert>
+
+    <insert id="insertReply" parameterType="Reply" useGeneratedKeys="true" keyProperty="postId">
+        INSERT INTO reply
+        VALUES (null, #{fatherId}, #{userId}, #{replyToUser.id}, #{content}, #{datePublished}, 0, 0);
+    </insert>
+
+    <update id="updateCommentLike" parameterType="java.util.HashMap">
+        UPDATE comment
+        SET likes = CASE
+        <foreach collection="argMap" index="id" item="likeNum" separator=" ">
+            WHEN id = #{id} THEN likes
+            <choose>
+                <when test="likeNum>0">
+                    +1
+                </when>
+                <when test="!(likeNum>0)">
+                    -1
+                </when>
+            </choose>
+        </foreach>
+        END WHERE id IN
+        <foreach collection="argMap" index="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
+
+
+    <select id="selectCategory" parameterType="java.lang.Long" resultType="java.lang.String">
+        SELECT name
+        FROM type t,
+             post_type pt
+        WHERE t.id = pt.type_id
+          AND pt.post_id = #{id};
+    </select>
+    <select id="selectComment" parameterType="java.lang.Long" resultMap="commentMap">
+        select c.id,
+               u.username,
+               u.photo,
+               c.content,
+               c.date_published,
+               c.likes,
+               c.dislikes
+        from comment c,
+             `user` u
+        where c.post_id = #{postId};
+    </select>
+    <select id="selectReply" parameterType="java.lang.Long" resultMap="replyMap">
+        select r.id,
+               u.username,
+               u.photo,
+               r.reply_to_id,
+               r.content,
+               r.date_published,
+               r.likes,
+               r.dislikes
+        from reply r,
+             `user` u
+        where father_id = #{fatherId};
+    </select>
+
+    <select id="selectUser" parameterType="java.lang.Long" resultType="com.moon.studentplatform.dto.User">
+        SELECT u.id,u.username,u.photo
+        FROM `user` u
+        WHERE u.id = #{id};
+    </select>
+
+
+    <resultMap id="blogMap" type="Blog">
+        <!--association column名跟自动装配冲突，手动装填-->
+        <id property="postId" column="post_id"/>
+        <association property="categories" column="post_id" select="selectCategory"/>
+    </resultMap>
+
+    <resultMap id="blogDetail" type="Blog">
+        <!--association column名跟自动装配冲突，手动装填-->
+        <id property="postId" column="post_id"/>
+        <association property="categories" column="post_id" select="selectCategory"/>
+        <association property="comments" column="post_id" select="selectComment"/>
+    </resultMap>
+
+    <resultMap id="commentMap" type="Comment">
+        <id property="commentId" column="id"/>
+        <result property="userPhoto" column="photo"/>
+        <association property="replies" column="id" select="selectReply"/>
+    </resultMap>
+
+    <resultMap id="replyMap" type="Reply">
+        <id property="replyId" column="id"/>
+        <result property="userPhoto" column="photo"/>
+        <association property="replyToUser" column="reply_to_id" select="selectUser"/>
+    </resultMap>
+</mapper>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie7 no-js" lang="en">     <![endif]-->
+<!--[if lte IE 8]>
+<html class="ie8 no-js" lang="en">     <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html class="not-ie no-js" lang="en" xmlns:th="http://www.w3.org/1999/xhtml">  <!--<![endif]-->
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>Emotion : Blog</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <!-- Mobile Specific Metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+
+    <!-- Favicons
+    ================================================== -->
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
+    <link rel="apple-touch-icon" th:href="@{/images/apple-touch-icon.png}">
+    <link rel="apple-touch-icon" sizes="72x72" th:href="@{/images/apple-touch-icon-72x72.png}">
+    <link rel="apple-touch-icon" sizes="114x114" th:href="@{/images/apple-touch-icon-114x114.png}">
+    <link rel="apple-touch-icon" sizes="144x144" th:href="@{/images/apple-touch-icon-144x144.png}">
+
+
+    <style>
+        .entry-content:hover {
+            color: #222222;
+            cursor: pointer;
+        }
+
+        a {
+            color: #5c5c5c;
+        }
+
+        .entry-content a:hover {
+            text-decoration: none;
+        }
+
+        /*滚动图片父容器*/
+        .entry__gallery .flexslider {
+            height: 360px;
+        }
+
+        /*图片滚动容器显示图片中间部分*/
+        .box {
+            height: 360px;
+            width: 100%;
+            overflow: hidden;
+            background-repeat: no-repeat;
+            background-position: center center;
+            float: left;
+        }
+
+        .box img {
+            margin-top: -100px;
+            max-height: 650px;
+            transition: all 0.6s;
+        }
+
+        .box img:hover {
+            transform: scale(1.2);
+        }
+
+        /*图片切换按钮透明度*/
+        .flex-control-nav a,
+        .flex-direction-nav a {
+            opacity: 0.5;
+        }
+
+        /*改变主内容div大小*/
+        .container {
+            width: 1200px;
+        }
+
+        .container .grid_12 {
+            width: 100%;
+        }
+
+        .container .grid_8 {
+            width: 70%;
+        }
+
+        .editormd-html-preview, .editormd-preview-container {
+            width: 95%;
+            background-color: #e7e6e0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- BEGIN WRAPPER -->
+<div id="wrapper">
+    <div class="wrapp-holder">
+        <div class="wrap-frame">
+            <!-- BEGIN HEADER -->
+            <header id="header" class="header">
+                <!-- Top Header -->
+                <!-- /Top Header -->
+
+                <!-- Main Header -->
+                <div class="header-main">
+                    <div class="container clearfix">
+                        <div class="grid_12 hr-bottom">
+
+                            <!-- BEGIN LOGO -->
+                            <div id="logo">
+                                <!-- Image based Logo-->
+                                <a href="index.html"><img src="/images/logo.png" alt="Emotion" width="145" height="67"/></a>
+
+                                <!-- Text based Logo
+                                <h1><a href="index.html">Emotion</a></h1>
+                                <p class="tagline">Responsive HTML Template</p>
+                                -->
+
+                            </div>
+                            <!-- END LOGO -->
+
+
+                            <!-- BEGIN NAVIGATION -->
+                            <nav class="primary">
+                                <ul class="sf-menu">
+                                    <li>
+                                        <a href="index.html">Home <span><i>|</i> Get Started</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="elements.html">Features <span><i>|</i> Why Choose Us</span></a>
+                                        <!-- Sub Navigation -->
+                                        <ul>
+                                            <li><a href="about.html">About Us</a></li>
+                                            <li><a href="columns.html">Columns</a></li>
+                                            <li><a href="services.html">Services</a></li>
+                                            <li><a href="pricing-tables.html">Pricing Tables</a></li>
+                                            <li><a href="elements.html">Page Elements</a></li>
+                                            <li><a href="#">Second Level Item</a>
+                                                <ul>
+                                                    <li><a href="#">Third Level Item</a></li>
+                                                    <li><a href="#">And another one</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <!-- /Sub Navigation -->
+                                    </li>
+                                    <li>
+                                        <a href="portfolio-3cols.html">Portfolio <span><i>|</i> Our Works</span></a>
+                                        <!-- Sub Navigation -->
+                                        <ul>
+                                            <li><a href="portfolio-2cols.html">Portfolio 2 cols</a></li>
+                                            <li><a href="portfolio-3cols.html">Portfolio 3 cols</a></li>
+                                            <li><a href="portfolio-4cols.html">Portfolio 4 cols</a></li>
+                                            <li><a href="portfolio-details.html">Single Project</a></li>
+                                        </ul>
+                                        <!-- /Sub Navigation -->
+                                    </li>
+                                    <li class="current-menu-item">
+                                        <a href="index.html">Blog <span><i>|</i> Our Updates</span></a>
+                                        <!-- Sub Navigation -->
+                                        <ul>
+                                            <li><a href="post.html">Single Post</a></li>
+                                        </ul>
+                                        <!-- /Sub Navigation -->
+                                    </li>
+                                    <li>
+                                        <a href="contacts.html">Contacts <span><i>|</i> Get in Touch</span></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <!-- END NAVIGATION -->
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /Main Header -->
+
+            </header>
+            <!-- END HEADER -->
+
+
+            <!-- BEGIN PAGE TITLE -->
+            <div id="page-title" class="page-title">
+                <div class="container clearfix">
+                    <div class="grid_12">
+                        <div class="page-title-holder clearfix">
+                            <h1>Blog</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE TITLE -->
+
+
+            <!-- BEGIN CONTENT WRAPPER -->
+            <div id="content-wrapper" class="content-wrapper">
+                <div class="container clearfix">
+                    <!-- Content -->
+                    <div id="content" class="grid_8">
+
+
+                        <!-- Post Gallery -->
+                        <article class="entry entry__gallery clearfix" th:each="post,postStat : ${list}">
+                            <!-- begin post image -->
+                            <div class="flexslider slide" th:if="${post.images}!=null">
+                                <ul class="slides">
+                                    <li th:each="image,imageStat : ${#strings.arraySplit(post.images,',')}"
+                                        th:if="${imageStat.index<3}">
+                                        <div class="box">
+                                            <img th:if="${#strings.contains(image,'http')}" th:src="${image}" alt=""/>
+                                            <img th:if="!${#strings.contains(image,'http')}" th:src="'/blog/'+${image}"
+                                                 alt=""/>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <!-- end post image -->
+                            <!-- begin post heading -->
+                            <header class="entry-header clearfix">
+                                <div class="format-icon">
+                                    <i class="icon-picture"></i>
+                                </div>
+                                <div class="entry-header-inner">
+                                    <h2 class="entry-title"><a th:href="'show/'+${post.postId}" th:text="${post.title}">图片滚动帖子</a></h2>
+                                    <p class="post-meta">
+                                        <span class="post-meta-cats"><i class="icon-tag"></i><a href="#"
+                                                                                                th:each="category : ${post.categories}"
+                                                                                                th:text="${category}+' / '">News</a>  </span>
+                                        <span class="post-meta-author"><a href="#"><i
+                                                class="icon-user"></i><span
+                                                th:text="${post.loginName}"></span> </a></span>
+                                        <span class="post-meta-comments"><a href="#"><i class="icon-comment"></i><span
+                                                th:text="${post.commentNum}"></span></a></span>
+                                    </p>
+                                </div>
+                            </header>
+                            <!-- end post heading -->
+
+                            <!-- begin post content -->
+                            <div class="entry-content">
+                                <a th:href="'/blog/show/'+${post.postId}">
+                                    <div th:text="${post.digest}"></div>
+                                </a>
+                            </div>
+                            <!-- end post content -->
+
+                            <!-- begin post footer -->
+                            <footer class="entry-footer">
+                            </footer>
+                            <!-- end post footer -->
+                        </article>
+                        <!-- /Post Gallery -->
+
+
+                        <!-- BEGIN PAGINATION -->
+                        <ul class="pagination">
+                            <li class="prev"><a href="#">&larr;</a></li>
+                            <li><span class="current">1</span></li>
+                            <li class="next"><a href="#">&rarr;</a></li>
+                        </ul>
+                        <!-- END PAGINATION -->
+
+                    </div>
+                    <!-- /Content -->
+                    <!-- Sidebar -->
+                    <aside id="sidebar" class="sidebar grid_4">
+
+                        <!-- Search Widget -->
+                        <div class="search-widget widget widget__sidebar">
+                            <div class="widget-content">
+                                <form action="/blog/searchByTitle" class="search-form clearfix">
+                                    <input type="text" name="title" id="search-t-i" placeholder="Search..."><input
+                                        type="submit" value="Search">
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Search Widget -->
+
+                        <!-- Popular Posts Widget -->
+                        <div class="popular-posts widget widget__sidebar">
+                            <h3 class="widget-title">Most Popular</h3>
+                            <div class="widget-content">
+                                <ul class="posts-list unstyled clearfix">
+                                    <li>
+                                        <figure class="featured-thumb">
+                                            <a href="#"><img src="/images/samples/img70x70.jpg" alt="" width="70"
+                                                             height="70"></a>
+                                        </figure>
+                                        <h4><a href="#">Bulgaria claims to find Europe's 'oldest town'</a></h4>
+                                        <p class="post-meta">Nov 3rd 2012 by <a href="#">Dan Fisher</a></p>
+                                    </li>
+                                    <li>
+                                        <figure class="featured-thumb">
+                                            <a href="#"><img src="/images/samples/img70x70.jpg" alt="" width="70"
+                                                             height="70"></a>
+                                        </figure>
+                                        <h4><a href="#">Where are all the space shuttles now?</a></h4>
+                                        <p class="post-meta">Nov 3rd 2012 by <a href="#">Dan Fisher</a></p>
+                                    </li>
+                                    <li>
+                                        <figure class="featured-thumb">
+                                            <a href="#"><img src="/images/samples/img70x70.jpg" alt="" width="70"
+                                                             height="70"></a>
+                                        </figure>
+                                        <h4><a href="#">Should you ever skip giving a tip?</a></h4>
+                                        <p class="post-meta">Nov 3rd 2012 by <a href="#">Dan Fisher</a></p>
+                                    </li>
+                                    <li>
+                                        <figure class="featured-thumb">
+                                            <a href="#"><img src="/images/samples/img70x70.jpg" alt="" width="70"
+                                                             height="70"></a>
+                                        </figure>
+                                        <h4><a href="#">Bulgaria claims to find Europe's 'oldest town'</a></h4>
+                                        <p class="post-meta">Nov 3rd 2012 by <a href="#">Dan Fisher</a></p>
+                                    </li>
+                                    <li>
+                                        <figure class="featured-thumb">
+                                            <a href="#"><img src="/images/samples/img70x70.jpg" alt="" width="70"
+                                                             height="70"></a>
+                                        </figure>
+                                        <h4><a href="#">New 'Star Wars' hints</a></h4>
+                                        <p class="post-meta">Nov 3rd 2012 by <a href="#">Dan Fisher</a></p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /Popular Posts Widget -->
+
+                        <!-- Ad Spots Widget -->
+                        <!-- /Ad Spots Widget -->
+
+                        <!-- Text Widget -->
+                        <div class="text-widget widget widget__sidebar">
+                            <h3 class="widget-title">Text Widget</h3>
+                            <div class="widget-content">
+                                Mauris at blandit erat. Nam vel tortor non quam scelerisque cursus. Praesent nunc vitae
+                                magna pellentesque auctor. Quisque id lectus.<br>
+                                Massa, eget eleifend tellus. Proin nec ante leo ssim nunc sit amet velit malesuada
+                                pharetra. Nulla neque sapien, sollicitudin non ornare quis, malesuada.
+                            </div>
+                        </div>
+                        <!-- /Text Widget -->
+
+
+                        <!-- Archives Widget -->
+                        <div class="archives-widget widget widget__sidebar">
+                            <h3 class="widget-title">Archives</h3>
+                            <div class="widget-content">
+                                <ul>
+                                    <li><a href="#">November 2012</a> <span>(10)</span></li>
+                                    <li><a href="#">October 2012</a> <span>(23)</span></li>
+                                    <li><a href="#">September 2012</a> <span>(8)</span></li>
+                                    <li><a href="#">August 2012</a> <span>(16)</span></li>
+                                    <li><a href="#">July 2012</a> <span>(4)</span></li>
+                                    <li><a href="#">June 2012</a> <span>(4)</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /Archives Widget -->
+
+                    </aside>
+                    <!-- /Sidebar -->
+                </div>
+            </div>
+            <!-- END CONTENT WRAPPER -->
+        </div>
+    </div>
+
+    <!-- BEGIN FOOTER -->
+    <footer id="footer" class="footer">
+
+        <div class="footer-holder">
+            <div class="footer-frame">
+                <!-- Footer Widgets -->
+                <div class="footer-widgets">
+                    <div class="container clearfix">
+
+                        <div class="grid_5">
+                            <!-- Text Widget -->
+                            <div class="text-widget widget widget__footer">
+                                <h3 class="widget-title">About This Theme</h3>
+                                <div class="widget-content">
+                                    <h5>Donec tincidunt, mi non ultrices varius, diam felis</h5>
+                                    <p>Elementum eros, at congue nisl massa ut metus. Vivamus accumsan malesuada orci,
+                                        vel euismod velit aliquet id.</p>
+
+                                    Sed aliquet tempus pellentesque. Curabitur varius suscipit orci, quis cursus quam
+                                    varius vel.Vivamus nec tortor tellus.
+                                </div>
+                            </div>
+                            <!-- /Text Widget -->
+                        </div>
+                        <div class="grid_3">
+                            <!-- Twitter Widget -->
+                            <!-- /Twitter Widget -->
+                        </div>
+                        <div class="grid_4">
+                            <!-- Flickr Widget -->
+                            <div class="flickr-widget widget widget__footer">
+                                <h3 class="widget-title">Flickr Feed</h3>
+                                <div class="widget-content">
+                                    <!-- Flickr images will appear here -->
+                                    <ul id="flickr" class="thumbs"></ul>
+                                </div>
+                            </div>
+                            <!-- /Flickr Widget -->
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /Footer Widgets -->
+
+                <!-- Copyright -->
+                <div class="copyright">
+                    <div class="container clearfix">
+                        <div class="grid_12">
+                            <div class="clearfix">
+                                <div class="copyright-primary">
+                                    &copy; 2013 Emotion <span class="separator">|</span> Responsive HTML Template
+                                </div>
+                                <div class="copyright-secondary">
+                                    More Templates <a href="http://www.cssmoban.com/" target="_blank"
+                                                      title="模板之家">模板之家</a> - Collect from <a
+                                        href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Copyright -->
+            </div>
+        </div>
+
+    </footer>
+    <!-- END FOOTER -->
+
+</div>
+<!-- END WRAPPER -->
+
+
+<!-- Javascript Files
+================================================== -->
+
+<!-- initialize jQuery Library -->
+<script th:src="@{/js/model_js/jquery.min.js}"></script>
+<script>window.jQuery || document.write('<script th:src="@{/js/model_js/jquery-1.9.1.min.js}"><\/script>')</script>
+<script th:src="@{/js/model_js/jquery-migrate-1.1.1.min.js}"></script>
+<!-- Modernizr -->
+<script th:src="@{/js/model_js/modernizr.custom.17475.js}"></script>
+<!-- easing plugin -->
+<script th:src="@{/js/model_js/jquery.easing.min.js}"></script>
+<!-- Prettyphoto -->
+<script th:src="@{/js/model_js/jquery.prettyPhoto.js}"></script>
+<!-- Superfish -->
+<script th:src="@{/js/model_js/jquery.mobilemenu.js}"></script>
+<!-- superfish -->
+<script th:src="@{/js/model_js/jquery.superfish-1.5.0.js}"></script>
+<!-- Twitter -->
+<!-- Flickr -->
+<!-- ElastiSlide Carousel -->
+<script th:src="@{/js/model_js/jquery.elastislide.js}"></script>
+<!-- jQuery REVOLUTION Slider  -->
+<script th:src="@{/js/model_js/jquery.themepunch.plugins.min.js}"></script>
+<script th:src="@{/js/model_js/jquery.themepunch.revolution.min.js}"></script>
+<!-- Isotope -->
+<script th:src="@{/js/model_js/jquery.isotope.min.js}"></script>
+<script th:src="@{/js/model_js/jquery.imagesloaded.min.js}"></script>
+<!-- Flexslider -->
+<script th:src="@{/js/model_js/jquery.flexslider.js}"></script>
+
+<!-- Custom -->
+<script th:src="@{/js/model_js/custom.js}"></script>
+
+</body>
+</html>

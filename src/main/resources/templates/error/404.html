@@ -5,9 +5,11 @@
     <title>页面丢失</title>
 </head>
 <body>
-<h1>404 Not Found</h1>
+<h1 th:if="${stateCode}==404">404 Not Found</h1>
 <label>statusCode:</label>
 <h1 th:text="${statusCode}"></h1>
+<h1 th:if="${statusCode}!=404">模板出错！</h1>
+
 <label>uri:</label>
 <h1 th:text="${url}"></h1>
 <label>url</label>

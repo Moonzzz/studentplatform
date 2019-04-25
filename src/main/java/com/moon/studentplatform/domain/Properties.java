@@ -10,9 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 public class Properties {
-    @Value("name")
-    private String name;
+    @Value("web.upload_path")
+    private String uploadPath;
 
-    @Value("title")
-    private String title;
 }

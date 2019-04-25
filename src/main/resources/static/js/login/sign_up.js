@@ -13,9 +13,6 @@ $(function () {
             $('#previewImg').attr('src', imgURL);
         }
     });
-    $('#username').blur(function () {
-
-    });
     $.validator.setDefaults({
         submitHandler: function () {
         }

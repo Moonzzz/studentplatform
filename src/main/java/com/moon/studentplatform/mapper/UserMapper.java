@@ -14,8 +14,9 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
     /**
-     * @param username
-     * @return
+     * 通过username查询User
+     * @param username username
+     * @return User
      */
     User findByUsername(@Param("username") String username);
 

@@ -1,0 +1,85 @@
+/* Comments
+-------------------------------------------------- */
+.comments-wrapper {
+    padding-bottom:15px;
+}
+.comment-body{
+    text-indent: 10px;
+}
+.commentlist {
+    padding:0;
+    margin:0;
+}
+.commentlist li {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+.commentlist li .comment-wrapper {
+    position:relative;
+    padding:0 20px 17px 80px;
+    margin-bottom:34px;
+    border-bottom: 1px dotted #c9c8c5;
+}
+
+/* Comment Author */
+.commentlist li .gravatar {
+    display:block;
+    position:absolute;
+    left:0;
+    top:0;
+}
+.commentlist li .gravatar img {
+    float:left;
+    border: 1px solid #e8e7e2;
+    border-radius: 5px;
+    -webkit-transition: all 0.1s ease-out;
+    -moz-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out;
+}
+.commentlist li .gravatar img:hover {
+    border-color: #6E9B76;
+}
+.commentlist li .comment-author {
+    margin: 10px;
+    font-size:14px;
+    color: #282828;
+    font-family: 'Oswald', sans-serif;
+}
+.commentlist li .comment-meta {
+    color:#999;
+    margin: 5px 5px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-style: italic;
+}
+.commentlist li .comment-reply {
+    text-align: right;
+    padding-top: 5px;
+}
+.commentlist li .comment-reply a {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    color: #6e9b76;
+    font-style: italic;
+}
+.commentlist li .comment-reply a:hover {
+    color: #eb593c;
+}
+.commentlist .children {
+    margin:0;
+    padding:0 0 0 80px;
+}
+
+
+/* Comment Form */
+.comment-form {
+
+}
+.comment-form input[type="text"],
+.comment-form input[type="email"] {
+    width: 220px;
+}
+.comment-form textarea {
+    width: 620px;
+    height: 186px;
+}
+/*/ Comments */
