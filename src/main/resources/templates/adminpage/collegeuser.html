@@ -103,13 +103,14 @@
                     dataType: "json",
                     data: {
                         "id": id,
-                        "pass": pass
+                        "pass": pass,
+                        "type":'userPass'
                     },
                     success: function (data) {
                         layer.msg("操作成功", {icon: 6});
                     },
                     error: function (data) {
-                        layer.tips("操作失败");
+                        layer.msg("操作失败！", {icon: 7});
                     }
                 });
         });
@@ -128,9 +129,13 @@
                         data: {"id": data.id},
                         dataType: "json",
                         success: function (data) {
-                            obj.del();
-                            layer.close(index);
-                            layer.msg("删除成功", {icon: 6});
+                            if(data==false){
+                                layer.msg("删除失败", {icon: 5});
+                            }else if(data==true){
+                                obj.del();
+                                layer.close(index);
+                                layer.msg("删除成功", {icon: 6});
+                            }
                         },
                         error: function (data) {
                             layer.msg("删除失败", {icon: 5});
@@ -181,9 +186,13 @@
                             },
                             dataType: "json",
                             success: function (data) {
-                                layer.close(index);
-                                layer.msg("删除成功", {icon: 6});
-                                location.reload();
+                                if(data==false){
+                                    layer.msg("删除失败", {icon: 5});
+                                }else if(data==true){
+                                    layer.close(index);
+                                    layer.msg("删除成功", {icon: 6});
+                                    location.reload();
+                                }
                             },
                             error: function (data) {
                                 layer.msg("删除失败", {icon: 5});

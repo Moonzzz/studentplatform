@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>社团组织</title>
+</head>
+<link rel="stylesheet" th:href="@{css/clubpage.css}">
+<link rel="stylesheet" th:href="@{/lib/layui/css/layui.css}">
+<script type="text/javascript" th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/xadmin.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/clubpage.js}" charset="utf-8"></script>
+<body>
+<div style="margin-left: 215px;" class="library-main__list">
+    <ul>
+        <li th:each="item:${attractions}" class="library-main__item">
+            <!-- <a onclick="detail()" href="javascript:" title="#" target="_blank"
+                class="picture">-->
+            <a th:href="@{'https://baike.baidu.com/item/'+${item.name}}" target="_blank"
+               class="picture">
+                <img th:src="@{${#httpServletRequest.getContextPath()} + 'arround_files/'+${item.photos}}" alt="#"
+                     title="#">
+            </a>
+            <div class="info" style="background-color: white;box-shadow: 5px 2px 6px slategray;">
+                <ul style="font-size: 12px">
+                    <li>
+                        名称：
+                        <td th:text="${item.name}"></td>
+                    </li>
+                    <li>
+                        地点：
+                        <td th:text="${item.position}"></td>
+                    </li>
+                    <li id = "icoFontlist">
+                        简介：
+                        <td th:text="${item.description}"></td>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+<script>
+    $(function () {
+        $("#description").on("mouseenter",function() {
+            if (this.offsetWidth < this.scrollWidth) {
+                var that = this;
+                var text = $(this).text();
+                layer.tips(text, that,{
+                    tips: 1,
+                    time: 2000
+                });
+            }
+        });
+    })
+</script>
+</body>
+</html>

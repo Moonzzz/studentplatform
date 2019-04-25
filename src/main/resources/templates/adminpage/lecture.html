@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" th:href="@{/lib/layui/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/css/clubpage.css}">
+    <script type="text/javascript" th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/xadmin.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/js/clubpage.js}" charset="utf-8"></script>
+</head>
+<body>
+<div class="top_area" style="width: 936px;height: 80px">
+    <ul>
+        <li style="float: left;font-size: 17px;margin-top: 6px">
+            <select name="type" id="type" lay-verify="" style="height: 33px">
+                <option value="-1">讲座分类选择</option>
+            </select>
+        </li>
+        <li style="float:left;margin-left: 20px">
+            <input style="color:black;border-radius:12px;margin-top: 3px;" type="text" name="filmname"
+                   placeholder="请输入关键字" autocomplete="on" class="layui-input"
+                   id="word">
+        </li>
+    </ul>
+</div>
+<table class="layui-hide" lay-filter="test" id="film"></table>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="search">按条件搜索</button>
+        <button class="layui-btn layui-btn-sm" lay-event="bulkdelete">批量删除</button>
+        <button class="layui-btn layui-btn-sm" lay-event="addLecture">新增讲座</button>
+    </div>
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="show">查看详情</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script>
+    layui.use(['table', 'form', 'laydate'], function () {
+        var table = layui.table
+            , form = layui.form
+            , laydate = layui.laydate;
+        table.render({
+            elem: '#film'
+            , url: '/lectureList'
+            , cellMinWidth: 80
+            , toolbar: '#toolbarDemo'
+            , cols: [ [
+                {
+                    type: 'checkbox',
+                    name: 'chk'
+                },{
+                    field: 'title',
+                    //width : 150,
+                    title: '讲座名称',
+                    align: 'center',
+                    sort: true
+                }, {
+                    field: 'dateStart',
+                    // width : 250,
+                    align: 'center',
+                    title: '学分认定开始时间'
+                }, {
+                    field: 'dateEnd',
+                    title: '学分认定结束时间',
+                    align: 'center'
+                    // width: 200
+                }, {
+                    fixed: 'right',
+                    title: '操作',
+                    toolbar: '#barDemo',
+                    width: 200
+                }] ]
+            , page: true
+            , limits: [10, 20, 30, 40]  //每页条数的选择项，默认：[10,20,30,40,50,60,70,80,90]。
+            , limit: 10
+            , done: function () {
+                $(".layui-table-cell").css({
+                    "height": "auto"
+                });
+            }
+        });
+        //日期框
+        laydate.render({
+            elem: '#datePublished' //指定元素
+        });
+        //监听工具条(删除，修改)
+        table.on('tool(test)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'show') {
+                var data = obj.data;
+                var lectureContext = data.context;
+                //配置一个透明的询问框
+                layer.msg(lectureContext+"&nbsp;&nbsp;&nbsp;时间："+data.dateStart, {
+                    time: 20000, //20s后自动关闭
+                    btn: ['OK']
+                });
+            }else if(obj.event==='del'){
+                layer.confirm('真的删除行么', function (index) {
+                    $.ajax({
+                        url: "/deleteLectures?type=one",
+                        type: "POST",
+                        data: {"id": data.id},
+                        dataType: "json",
+                        success: function (data) {
+                            if(data==false){
+                                layer.msg("删除失败", {icon: 5});
+                            }else if(data==true){
+                                obj.del();
+                                layer.close(index);
+                                layer.msg("删除成功", {icon: 6});
+                            }
+                        },
+                        error: function (data) {
+                            layer.msg("删除失败", {icon: 5});
+                        }
+                    });
+                });
+            }
+        });
+        //头工具栏事件
+        table.on('toolbar(test)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'search'://搜索
+                    search(obj);
+                    break;
+                case 'bulkdelete'://批量删除
+                    bulkdelete();
+                    break;
+                case'addLecture':
+                    openModak();
+                    break;
+            };
+
+            function openModak() {
+                $("[name='testname']").val("xxxxxxxxxxxxxxx");//向模态框中赋值
+                layui.use(['layer'], function () {
+                    var layer = layui.layer, $ = layui.$;
+                    layer.open({
+                        type: 1,//类型
+                        area: ['420px', '490px'],//定义宽和高
+                        title: '新增讲座',//题目
+                        shadeClose: false,//点击遮罩层关闭
+                        content: $('#motaikunag')//打开的内容
+                    });
+                })
+            }
+
+            function search() {
+                var words = $("#word").val();
+                var type = $("#type").val();
+                var urlstr='/searchLecture?keyword='+words+'&type='+type;
+                //所获得的 tableIns 即为当前容器的实例
+                table.render({
+                    elem: '#film'
+                    , url: urlstr
+                    , cellMinWidth: 80
+                    , toolbar: '#toolbarDemo'
+                    , cols: [ [
+                        {
+                            field: 'title',
+                            title: '讲座名称',
+                            align: 'center',
+                            sort: true
+                        }, {
+                            field: 'dateStart',
+                            align: 'center',
+                            title: '学分认定开始时间'
+                        }, {
+                            field: 'dateEnd',
+                            title: '学分认定结束时间',
+                            align: 'center'
+                        }, {
+                            fixed: 'right',
+                            title: '操作',
+                            toolbar: '#barDemo',
+                            width: 200
+                        }] ]
+                    , page: true
+                    , limits: [100, 200, 300, 400]  //每页条数的选择项，默认：[10,20,30,40,50,60,70,80,90]。
+                    , limit: 100
+                    , done: function () {
+                        $(".layui-table-cell").css({
+                            "height": "auto"
+                        });
+                    }
+                });
+            }
+
+            //批量删除
+            function bulkdelete() {
+                var data = checkStatus.data;
+                var ids = new Array();//声明数组
+                for (var i = 0; i < data.length; i++) {
+                    ids[i] = data[i].id;
+                }
+                layer.confirm("真的删除这些数据吗？", function (index) {
+                    if (ids.length != 0) {
+                        $.ajax({
+                            url: "/deleteLectures?type=beth",
+                            type: "POST",
+                            traditional: true,//传数组一定要加的
+                            data: {
+                                "id": ids
+                            },
+                            dataType: "json",
+                            success: function (data) {
+                                if(data==false){
+                                    layer.msg("删除失败", {icon: 5});
+                                }else if(data==true){
+                                    layer.close(index);
+                                    layer.msg("删除成功", {icon: 6});
+                                    location.reload();
+                                }
+                            },
+                            error: function (data) {
+                                layer.msg("删除失败", {icon: 5});
+                            }
+                        });
+                    } else {
+                        layer.msg("请选择要删除的数据", {icon: 5},1000);
+                    }
+                });
+            }
+        });
+    });
+
+
+    /*异步绑定部门种类*/
+    $(function () {
+        $.ajax({
+            url: "/allTypes",
+            type: "POST",
+            traditional: true,//传数组一定要加的
+            data: {},
+            dataType: "json",
+            success: function (data) {
+                var datas = eval(data);
+                for (var i = 0; i < datas.length; i++) {
+                    $("#type").append("<option value='"+datas[i].id+"'>"+datas[i].name+"</option>");
+                    $("#typeId").append("<option value='"+datas[i].id+"'>"+datas[i].name+"</option>");
+
+                }
+            },
+            error: function (data) {
+                layer.msg("获取部门类型失败", {icon: 5});
+            }
+        });
+    });
+</script>
+
+<!--模仿bootstrap的模态框-->
+<div id="motaikunag" style="display: none;">
+   <div style="width: 80%">
+    <!--<form action="/addLecture" method="post">-->
+        <div class="layui-form-item">
+            <label class="layui-form-label">标题</label>
+            <div class="layui-input-block">
+                <input id="title" type="text" name="title" required autocomplete="off" placeholder="请输入标题"
+                       class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">部门</label>
+            <div class="layui-input-block">
+                <select name="typeId" id="typeId" lay-verify="" style="height: 33px">
+                    <option value="-1">讲座分类选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">地址</label>
+            <div class="layui-input-block">
+                <input type="text" id="context" name="context" required autocomplete="off" placeholder="请输入地址"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">开始时间</label>
+            <div class="layui-input-block">
+                <input type="date" id="dateStart" name="dateStart" class="layui-input"
+                       required>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">结束时间</label>
+            <div class="layui-input-block">
+                <input type="date" id="dateEnd" name="dateEnd" class="layui-input"
+                       required>
+            </div>
+        </div>
+        <div style="margin-top: 20px" class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="button" onclick="addLecture()" class="layui-btn">添加</button>
+            </div>
+        </div>
+    <!--</form>-->
+   </div>
+</div>
+
+<script>
+    function addLecture() {
+        var title=$("#title").val();
+        var typeId=$("#typeId").val();
+        var context=$("#context").val();
+        var dateStart=$("#dateStart").val();
+        var dateEnd=$("#dateEnd").val();
+
+        if(title==""||typeId=="-1"||context==""||dateStart==""||dateEnd==""){
+            layer.msg("请将信息补全", {icon: 5});
+        }else{
+            $.ajax({
+                url: "/addLecture",
+                type: "POST",
+                traditional: true,//传数组一定要加的
+                data: {
+                    "title": title,
+                    "typeId": typeId,
+                    "context": context,
+                    "dateStart": dateStart,
+                    "dateEnd":dateEnd
+                },
+                dataType: "text",
+                success: function (data) {
+                    if(data=='false'){
+                        layer.msg("新增讲座失败", {icon: 5});
+                    }else if(data=='true'){
+                        layer.msg("新增讲座成功", {icon: 6});
+                    }
+                },
+                error: function (data) {
+                    layer.msg("操作失败", {icon: 5});
+                }
+            });
+        }
+    }
+</script>
+
+
+</body>
+</html>

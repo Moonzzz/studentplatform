@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>社团主页</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <!-- Mobile Specific Metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+    <!-- CSS
+    ================================================== -->
+    <!-- Normalize default styles -->
+    <link rel="stylesheet" th:href="@{/mcss/normalize.css}">
+    <!-- Skeleton grid system -->
+    <link rel="stylesheet" th:href="@{/mcss/skeleton.css}">
+    <!-- Base Template Styles-->
+    <link rel="stylesheet" th:href="@{/mcss/base.css}">
+    <!-- Template Styles-->
+    <link rel="stylesheet" th:href="@{/mcss/style.css}">
+    <!-- Superfish -->
+    <link rel="stylesheet" th:href="@{/mcss/superfish.css}">
+    <!-- Prettyphoto -->
+    <link rel="stylesheet" th:href="@{/mcss/prettyPhoto.css}">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" th:href="@{/mcss/font-awesome.min.css}">
+    <!-- REVOLUTION BANNER CSS SETTINGS -->
+    <link rel="stylesheet" th:href="@{/mcss/settings.css}">
+    <!-- Flexslider -->
+    <link rel="stylesheet" th:href="@{/mcss/flexslider.css}">
+    <!-- Layout and Media queries-->
+    <link rel="stylesheet" th:href="@{/mcss/media-queries.css}">
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" th:href="@{/mcss/ie/ie8.css}">
+    <![endif]-->
+    <link rel="stylesheet" th:href="@{/lib/layui/css/layui.css}">
+
+    <link rel="stylesheet" th:href="@{/css/clubpage.css}">
+    <!--[if lt IE 9]>
+<!--
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+-->
+
+
+</head>
+<body>
+<div style="margin-left: 195px;width: 950px" class="library-main__list">
+
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>所有信息</legend>
+    </fieldset>
+    <div class="latest-posts-holder">
+        <!--社团通知循环开始-->
+        <article th:each="item:${infos}" class="post clearfix">
+            <figure class="featured-thumb">
+                <a th:title="${item.title}" target="_blank"
+                   th:href="@{'/toActDetailPage?type=foreGround&id='+${item.id}}"><img style="height: 155px" th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/activity_imgs/'+${item.image}}" alt=""></a>
+            </figure>
+            <div class="post-body">
+                <header class="post-header">
+                    <h3><a target="_blank" th:href="@{'/toActDetailPage?type=foreGround&id='+${item.id}}">
+                        <td th:text="${item.title}"></td>
+                    </a></h3>
+                    <p class="post-meta">
+                                                    <span class="post-meta-cats"><i
+                                                            class="layui-icon layui-icon-friends"></i><td
+                                                            th:text="${item.author}"></td></span>
+                        <span class="post-meta-author"><i
+                                class="layui-icon layui-icon-log"></i><td
+                                th:text="${item.date}"></td></span>
+                    </p>
+                </header>
+                <div class="post-excerpt">
+                    <p class="over_skip">
+                    <td th:text="${item.description}"></td>
+                    </p>
+                    <a target="_blank" th:href="@{'/toActDetailPage?type=foreGround&id='+${item.id}}"
+                       class="btn">查 看 详 情</a>
+                </div>
+            </div>
+        </article>
+        <!--社团通知循环结束-->
+    </div>
+</div>
+</body>
+<!-- Javascript Files
+================================================== -->
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- initialize jQuery Library -->
+<script type="text/javascript" th:src="@{/mjs/jquery.min.js}" charset="utf-8"></script>
+
+<script>window.jQuery || document.write('<script src="mjs/jquery-1.9.1.min.js"><\/script>')</script>
+
+<script type="text/javascript" th:src="@{/mjs/jquery-migrate-1.1.1.min.js}" charset="utf-8"></script>
+<!-- Modernizr -->
+<script type="text/javascript" th:src="@{/mjs/modernizr.custom.17475.js}" charset="utf-8"></script>
+<!-- easing plugin -->
+<script type="text/javascript" th:src="@{/mjs/jquery.easing.min.js}" charset="utf-8"></script>
+<!-- Prettyphoto -->
+<script type="text/javascript" th:src="@{/mjs/jquery.prettyPhoto.js}" charset="utf-8"></script>
+<!-- Superfish -->
+<script type="text/javascript" th:src="@{/mjs/jquery.mobilemenu.js}" charset="utf-8"></script>
+<!-- superfish -->
+<script type="text/javascript" th:src="@{/mjs/jquery.superfish-1.5.0.js}" charset="utf-8"></script>
+<!-- Twitter -->
+<script type="text/javascript" th:src="@{/mjs/jquery.twitter.js}" charset="utf-8"></script>
+<!-- Flickr -->
+<script type="text/javascript" th:src="@{/mjs/jflickrfeed.js}" charset="utf-8"></script>
+<!-- ElastiSlide Carousel -->
+<script type="text/javascript" th:src="@{/mjs/jquery.elastislide.js}" charset="utf-8"></script>
+
+<!-- jQuery REVOLUTION Slider  -->
+<script type="text/javascript" th:src="@{/mjs/jquery.themepunch.plugins.min.js}" charset="utf-8"></script>
+
+
+<script type="text/javascript" th:src="@{/mjs/jquery.themepunch.revolution.min.js}" charset="utf-8"></script>
+
+<!-- Isotope -->
+<script type="text/javascript" th:src="@{/mjs/jquery.isotope.min.js}" charset="utf-8"></script>
+
+<script type="text/javascript" th:src="@{/mjs/jquery.imagesloaded.min.js}" charset="utf-8"></script>
+
+<!-- Flexslider -->
+<script type="text/javascript" th:src="@{/mjs/jquery.flexslider.js}" charset="utf-8"></script>
+
+
+<!-- Custom -->
+<script type="text/javascript" th:src="@{/mjs/custom.js}" charset="utf-8"></script>
+
+<script type="text/javascript" th:src="@{/js/clubpage.js}" charset="utf-8"></script>
+
+<script type="text/javascript" th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+
+<script type="text/javascript" th:src="@{/js/xadmin.js}" charset="utf-8"></script>
+
+</html>

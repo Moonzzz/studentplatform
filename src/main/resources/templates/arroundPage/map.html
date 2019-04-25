@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+    <script src="https://cache.amap.com/lbs/static/es5.min.js"></script>
+    <script src="https://webapi.amap.com/maps?v=1.4.13&key=8cc355b1d46538c64a75d9a0b57ea744&&plugin=AMap.Scale,AMap.OverView,AMap.ToolBar"></script>
+    <title>地图显示</title>
+    <style>
+        html,
+        body,
+        #container {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<!-- 加载地图JSAPI脚本 -->
+<script src="https://webapi.amap.com/maps?v=1.4.13&key=8cc355b1d46538c64a75d9a0b57ea744&&plugin=AMap.Scale,AMap.OverView,AMap.ToolBar"></script>
+<script>
+    var marker, map = new AMap.Map("container", {
+        resizeEnable: true,
+        center: [118.35680, 31.28300],
+        zoom: 17
+    });
+    marker = new AMap.Marker({
+        icon: "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png",
+        position: [118.35680, 31.28300],
+        offset: new AMap.Pixel(-13, -30)
+    });
+    marker.setMap(map);
+</script>
+</body>
+</html>

@@ -6,13 +6,13 @@
     ================================================== -->
     <meta charset="utf-8">
     <title>平台首页</title>
-    <meta title="description" content="">
-    <meta title="author" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
     <!-- Mobile Specific Metas
     ================================================== -->
-    <meta title="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
     <!-- CSS
@@ -113,35 +113,24 @@
                             <nav class="primary">
                                 <ul class="sf-menu">
                                     <li class="current-menu-item">
-                                        <a href="javascript:;" onclick="mainFrame()">主页
-                                            <span><i>|</i>go index</span></a>
-                                        <ul>
-                                            <li class="current-menu-item"><a href="old_index.html">Revolution Slider</a>
-                                            </li>
-                                            <li><a href="index-flex-fade.html">Flexslider Fade</a></li>
-                                            <li><a href="index-flex-slide.html">Flexslider Slide</a></li>
-                                        </ul>
+                                        <!-- onclick="mainFrame()"-->
+                                        <a href="javascript:" onclick="mainFrame()">主页
+                                            <span><i>|</i></span></a>
                                     </li>
                                     <li>
-                                        <a href="#">信息通知 <span><i>|</i> Why Choose Us</span></a>
+                                        <a href="#">信息通知 <span><i>|</i></span></a>
                                         <!-- Sub Navigation -->
                                         <ul>
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="columns.html">Columns</a></li>
-                                            <li><a href="services.html">Services</a></li>
-                                            <li><a href="pricing-tables.html">Pricing Tables</a></li>
-                                            <li><a href="elements.html">Page Elements</a></li>
-                                            <li><a href="#">Second Level Item</a>
-                                                <ul>
-                                                    <li><a href="#">Third Level Item</a></li>
-                                                    <li><a href="#">And another one</a></li>
-                                                </ul>
-                                            </li>
+                                            <li><a href="javascript:" onclick="allInfoDynamic()">信息动态</a></li>
+                                            <li><a href="javascript:" onclick="collegeIntro()">学院信息</a></li>
+                                            <li><a target="_blank" href="/officialPage?page=lectures">学术与行业讲座</a></li>
+                                            <li><a href="javascript:" onclick="allContests()">学科竞赛</a></li>
+                                            <li><a href="javascript:" onclick="allCompetitions()">考试考证</a></li>
                                         </ul>
                                         <!-- /Sub Navigation -->
                                     </li>
                                     <li>
-                                        <a href="#">社团组织 <span><i>|</i> Our Works</span></a>
+                                        <a href="#">社团组织 <span><i>|</i></span></a>
                                         <!-- Sub Navigation -->
                                         <ul>
                                             <li><a href="javascript:;" onclick="allSociety()">全部</a></li>
@@ -153,15 +142,20 @@
                                         <!-- /Sub Navigation -->
                                     </li>
                                     <li>
-                                        <a href="#">失物招领 <span><i>|</i> Our Updates</span></a>
+                                        <a href="#">失物招领 <span><i>|</i></span></a>
                                         <!-- Sub Navigation -->
                                         <ul>
-                                            <li><a href="post.html">Single Post</a></li>
+                                            <li><a href="javascript:;" onclick="allFound()">全部</a></li>
                                         </ul>
                                         <!-- /Sub Navigation -->
                                     </li>
                                     <li>
-                                        <a href="#">生活服务 <span><i>|</i> Get in Touch</span></a>
+                                        <a href="#">生活服务 <span><i>|</i></span></a>
+                                        <ul>
+                                            <li><a href="javascript:;" onclick="allAttractions()">景点</a></li>
+                                            <li><a href="javascript:;" onclick="allFoods()">美食</a></li>
+                                            <li><a target="_blank" href="/Map">地图</a></li>
+                                        </ul>
                                     </li>
                                 </ul>
                             </nav>
@@ -171,19 +165,22 @@
                     </div>
                 </div>
                 <!-- /Main Header -->
+
             </header>
             <!-- END HEADER -->
-            <div>
-                <h1 style="margin-left: 560px;color: black">
-                    <td th:text="${activity.title}"></td>
-                </h1>
-                </br>
-                <div  style="margin-left: 360px" class="latest-posts-holder">
+            <div id="mainFrame">
+                <div style="margin-left: 360px" class="latest-posts-holder">
                     <article class="post clearfix">
+                        <div style="margin-left: 150px;float: left">
+                            <h1 style="color: black">
+                                <td th:text="${activity.title}"></td>
+                            </h1>
+                        </div>
+                        </br></br></br>
                         <figure style="height: 255px;width: 600px" class="featured-thumb">
                             <a th:title="${activity.title}"><img style="height: 255px;width: 600px"
-                                             th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/activity_imgs/'+${activity.image}}"
-                                             alt=""></a>
+                                                                 th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/activity_imgs/'+${activity.image}}"
+                                                                 alt=""></a>
                         </figure>
                     </article>
                 </div>
@@ -192,24 +189,29 @@
                         <div class="clearfix">
                             <!--正文内容开始-->
                             <p style="font-size: 20px">
-                                <td th:text="${activity.text}"></td>
+                            <td th:text="${activity.text}"></td>
                             </p>
                             <!--正文内容结束-->
                             <div style="float: right;font-size: 20px">
                                 </br>
-                                作者：<td th:text="${activity.author}" />
+                                作者：
+                                <td th:text="${activity.author}"/>
                                 </br>
-                                时间：<td th:text="${activity.date}" />
+                                时间：
+                                <td th:text="${activity.date}"/>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!--内嵌网页容器-->
+            <div id="innerView">
+
+            </div>
         </div>
     </div>
 </div>
 <!-- END WRAPPER -->
-
 
 <!-- Javascript Files
 ================================================== -->
@@ -255,7 +257,6 @@
 
 <!-- Custom -->
 <script type="text/javascript" th:src="@{/mjs/custom.js}" charset="utf-8"></script>
-
 
 <script type="text/javascript" th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
 

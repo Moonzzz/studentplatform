@@ -5,14 +5,14 @@
     <!-- Basic Page Needs
     ================================================== -->
     <meta charset="utf-8">
-    <title>社团主页</title>
-    <meta title="description" content="">
-    <meta title="author" content="">
+    <title>平台首页</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
     <!-- Mobile Specific Metas
     ================================================== -->
-    <meta title="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
     <!-- CSS
@@ -44,11 +44,15 @@
 
     <link rel="stylesheet" th:href="@{/css/clubpage.css}">
     <!--[if lt IE 9]>
-<!--
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
--->
+    <![endif]-->
 
-
+    <style>
+        a:hover {
+            text-decoration: none;
+            color: orange;
+        }
+    </style>
 </head>
 <body>
 
@@ -109,35 +113,24 @@
                             <nav class="primary">
                                 <ul class="sf-menu">
                                     <li class="current-menu-item">
-                                        <a href="javascript:;" onclick="mainFrame()">主页
-                                            <span><i>|</i>go index</span></a>
-                                        <ul>
-                                            <li class="current-menu-item"><a href="old_index.html">Revolution Slider</a>
-                                            </li>
-                                            <li><a href="index-flex-fade.html">Flexslider Fade</a></li>
-                                            <li><a href="index-flex-slide.html">Flexslider Slide</a></li>
-                                        </ul>
+                                        <!-- onclick="mainFrame()"-->
+                                        <a href="javascript:" onclick="mainFrame()">主页
+                                            <span><i>|</i></span></a>
                                     </li>
                                     <li>
-                                        <a href="#">信息通知 <span><i>|</i> Why Choose Us</span></a>
+                                        <a href="#">信息通知 <span><i>|</i></span></a>
                                         <!-- Sub Navigation -->
                                         <ul>
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="columns.html">Columns</a></li>
-                                            <li><a href="services.html">Services</a></li>
-                                            <li><a href="pricing-tables.html">Pricing Tables</a></li>
-                                            <li><a href="elements.html">Page Elements</a></li>
-                                            <li><a href="#">Second Level Item</a>
-                                                <ul>
-                                                    <li><a href="#">Third Level Item</a></li>
-                                                    <li><a href="#">And another one</a></li>
-                                                </ul>
-                                            </li>
+                                            <li><a href="javascript:" onclick="allInfoDynamic()">信息动态</a></li>
+                                            <li><a href="javascript:" onclick="collegeIntro()">学院信息</a></li>
+                                            <li><a target="_blank" href="/officialPage?page=lectures">学术与行业讲座</a></li>
+                                            <li><a href="javascript:" onclick="allContests()">学科竞赛</a></li>
+                                            <li><a href="javascript:" onclick="allCompetitions()">考试考证</a></li>
                                         </ul>
                                         <!-- /Sub Navigation -->
                                     </li>
                                     <li>
-                                        <a href="#">社团组织<span><i>|</i> Our Works</span></a>
+                                        <a href="#">社团组织 <span><i>|</i></span></a>
                                         <!-- Sub Navigation -->
                                         <ul>
                                             <li><a href="javascript:;" onclick="allSociety()">全部</a></li>
@@ -149,15 +142,20 @@
                                         <!-- /Sub Navigation -->
                                     </li>
                                     <li>
-                                        <a href="#">失物招领 <span><i>|</i> Our Updates</span></a>
+                                        <a href="#">失物招领 <span><i>|</i></span></a>
                                         <!-- Sub Navigation -->
                                         <ul>
-                                            <li><a href="post.html">Single Post</a></li>
+                                            <li><a href="javascript:;" onclick="allFound()">全部</a></li>
                                         </ul>
                                         <!-- /Sub Navigation -->
                                     </li>
                                     <li>
-                                        <a href="#">生活服务 <span><i>|</i> Get in Touch</span></a>
+                                        <a href="#">生活服务 <span><i>|</i></span></a>
+                                        <ul>
+                                            <li><a href="javascript:;" onclick="allAttractions()">景点</a></li>
+                                            <li><a href="javascript:;" onclick="allFoods()">美食</a></li>
+                                            <li><a target="_blank" href="/Map">地图</a></li>
+                                        </ul>
                                     </li>
                                 </ul>
                             </nav>
@@ -170,7 +168,6 @@
 
             </header>
             <!-- END HEADER -->
-
 
             <div id="mainFrame">
 
@@ -198,7 +195,7 @@
                                                  data-captionhidden="on"
                                                  data-endeasing="easeOutExpo"
                                                  data-easing="easeOutExpo">
-                                               Activity!
+                                                <td th:text="${cDetail.name}"></td>
                                             </div>
                                             <div class="tp-caption sfr original_high"
                                                  data-x="142"
@@ -208,7 +205,10 @@
                                                  data-captionhidden="on"
                                                  data-endeasing="easeOutExpo"
                                                  data-easing="easeOutExpo">
-                                                <a th:title="${item.title}" target="_blank" th:href="@{'/toActDetailPage?id='+${item.id}}"> <td th:text="${item.title}"></td></a>
+                                                <a th:title="${item.title}" target="_blank"
+                                                   th:href="@{'/toActDetailPage?type=foreGround&id='+${item.id}}">
+                                                    <td th:text="${item.title}"></td>
+                                                </a>
                                             </div>
                                         </li>
                                         <!--轮播图片结束-->
@@ -231,13 +231,14 @@
                                     <!--社团通知循环开始-->
                                     <article th:each="item:${clubActs}" class="post clearfix">
                                         <figure class="featured-thumb">
-                                            <a th:title="${item.title}" target="_blank" th:href="@{'/toActDetailPage?id='+${item.id}}"><img style="height: 155px"
-                                                             th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/activity_imgs/'+${item.image}}"
-                                                             alt=""></a>
+                                            <a th:title="${item.title}" target="_blank"
+                                               th:href="@{'/toActDetailPage?type=foreGround&id='+${item.id}}"><img style="height: 155px"
+                                                                                                   th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/activity_imgs/'+${item.image}}"
+                                                                                                   alt=""></a>
                                         </figure>
                                         <div class="post-body">
                                             <header class="post-header">
-                                                <h3><a  target="_blank" th:href="@{'/toActDetailPage?id='+${item.id}}">
+                                                <h3><a target="_blank" th:href="@{'/toActDetailPage?type=foreGround&id='+${item.id}}">
                                                     <td th:text="${item.title}"></td>
                                                 </a></h3>
                                                 <p class="post-meta">
@@ -253,7 +254,8 @@
                                                 <p class="over_skip">
                                                 <td th:text="${item.description}"></td>
                                                 </p>
-                                                <a target="_blank" th:href="@{'/toActDetailPage?id='+${item.id}}" class="btn">查 看 详 情</a>
+                                                <a target="_blank" th:href="@{'/toActDetailPage?type=foreGround&id='+${item.id}}"
+                                                   class="btn">查 看 详 情</a>
                                             </div>
                                         </div>
                                     </article>
@@ -300,10 +302,11 @@
                                             </li>
                                             <li>
                                                 <h1><a href="javascript:;"
-                                                    onclick="x_admin_show('加 入 我 们','/toJoinClubPage',670,590)">加 入 我 们</a></h1>
+                                                       onclick="joinClub()">加 入 我 们</a></h1>
                                             </li>
                                             <li>
-                                                <h1><a href="#">相 关 人 员</a></h1>
+                                                <h1><a target="_blank" href="javascript:;" onclick="EditArticle()">发 表 文
+                                                    章</a></h1>
                                             </li>
                                         </ul>
                                     </div>
@@ -407,15 +410,63 @@
 
 <script>
 
-    function openModak(){
+    function joinClub() {
+        $.ajax({
+            url: "/isUserPass",
+            type: "GET",
+            traditional: true,//传数组一定要加的
+            async: true,
+            data: {type: 'isPassJoin'},
+            dataType: "json",
+            success: function (data) {
+                //layer.msg("可以申请", {icon: 6});
+                if (data == '3') {
+                    layer.msg("对不起，您已经是该组织成员，不能提交申请！", {icon: 5});
+                }
+                else if (data == '1') {
+                    x_admin_show('加 入 我 们', '/toJoinClubPage', 670, 590);
+                } else if (data = '2') {
+                    layer.msg("对不起，您已经提交加入申请，不能重复提交！", {icon: 5});
+                }
+            },
+            error: function (data) {
+                layer.msg("对不起,请先登录！", {icon: 5});
+            }
+        });
+    }
+
+    function EditArticle() {
+        /*href="/toEditArticlePage"*/
+        $.ajax({
+            url: "/isUserPass",
+            type: "GET",
+            traditional: true,//传数组一定要加的
+            async: true,
+            data: {type: 'isPassEdit'},
+            dataType: "json",
+            success: function (data) {
+                //layer.msg("可以发表文章", {icon: 6});
+                if (data == false) {
+                    layer.msg("对不起，您目前还不是该组织成员，无法发表文章", {icon: 5});
+                } else {
+                    window.location.href = "/toEditArticlePage";
+                }
+            },
+            error: function (data) {
+                layer.msg("对不起,请先登录！", {icon: 5});
+            }
+        });
+    }
+
+    function openModak() {
         $("[name='testname']").val("xxxxxxxxxxxxxxx");//向模态框中赋值
-        layui.use(['layer'],function () {
-            var layer = layui.layer,$=layui.$;
+        layui.use(['layer'], function () {
+            var layer = layui.layer, $ = layui.$;
             layer.open({
-                type:1,//类型
-                area:['520px','590px'],//定义宽和高
-                title:'查看详细信息',//题目
-                shadeClose:false,//点击遮罩层关闭
+                type: 1,//类型
+                area: ['520px', '590px'],//定义宽和高
+                title: '查看详细信息',//题目
+                shadeClose: false,//点击遮罩层关闭
                 content: $('#motaikunag')//打开的内容
             });
         })

@@ -1,5 +1,6 @@
 package com.moon.studentplatform.mapper.society;
 
+import com.moon.studentplatform.dto.society.ClubActivity;
 import com.moon.studentplatform.dto.society.ClubUser;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -46,6 +47,35 @@ public interface IClubUserDao {
             " where id=#{id}")
     boolean setIsPass(@Param("id") String id, @Param("pass") String pass);
 
+
+    @Update("update club_activity set pass=#{pass}\n" +
+            " where id=#{id}")
+    boolean setArticleIsPass(@Param("id") String id, @Param("pass") String pass);
+
+
+    @Delete("delete from club_activity where id=#{id}")
+    int deleteArticleById(@Param("id") String id);
+
     @Delete("delete from club_user where id=#{id}")
     int deleteClubUserById(@Param("id") String id);
+
+
+    @Insert("INSERT into `club_activity`\n" +
+            "(userId,clubId,title,image,author,date,text,description,pass)\n" +
+            "VALUES(#{userId},#{clubId},#{title},#{image},#{author}\n" +
+            ",#{date},#{text},#{description},#{pass})")
+    boolean editArticle(ClubActivity activity);
+
+
+    @Select("select count(*) from club_user WHERE club_id=#{club_id} and user_id=#{user_id} and pass='true'")
+    int isUserPass(@Param("club_id") int club_id, @Param("user_id") int user_id);
+
+    @Select("select count(*) from club_user WHERE club_id=#{club_id} and user_id=#{user_id}")
+    int isUserApply(@Param("club_id") int club_id, @Param("user_id") int user_id);
+
+    @Select("select * from club_activity ORDER BY pass ASC LIMIT #{offset},#{limit}")
+    List<ClubActivity> getLimitArticles(@Param("offset") int offset, @Param("limit") int limit);
+
+    @Select("select count(*) from club_activity")
+    int getArticlesCount();
 }

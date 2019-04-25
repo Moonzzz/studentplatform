@@ -86,6 +86,10 @@
     overflow: hidden;
 }
 
+.top_area ul li {
+    float:left; /* 向左漂移，将竖排变为横排 */
+}
+
 /*.library-main__item .info ul li {
     display: inline-block;
     width: 200%;

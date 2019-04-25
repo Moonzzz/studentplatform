@@ -14,6 +14,7 @@ import java.util.List;
  * @modified By：
  */
 public interface IClubService {
+
     boolean addClub(MultipartFile picFile, Club club);
 
     int deleteClubById(String id);
@@ -37,5 +38,8 @@ public interface IClubService {
     List<ClubActivity> showClubActsByCId(int clubId);
 
     ClubActivity showClubActDetailById(int id);
+
+    boolean setIsClubPass(String id, String pass);
+
 
 }

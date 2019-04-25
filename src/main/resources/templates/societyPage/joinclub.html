@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>全部信息</title>
+    <title>加入社团或组织</title>
 </head>
 <script type="text/javascript" th:src="@{/js/xadmin.js}" charset="utf-8"></script>
 <link rel="stylesheet" th:href="@{/css/xadmin.css}">
@@ -35,11 +35,11 @@
             <div style="float: right;height: 400px;width: 240px">
                 <h5>申请原因:</h5>
                 </br>
-                <textarea required style="font-size: 10px;width: 250px" cols="22" rows="12" name="reason">
+                <textarea  required lay-verify="nikename"style="font-size: 10px;width: 250px" cols="22" rows="12" name="reason">
                    </textarea>
                 <h5>个人经历:</h5>
                 </br>
-                <textarea required style="font-size: 10px;width: 250px" cols="22" rows="12" name="experience">
+                <textarea  required lay-verify="nikename"   style="font-size: 10px;width: 250px" cols="22" rows="12" name="experience">
                    </textarea>
             </div>
         </div>
