@@ -10,6 +10,5 @@ public class PropertiesTest extends BasicTest {
 
     @Test
     public void getName() {
-        System.out.println(properties.getName());
     }
 }

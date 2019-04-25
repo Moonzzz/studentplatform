@@ -319,7 +319,7 @@ jQuery(function($){
 	/*  10. Flickr
 	/* ----------------------------------------------------------- */
 	
-	$('#flickr').jflickrfeed({
+	/*$('#flickr').jflickrfeed({
 		limit: 8,
 		qstrings: {
 			id: '52617155@N08'
@@ -334,7 +334,7 @@ jQuery(function($){
 		});
 		$("#flickr li:nth-child(4n)").addClass("nomargin");
 	});
-
+*/
 
 
 	/* ----------------------------------------------------------- */

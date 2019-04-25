@@ -28,12 +28,18 @@
     <meta name="twitter:card" content=""/>
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="shortcut icon" href="favicon.ico">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
 
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!--checkBox-->
+    <link href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.materialdesignicons.com/3.5.95/css/materialdesignicons.min.css">
+
     <link rel="stylesheet" href="/css/animate.css">
+    <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
+          rel="stylesheet">
     <link rel="stylesheet" href="/css/login/style.css">
 
     <!-- Modernizr JS -->
@@ -43,36 +49,40 @@
     <script src="/js/respond.min.js"></script>
     <![endif]-->
 
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
-
 <div class="container">
-    <div class="col myDiv" id="d1">
-        <div class="col-md-4 col-md-4">
+    <div class="col myDiv">
+        <div class="col-md-4">
             <!-- Start Sign In Form -->
-            <form action="#" class="fh5co-form animate-box" data-animate-effect="fadeInLeft">
-                <h2>建立账户</h2>
+            <form action="#" id="form1" class="fh5co-form animate-box" data-animate-effect="fadeInLeft">
+                <h2>开始!</h2>
                 <div class="form-group">
-                    <div class="alert alert-success" role="alert">信息已保存</div>
-                </div>
-                <div class="form-group">
-                    <label for="name" class="sr-only">昵称</label>
-                    <input type="text" class="form-control" id="name" placeholder="昵称" name="username"
+                    <label for="username" class="sr-only">昵称</label>
+                    <input type="text" class="form-control" id="username" placeholder="昵称" name="username" value="ss"
                            autocomplete="off">
                 </div>
-                <div class="form-group">
+                <div class="form-group ">
                     <label for="email" class="sr-only">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="邮箱"
+                    <input type="email" class="form-control" id="email" name="email" placeholder="邮箱" value="ss@ss"
                            autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="password" class="sr-only">密码</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="密码"
+                           value="ssssssss"
                            autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <label for="re-password" class="sr-only">再次输入密码</label>
-                    <input type="password" class="form-control" id="re-password" placeholder="再次输入密码"
+                    <label for="confirm_password" class="sr-only">再次输入密码</label>
+                    <input type="password" class="form-control" id="confirm_password" name="confirm_password"
+                           value="ssssssss"
+                           placeholder="再次输入密码"
                            autocomplete="off">
                 </div>
                 <div class="form-group">
@@ -87,40 +97,88 @@
     </div>
 
     <div class="col myDiv" style="display: none">
+
         <div class="col-md-4 col-md-offset-4">
             <!-- Start Sign In Form -->
-            <form action="#" id="d2" class="fh5co-form animate-box"
+            <form action="#" id="form2" class="fh5co-form animate-box"
                   data-animate-effect="fadeInLeft">
-                <h2>建立账户</h2>
+                <h2>加油！</h2>
                 <div class="form-group">
-                    <div class="alert alert-success" role="alert">信息已保存</div>
+                    <label for="gender">性别：</label>
+                    <br/>
+                    <div class="pretty p-icon p-curve p-jelly">
+                        <input type="radio" class="form-control" id="gender" name="gender" value="male" checked>
+                        <div class="state p-primary">
+                            <i class="icon mdi mdi-check"></i>
+                            <label> 男</label>
+                        </div>
+                    </div>
+                    <div class="pretty p-icon p-curve p-jelly">
+                        <input type="radio" class="form-control" name="gender" value="female">
+                        <div class="state p-primary">
+                            <i class="icon mdi mdi-check"></i>
+                            <label> 女</label>
+                        </div>
+                    </div>
+                    <div class="pretty p-icon p-curve p-jelly">
+                        <input type="radio" class="form-control" name="gender" value="secret">
+                        <div class="state p-primary">
+                            <i class="icon mdi mdi-check"></i>
+                            <label> 保密</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 10px">
+                    <label for="birthday">诞生日期：(希望填写)</label>
+                    <br/>
+                    <input type="text" value="2000-05-15" id="birthday" class="form-control" name="birthday">
                 </div>
                 <div class="form-group">
-                    <label for="name" class="sr-only">昵称</label>
-                    <input type="text" class="form-control" placeholder="昵称" name="username"
+                    <label for="tel" class="sr-only">电话：</label>
+                    <input type="tel" id="tel" name="tel" class="form-control" placeholder="电话(选填)"
                            autocomplete="off">
                 </div>
-                <div class="form-group">
-                    <label for="email" class="sr-only">Email</label>
-                    <input type="email" class="form-control" name="email" placeholder="邮箱"
-                           autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label for="password" class="sr-only">密码</label>
-                    <input type="password" class="form-control" name="password" placeholder="密码"
-                           autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label for="re-password" class="sr-only">再次输入密码</label>
-                    <input type="password" class="form-control" placeholder="再次输入密码"
-                           autocomplete="off">
+                <div class="form-group" style="margin-bottom: 0">
+                    <label>专业班级：(选填)</label>
+                    <select class="form-control" name="dept">
+                        <option disabled selected>院系</option>
+                        <option>计算机与软件工程</option>
+                        <option>艺术设计</option>
+                    </select>
+                    <select class="form-control" name="major">
+                        <option disabled selected>专业</option>
+                        <option>软件工程</option>
+                        <option>计算机科学</option>
+                    </select>
+                    <div class="row" style="padding-left: 3px">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="year" class="sr-only">年级</label>
+                                <input type="text" class="form-control" id="year" placeholder="年级" name="year"
+                                       maxlength="4"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="class" class="sr-only">班级</label>
+                                <input type="text" class="form-control" id="class" placeholder="班级" name="class"
+                                       maxlength="2"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <p>已有账号? <a href="login.html">登 陆</a></p>
                 </div>
-                <div class="form-group">
-                    <input type="button" value="上一步" onclick="prevForm(event)" class="btn btn-primary">
-                    <input type="button" value="下一步" onclick="nextForm(event)" class="btn btn-primary">
+                <div class="row">
+                    <div class="col-md-5">
+                        <input type="button" value="上一步" onclick="prevForm(event)" class="btn btn-primary">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="button" value="下一步" onclick="nextForm(event)" class="btn btn-primary">
+                    </div>
                 </div>
             </form>
             <!-- END Sign In Form -->
@@ -129,79 +187,73 @@
     </div>
     <div class="col myDiv" style="display: none">
         <div class="col-md-4 col-md-offset-8">
-            <form action="#" id="d3" class="fh5co-form animate-box" data-animate-effect="fadeInLeft">
-                <h2>建立账户</h2>
+            <form action="#" id="form3" class="fh5co-form animate-box" data-animate-effect="fadeInLeft"
+                  enctype="multipart/form-data">
+                <h2>完结！</h2>
+                <!--<div style="display: none">
+                    <input type="text" name="username">
+                    <input type="password" name="password" >
+                    <input type="text" name="gender" >
+                    <input type="text" name="birthday" >
+                    <input type="text" name="tel" >
+                    <input type="text" name="dept" >
+                    <input type="text" name="major" >
+                    <input type="text" name="year" >
+                    <input type="text" name="class" >
+                </div>-->
                 <div class="form-group">
-                    <div class="alert alert-success" role="alert">信息已保存</div>
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" id="previewImg" onclick="$('input[id=photo]').click();"
+                             src="/image/img220x220.jpg" width="220" height="220"
+                             alt="选择头像！">
+                        <div class="card-body">
+                            <input id="photo" name="photo" type="file" style="display:none">
+                            <div class="input-append">
+                                <a class="btn" onclick="$('input[id=photo]').click();">选择头像</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="form-group">
-                    <label for="name" class="sr-only">昵称</label>
-                    <input type="text" class="form-control" placeholder="昵称" name="username"
-                           autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label for="email" class="sr-only">Email</label>
-                    <input type="email" class="form-control" name="email" placeholder="邮箱"
-                           autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label for="password" class="sr-only">密码</label>
-                    <input type="password" class="form-control" name="password" placeholder="密码"
-                           autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label for="re-password" class="sr-only">再次输入密码</label>
-                    <input type="password" class="form-control" placeholder="再次输入密码"
+                    <label for="info">个人签名：</label>
+                    <input type="text" class="form-control" id="info" name="info" placeholder="中二宣言板"
                            autocomplete="off">
                 </div>
                 <div class="form-group">
                     <p>已有账号? <a href="login.html">登 陆</a></p>
                 </div>
-                <div class="form-group">
-                    <input type="button" value="上一步" onclick="prevForm(event)" class="btn btn-primary">
+                <div class="row">
+                    <div class="col-md-5">
+                        <input type="button" value="上一步" onclick="prevForm(event)" class="btn btn-primary">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="button" value="提交" onclick="submitForm()" class="btn btn-primary">
+                    </div>
                 </div>
             </form>
             <!-- END Sign In Form -->
         </div>
     </div>
-    <div class="row" style="padding-top: 60px; clear: both;">
-        <div class="col-md-12 text-center">
-            <p>
-                <small>&copy; All Rights Reserved. More Templates <a href="http://www.cssmoban.com/"
-                                                                     target="_blank"
-                                                                     title="模板之家">模板之家</a> - Collect from <a
-                        href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></small>
-            </p>
-        </div>
-    </div>
 </div>
 
+<script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.24.0/locale/zh-cn.js"></script>
 <!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-validate/1.19.0/localization/messages_zh.min.js"></script>
 <!-- Bootstrap -->
-<script src="/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 <!-- Placeholder -->
 <script src="/js/jquery.placeholder.min.js"></script>
 <!-- Waypoints -->
 <script src="/js/jquery.waypoints.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 <!-- Main JS -->
 <script src="/js/login/main.js"></script>
-
-<script>
-    function nextForm(ev) {
-        let div = $(ev.target).parents(".myDiv");
-        div.next().show();
-        $(ev.target).parents("form").toggleClass("fadeInLeft fadeInRight");
-        div.hide();
-    }
-
-    function prevForm(ev) {
-        let div = $(ev.target).parents(".myDiv");
-        div.prev().show();
-        $(ev.target).parents("form").toggleClass("fadeInLeft fadeInRight");
-        div.hide();
-    }
-</script>
+<script src="/js/login/sign_up.js"></script>
 </body>
 </html>
 
