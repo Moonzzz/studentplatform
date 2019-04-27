@@ -7,6 +7,7 @@ import com.moon.studentplatform.dto.official.Lecture;
 import com.moon.studentplatform.dto.society.Club;
 import com.moon.studentplatform.dto.society.ClubActivity;
 import com.moon.studentplatform.dto.society.ClubUser;
+import com.moon.studentplatform.dto.society.ReplyManager;
 import com.moon.studentplatform.service.arround.IArroundService;
 import com.moon.studentplatform.service.official.IOfficialService;
 import com.moon.studentplatform.service.society.IClubService;
@@ -31,18 +32,18 @@ import java.util.Map;
  */
 @Controller
 public class AdminController {
-    @Autowired
-    IClubService clubService;
+    private final IClubService clubService;
+    private final IClubUserService clubUserService;
+    private final IArroundService arroundService;
+    private final IOfficialService officialService;
 
     @Autowired
-    IClubUserService clubUserService;
-
-
-    @Autowired
-    IOfficialService officialService;
-
-    @Autowired
-    IArroundService arroundService;
+    public AdminController(IClubService clubService, IClubUserService clubUserService, IArroundService arroundService, IOfficialService officialService) {
+        this.clubService = clubService;
+        this.clubUserService = clubUserService;
+        this.arroundService = arroundService;
+        this.officialService = officialService;
+    }
 
     Attractions attraction = null;
     Food food = null;
@@ -85,6 +86,12 @@ public class AdminController {
             case "food":
                 toPage = "adminpage/food";
                 break;
+            case "comment":
+                toPage = "adminPage/comment";
+                break;
+            case "reply":
+                toPage = "adminpage/reply";
+                break;
             default:
                 break;
         }
@@ -107,7 +114,7 @@ public class AdminController {
     }
 
 
-    @RequestMapping(value = "/addLecture", method = RequestMethod.POST,produces = "application/json")
+    @RequestMapping(value = "/addLecture", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public String addLecture(@RequestParam Map<String, String> objs) {
         String title = objs.get("title");
@@ -117,7 +124,7 @@ public class AdminController {
         String dateEnd = objs.get("dateEnd");
         Lecture lecture = new Lecture(title, typeId, context, dateStart, dateEnd);
         int flag = officialService.addLecture(lecture);
-        return flag >0 ? "true" : "false";
+        return flag > 0 ? "true" : "false";
     }
 
 
@@ -214,6 +221,56 @@ public class AdminController {
         return getString(clubs, count);
     }
 
+    @RequestMapping("/replyList")
+    @ResponseBody
+    public String replyList(@RequestParam Map<String, String> objs) {
+        String pageStr = objs.get("page");
+        String limitStr = objs.get("limit");
+        String table = objs.get("table");
+        int page = Integer.parseInt(pageStr);
+        int limit = Integer.parseInt(limitStr);
+        List<ReplyManager> replys = officialService.getLimitReplys((page - 1) * limit, limit, table);
+        System.out.println(replys.toString());
+        int count = officialService.getReplysCount(table);
+        Gson gson = new Gson();
+        String result = gson.toJson(replys);
+        result = "{\"code\":0,\"msg\":\"\",\"count\":" + count + ",\"data\":" + result + "}";
+        return result;
+    }
+
+    @RequestMapping("/modifyReply")
+    @ResponseBody
+    public String modifyReply(@RequestParam Map<String, String> objs) {
+        String idStr = objs.get("id");
+        String table = objs.get("table");
+        int id = Integer.parseInt(idStr);
+        String content = objs.get("content");
+        boolean flag = officialService.modifyReplyContentById(id, content, table);
+        return flag ? "true" : "false";
+    }
+
+    @RequestMapping("/deleteReply")
+    @ResponseBody
+    public String deleteReply(HttpServletRequest request) {
+        int count = 1;
+        int ids;
+        String type = request.getParameter("type");
+        String table = request.getParameter("table");
+        if (type.equals("beth")) {
+            String[] id = request.getParameterValues("id");
+            for (int i = 0; i < id.length; i++) {
+                ids = Integer.parseInt(id[i]);
+                int flag = officialService.deleteReplyByID(ids, table);
+                if (flag == 0) count = 0;
+            }
+        } else if (type.equals("one")) {
+            String id = request.getParameter("id");
+            ids = Integer.parseInt(id);
+            if (officialService.deleteReplyByID(ids, table) == 0) count = 0;
+        }
+        return count > 0 ? "true" : "false";
+    }
+
     @RequestMapping(value = "/setPass", method = RequestMethod.POST)
     @ResponseBody
     public String stePass(@RequestParam Map<String, String> objs) {
@@ -226,8 +283,6 @@ public class AdminController {
         } else if (type.equals("articlePass")) {
             flag = clubUserService.setArticleIsPass(id, pass);
         } else if (type.equals("clubPass")) {
-            System.out.println("ClubID: " + id);
-            System.out.println("pass" + pass);
             flag = clubService.setIsClubPass(id, pass);
         }
         return flag == true ? "true" : "false";
@@ -251,7 +306,7 @@ public class AdminController {
 
     @RequestMapping("/allClubUser")
     @ResponseBody
-    public String allCollegeUser(@RequestParam Map<String, String> objs) {
+    public String allClubUser(@RequestParam Map<String, String> objs) {
         String pageStr = objs.get("page");
         String limitStr = objs.get("limit");
         String typeStr = objs.get("type");

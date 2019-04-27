@@ -1,6 +1,5 @@
 package com.moon.studentplatform.mapper.arroundMapper;
 
-import com.moon.studentplatform.dto.arround.Attractions;
 import com.moon.studentplatform.dto.arround.Food;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;

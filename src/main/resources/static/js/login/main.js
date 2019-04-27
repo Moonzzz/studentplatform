@@ -75,7 +75,8 @@ function prevForm(ev) {
     prevForm.find("input:first").focus();
     div.hide();
 }function submitForm() {
-    let arr = $('#form1').serializeArray();
+    alert("注册成功！");
+    /*let arr = $('#form1').serializeArray();
     arr.push.apply(arr, $('#form2').serializeArray());
     arr.push.apply(arr, $('#form3').serializeArray());
     let formData = new FormData();
@@ -96,5 +97,5 @@ function prevForm(ev) {
         success: function (data) {
             alert(data);
         }
-    })
+    })*/
 }

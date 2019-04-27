@@ -44,7 +44,7 @@ public class UploadBlogImgServiceImpl implements IUploadService {
             } catch (IOException e) {
                 resultMap.put("success", 0);
                 resultMap.put("message", "上传失败，请选择文件!");
-                log.error(e.toString(), e);
+                //log.error(e.toString(), e);
             }
         }
 

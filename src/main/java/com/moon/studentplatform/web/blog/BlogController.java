@@ -105,7 +105,7 @@ public class BlogController {
     @RequestMapping(value = "uploadImg", method = RequestMethod.POST)
     @ResponseBody
     public String uploadImg(String guid, HttpServletRequest request, @RequestParam("editormd-image-file") MultipartFile file) {
-        log.error(guid);
+        //log.error(guid);
         String path = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
         return uploadBlogImgServiceImpl.uploadImg(guid, path, file);
     }

@@ -31,7 +31,8 @@
     <link rel="apple-touch-icon" sizes="72x72" th:href="@{/images/apple-touch-icon-72x72.png}">
     <link rel="apple-touch-icon" sizes="114x114" th:href="@{/images/apple-touch-icon-114x114.png}">
     <link rel="apple-touch-icon" sizes="144x144" th:href="@{/images/apple-touch-icon-144x144.png}">
-
+    <link rel="stylesheet" th:href="@{/lib/layui/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/css/clubpage.css}">
 
     <style>
         .entry-content:hover {
@@ -103,84 +104,108 @@
 <div id="wrapper">
     <div class="wrapp-holder">
         <div class="wrap-frame">
-            <!-- BEGIN HEADER -->
-            <header id="header" class="header">
-                <!-- Top Header -->
-                <!-- /Top Header -->
 
-                <!-- Main Header -->
-                <div class="header-main">
-                    <div class="container clearfix">
-                        <div class="grid_12 hr-bottom">
+            <!-- Top Header -->
+            <div class="header-top">
+                <div class="container clearfix">
+                    <div class="grid_12">
+                        <!-- Top Menu -->
+                        <ul class="header-top-menu unstyled">
+                            <li><a href="#">Pricing</a></li>
+                            <li><a href="#">Sitemap</a></li>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="http://www.cssmoban.com">More themes</a></li>
+                        </ul>
+                        <!-- /Top Menu -->
 
-                            <!-- BEGIN LOGO -->
-                            <div id="logo">
-                                <!-- Image based Logo-->
-                                <a href="index.html"><img src="/images/logo.png" alt="Emotion" width="145" height="67"/></a>
-
-                                <!-- Text based Logo
-                                <h1><a href="index.html">Emotion</a></h1>
-                                <p class="tagline">Responsive HTML Template</p>
-                                -->
-
-                            </div>
-                            <!-- END LOGO -->
-
-
-                            <!-- BEGIN NAVIGATION -->
-                            <nav class="primary">
-                                <ul class="sf-menu">
-                                    <li>
-                                        <a href="index.html">Home <span><i>|</i> Get Started</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="elements.html">Features <span><i>|</i> Why Choose Us</span></a>
-                                        <!-- Sub Navigation -->
-                                        <ul>
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="columns.html">Columns</a></li>
-                                            <li><a href="services.html">Services</a></li>
-                                            <li><a href="pricing-tables.html">Pricing Tables</a></li>
-                                            <li><a href="elements.html">Page Elements</a></li>
-                                            <li><a href="#">Second Level Item</a>
-                                                <ul>
-                                                    <li><a href="#">Third Level Item</a></li>
-                                                    <li><a href="#">And another one</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                        <!-- /Sub Navigation -->
-                                    </li>
-                                    <li>
-                                        <a href="portfolio-3cols.html">Portfolio <span><i>|</i> Our Works</span></a>
-                                        <!-- Sub Navigation -->
-                                        <ul>
-                                            <li><a href="portfolio-2cols.html">Portfolio 2 cols</a></li>
-                                            <li><a href="portfolio-3cols.html">Portfolio 3 cols</a></li>
-                                            <li><a href="portfolio-4cols.html">Portfolio 4 cols</a></li>
-                                            <li><a href="portfolio-details.html">Single Project</a></li>
-                                        </ul>
-                                        <!-- /Sub Navigation -->
-                                    </li>
-                                    <li class="current-menu-item">
-                                        <a href="index.html">Blog <span><i>|</i> Our Updates</span></a>
-                                        <!-- Sub Navigation -->
-                                        <ul>
-                                            <li><a href="post.html">Single Post</a></li>
-                                        </ul>
-                                        <!-- /Sub Navigation -->
-                                    </li>
-                                    <li>
-                                        <a href="contacts.html">Contacts <span><i>|</i> Get in Touch</span></a>
-                                    </li>
-                                </ul>
-                            </nav>
-                            <!-- END NAVIGATION -->
-
-                        </div>
+                        <!-- Social Links -->
+                        <ul class="social-links unstyled">
+                            <li class="ico-twitter"><a href="#">Twitter</a></li>
+                            <li class="ico-facebook"><a href="#">Facebook</a></li>
+                            <li class="ico-googleplus"><a href="#">Google+</a></li>
+                            <li class="ico-dribbble"><a href="#">Dribbble</a></li>
+                            <li class="ico-vimeo"><a href="#">Vimeo</a></li>
+                            <li class="ico-rss"><a href="#">RSS</a></li>
+                        </ul>
+                        <!-- /Social Links -->
                     </div>
                 </div>
-                <!-- /Main Header -->
+            </div>
+            <!-- /Top Header -->
+
+            <!-- Main Header -->
+            <div class="header-main">
+                <div class="container clearfix">
+                    <div class="grid_12 hr-bottom">
+
+                        <!-- BEGIN LOGO -->
+                        <div id="logo">
+                            <!-- Image based Logo -->
+                            <a style="font-size: 30px" href="/index">
+                                大学生信息服务平台&nbsp;<i style="font-size: 30px;"
+                                                  class="layui-icon layui-icon-find-fill"></i>
+                            </a>
+
+                        </div>
+                        <!-- END LOGO -->
+
+
+                        <!-- BEGIN NAVIGATION -->
+                        <nav class="primary">
+                            <ul class="sf-menu">
+                                <li class="current-menu-item">
+                                    <!-- onclick="mainFrame()"-->
+                                    <a href="javascript:" onclick="mainFrame()">主页
+                                        <span><i>|</i></span></a>
+                                </li>
+                                <li>
+                                    <a href="#">信息通知 <span><i>|</i></span></a>
+                                    <!-- Sub Navigation -->
+                                    <ul>
+                                        <li><a href="javascript:" onclick="allInfoDynamic()">信息动态</a></li>
+                                        <li><a href="javascript:" onclick="collegeIntro()">学院信息</a></li>
+                                        <li><a target="_blank" href="/officialPage?page=lectures">学术与行业讲座</a></li>
+                                        <li><a href="javascript:" onclick="allContests()">学科竞赛</a></li>
+                                        <li><a href="javascript:" onclick="allCompetitions()">考试考证</a></li>
+                                    </ul>
+                                    <!-- /Sub Navigation -->
+                                </li>
+                                <li>
+                                    <a href="#">社团组织 <span><i>|</i></span></a>
+                                    <!-- Sub Navigation -->
+                                    <ul>
+                                        <li><a href="javascript:;" onclick="allSociety()">全部</a></li>
+                                        <li><a href="javascript:;" onclick="allStuOrganize()">学生组织</a></li>
+                                        <li><a href="javascript:;" onclick="allColleges()">社团</a></li>
+                                        <li><a href="javascript:;"
+                                               onclick="x_admin_show('创建社团','/toAddClubPage',670,590)">创建社团</a></li>
+                                    </ul>
+                                    <!-- /Sub Navigation -->
+                                </li>
+                                <li>
+                                    <a href="#">失物招领 <span><i>|</i></span></a>
+                                    <!-- Sub Navigation -->
+                                    <ul>
+                                        <li><a href="javascript:;" onclick="allFound()">全部</a></li>
+                                    </ul>
+                                    <!-- /Sub Navigation -->
+                                </li>
+                                <li>
+                                    <a href="#">生活服务 <span><i>|</i></span></a>
+                                    <ul>
+                                        <li><a href="javascript:;" onclick="allAttractions()">景点</a></li>
+                                        <li><a href="javascript:;" onclick="allFoods()">美食</a></li>
+                                        <li><a target="_blank" href="/Map">地图</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!-- END NAVIGATION -->
+
+                    </div>
+                </div>
+            </div>
+            <!-- /Main Header -->
 
             </header>
             <!-- END HEADER -->
@@ -285,7 +310,7 @@
                         <!-- /Search Widget -->
 
                         <!-- Popular Posts Widget -->
-                        <div class="popular-posts widget widget__sidebar">
+                        <!--<div class="popular-posts widget widget__sidebar">
                             <h3 class="widget-title">Most Popular</h3>
                             <div class="widget-content">
                                 <ul class="posts-list unstyled clearfix">
@@ -331,14 +356,14 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div>-->
                         <!-- /Popular Posts Widget -->
 
                         <!-- Ad Spots Widget -->
                         <!-- /Ad Spots Widget -->
 
                         <!-- Text Widget -->
-                        <div class="text-widget widget widget__sidebar">
+                        <!--<div class="text-widget widget widget__sidebar">
                             <h3 class="widget-title">Text Widget</h3>
                             <div class="widget-content">
                                 Mauris at blandit erat. Nam vel tortor non quam scelerisque cursus. Praesent nunc vitae
@@ -346,12 +371,12 @@
                                 Massa, eget eleifend tellus. Proin nec ante leo ssim nunc sit amet velit malesuada
                                 pharetra. Nulla neque sapien, sollicitudin non ornare quis, malesuada.
                             </div>
-                        </div>
+                        </div>-->
                         <!-- /Text Widget -->
 
 
                         <!-- Archives Widget -->
-                        <div class="archives-widget widget widget__sidebar">
+                        <!--<div class="archives-widget widget widget__sidebar">
                             <h3 class="widget-title">Archives</h3>
                             <div class="widget-content">
                                 <ul>
@@ -363,7 +388,7 @@
                                     <li><a href="#">June 2012</a> <span>(4)</span></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div>-->
                         <!-- /Archives Widget -->
 
                     </aside>

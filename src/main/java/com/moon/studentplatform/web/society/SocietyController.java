@@ -5,6 +5,7 @@ import com.moon.studentplatform.dto.society.Club;
 import com.moon.studentplatform.dto.society.ClubActivity;
 import com.moon.studentplatform.dto.society.ClubUser;
 import com.moon.studentplatform.service.society.IClubService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,6 +29,7 @@ import java.util.Map;
  * @modified By：
  */
 @Controller
+@Log4j2
 public class SocietyController {
     @Autowired
     IClubService clubService;
@@ -77,7 +79,7 @@ public class SocietyController {
     }
 
     @RequestMapping("/toActDetailPage")
-    public String toActDetailPage(ModelMap map, @RequestParam("id") int id, @RequestParam("type") String type) {
+    public String toActDetailPage(ModelMap map, @RequestParam("type") String type, @RequestParam("id") int id) {
         String toPage = "";
         activity = clubService.showClubActDetailById(id);
         map.addAttribute("activity", activity);

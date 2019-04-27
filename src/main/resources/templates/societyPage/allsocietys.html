@@ -56,7 +56,7 @@
         <li th:each="item:${clubs}" class="library-main__item">
             <!-- <a onclick="detail()" href="javascript:" title="#" target="_blank"
                 class="picture">-->
-            <a th:href="@{'/toClubDetailPage'+'?id='+${item.id}}" target="_blank"
+            <a th:href="@{'/toClubDetailPage?id='+${item.id}}" target="_blank"
                class="picture">
                 <img th:src="@{${#httpServletRequest.getContextPath()} + 'society_files/'+${item.icon}}" alt="#"
                      title="#">

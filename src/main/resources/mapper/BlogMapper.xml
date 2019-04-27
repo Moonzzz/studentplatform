@@ -128,7 +128,7 @@
                c.dislikes
         from comment c,
              `user` u
-        where c.post_id = #{postId};
+        where c.post_id = #{postId} AND c.user_id=u.id;
     </select>
     <select id="selectReply" parameterType="java.lang.Long" resultMap="replyMap">
         select r.id,
@@ -141,7 +141,7 @@
                r.dislikes
         from reply r,
              `user` u
-        where father_id = #{fatherId};
+        where father_id = #{fatherId} AND r.user_id=u.id;
     </select>
 
     <select id="selectUser" parameterType="java.lang.Long" resultType="com.moon.studentplatform.dto.User">

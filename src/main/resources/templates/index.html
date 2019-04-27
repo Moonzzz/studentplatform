@@ -152,6 +152,7 @@
                                     <li>
                                         <a href="#">生活服务 <span><i>|</i></span></a>
                                         <ul>
+                                            <li><a href="/blog/index">社交模块</a></li>
                                             <li><a href="javascript:;" onclick="allAttractions()">景点</a></li>
                                             <li><a href="javascript:;" onclick="allFoods()">美食</a></li>
                                             <li><a target="_blank" href="/Map">地图</a></li>
@@ -206,7 +207,7 @@
                                                  data-captionhidden="on"
                                                  data-endeasing="easeOutExpo"
                                                  data-easing="easeOutExpo">
-                                                <a th:title="${item.title}" target="_blank"
+                                                <a ng-init=0 th:title="${item.title}" target="_blank"
                                                    th:href="@{'/toActDetailPage?type=foreGround&id='+${item.id}}">
                                                     <td th:text="${item.title}"></td>
                                                 </a>

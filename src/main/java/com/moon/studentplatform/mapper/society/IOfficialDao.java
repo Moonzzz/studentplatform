@@ -4,6 +4,7 @@ import com.moon.studentplatform.dto.official.DeptType;
 import com.moon.studentplatform.dto.official.Lecture;
 import com.moon.studentplatform.dto.official.LectureSeach;
 import com.moon.studentplatform.dto.society.ClubActivity;
+import com.moon.studentplatform.dto.society.ReplyManager;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +20,58 @@ import java.util.List;
 @Mapper
 public interface IOfficialDao {
 
+    @Select("select count(*) from reply")
+    int getReplysCount();
+
+    @Delete("delete from reply where id=#{id}")
+    int deleteReplyByID(@Param("id") int id);
+
+    @Update("update reply set content=#{content} where id=#{id}")
+    boolean modifyReplyContentById(@Param("id") int id,
+                                   @Param("content") String content);
+
+    @Select("SELECT\n" +
+            "reply.id,\n" +
+            "reply.content,\n" +
+            "reply.date_published as datePublished,\n" +
+            "`user`.username as userName\n" +
+            "FROM\n" +
+            "reply,\n" +
+            "`user`\n" +
+            "WHERE\n" +
+            "reply.user_id = `user`.id\n" +
+            "LIMIT #{offset},#{limit}")
+    List<ReplyManager> getLimitReplys(@Param("offset") int offset,
+                                      @Param("limit") int limit);
+
+    /*………………………………………………………………………………………………………………………………………………………………………………*/
+
+    @Select("select count(*) from comment")
+    int getCommentsCount();
+
+    @Delete("delete from comment where id=#{id}")
+    int deleteCommentByID(@Param("id") int id);
+
+    @Update("update comment set content=#{content} where id=#{id}")
+    boolean modifyCommentContentById(@Param("id") int id,
+                                     @Param("content") String content);
+
+    @Select("SELECT\n" +
+            "comment.id,\n" +
+            "comment.content,\n" +
+            "comment.date_published as datePublished,\n" +
+            "`user`.username as userName\n" +
+            "FROM\n" +
+            "comment,\n" +
+            "`user`\n" +
+            "WHERE\n" +
+            "comment.user_id = `user`.id\n" +
+            "LIMIT #{offset},#{limit}")
+    List<ReplyManager> getLimitComments(@Param("offset") int offset,
+                                        @Param("limit") int limit);
+
+    /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
+
     @Insert("INSERT into `lecture_type`(title,type_id,context,dateStart,dateEnd)\n" +
             "VALUES(#{title},#{type},#{context},#{dateStart},#{dateEnd})")
     int addLecture(Lecture lecture);
@@ -27,7 +80,7 @@ public interface IOfficialDao {
     int deleteLectureById(@Param("id") String id);
 
     @Select("SELECT\n" +
-            "lecture_type.id as id,"+
+            "lecture_type.id as id," +
             "type.`name` as type,\n" +
             "lecture_type.title,\n" +
             "lecture_type.dateStart,\n" +
